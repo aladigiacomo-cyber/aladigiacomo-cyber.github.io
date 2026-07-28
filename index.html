@@ -194,14 +194,18 @@
     color: var(--muted-dark);
   }
   .terminal-body { padding: clamp(18px, 3vw, 26px); }
-  .terminal-body p {
+  .terminal .terminal-body p {
     margin: 0 0 10px;
     font-family: var(--font-mono);
     font-size: clamp(12.5px, 1.8vw, 14.5px);
     line-height: 1.7;
     color: #dbe4f5;
+    max-width: 100%;
   }
-  .terminal-body p:last-child { margin-bottom: 0; }
+  .terminal .terminal-body p:last-child { margin-bottom: 0; }
+  .terminal-compact { margin-top: 20px; }
+  .terminal-compact .terminal-body { padding: 16px; }
+  .terminal-compact .terminal-body p { font-size: 12.5px; }
   .terminal-body .t-muted { color: var(--muted-dark); }
   .terminal-body .t-arrow { color: var(--muted-dark); margin-right: 2px; }
   .terminal-body .t-accent { color: var(--blue-bright); }
@@ -484,6 +488,21 @@
         <div>
           <h3>Processos com n8n</h3>
           <p>Fluxos que conectam suas ferramentas e eliminam tarefa repetitiva: e-mail, planilha, CRM, WhatsApp, formulário — tudo conversando entre si, sem ninguém copiando e colando nada.</p>
+          <div class="terminal terminal-compact">
+            <div class="terminal-bar">
+              <span class="terminal-dot terminal-dot-red"></span>
+              <span class="terminal-dot terminal-dot-yellow"></span>
+              <span class="terminal-dot terminal-dot-green"></span>
+              <span class="terminal-title">automação · n8n</span>
+            </div>
+            <div class="terminal-body">
+              <p><span class="t-muted">$</span> workflow <span class="t-accent">conciliação-financeira</span></p>
+              <p><span class="t-arrow">▸</span> gatilho: novo pagamento recebido</p>
+              <p><span class="t-arrow">▸</span> conferindo valor com o pedido</p>
+              <p><span class="t-ok">✓</span> planilha atualizada <span class="t-muted">(0.9s)</span></p>
+              <p><span class="t-ok">✓</span> recibo enviado ao cliente</p>
+            </div>
+          </div>
         </div>
       </div>
       <div class="service reveal-item">
@@ -494,6 +513,21 @@
         <div>
           <h3>Soluções com inteligência artificial</h3>
           <p>Agentes e integrações de IA aplicados a um problema real do seu negócio: triagem de atendimento, geração de conteúdo, análise de dados. IA que resolve gargalo, não IA por IA.</p>
+          <div class="terminal terminal-compact">
+            <div class="terminal-bar">
+              <span class="terminal-dot terminal-dot-red"></span>
+              <span class="terminal-dot terminal-dot-yellow"></span>
+              <span class="terminal-dot terminal-dot-green"></span>
+              <span class="terminal-title">agente · triagem</span>
+            </div>
+            <div class="terminal-body">
+              <p><span class="t-muted">$</span> mensagem: <span class="t-accent">"quero cancelar meu pedido"</span></p>
+              <p><span class="t-arrow">▸</span> IA classifica: cancelamento · urgência alta</p>
+              <p><span class="t-ok">✓</span> resposta inicial enviada <span class="t-muted">(2.1s)</span></p>
+              <p><span class="t-ok">✓</span> caso encaminhado ao time quando precisa</p>
+              <p class="t-status"><span class="t-muted">critério:</span> IA decide, pessoa confirma</p>
+            </div>
+          </div>
         </div>
       </div>
       <div class="service reveal-item">
@@ -504,6 +538,21 @@
         <div>
           <h3>Claude / Claude Code</h3>
           <p>Apoio para usar Claude e Claude Code de verdade no seu dia a dia — da configuração inicial a fluxos avançados de IA aplicada ao seu trabalho.</p>
+          <div class="terminal terminal-compact">
+            <div class="terminal-bar">
+              <span class="terminal-dot terminal-dot-red"></span>
+              <span class="terminal-dot terminal-dot-yellow"></span>
+              <span class="terminal-dot terminal-dot-green"></span>
+              <span class="terminal-title">consultoria · claude code</span>
+            </div>
+            <div class="terminal-body">
+              <p><span class="t-muted">$</span> claude</p>
+              <p><span class="t-arrow">▸</span> configurando seu fluxo de trabalho com você</p>
+              <p><span class="t-ok">✓</span> automações do dia a dia mapeadas</p>
+              <p><span class="t-ok">✓</span> pronto pra você usar sozinho</p>
+              <p class="t-status"><span class="t-muted">critério:</span> setup guiado, você no controle</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
