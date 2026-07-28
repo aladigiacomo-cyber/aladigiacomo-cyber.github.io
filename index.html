@@ -352,7 +352,11 @@
 
   .reveal { opacity: 0; transform: translateY(18px); transition: opacity .8s ease, transform .8s ease; }
   .reveal.in { opacity: 1; transform: translateY(0); }
-  @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+  .reveal-item { opacity: 0; transform: translateY(16px); transition: opacity .55s ease, transform .55s ease; }
+  .reveal-item.in { opacity: 1; transform: translateY(0); }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal, .reveal-item { opacity: 1; transform: none; transition: none; }
+  }
 
 
 </style>
@@ -397,7 +401,7 @@
   <div class="wrap">
     <div class="ref"><span class="rule"></span> O que eu faço <span class="rule"></span></div>
     <div class="services">
-      <div class="service">
+      <div class="service reveal-item">
         <div class="service-icon">
           <img src="images/img2.png" alt="" width="52" height="52" loading="lazy" decoding="async">
           <span class="service-kw">Automação</span>
@@ -407,7 +411,7 @@
           <p>Fluxos que conectam suas ferramentas e eliminam tarefa repetitiva: e-mail, planilha, CRM, WhatsApp, formulário — tudo conversando entre si, sem ninguém copiando e colando nada.</p>
         </div>
       </div>
-      <div class="service">
+      <div class="service reveal-item">
         <div class="service-icon">
           <img src="images/img3.png" alt="" width="52" height="52" loading="lazy" decoding="async">
           <span class="service-kw">IA</span>
@@ -417,7 +421,7 @@
           <p>Agentes e integrações de IA aplicados a um problema real do seu negócio: triagem de atendimento, geração de conteúdo, análise de dados. IA que resolve gargalo, não IA por IA.</p>
         </div>
       </div>
-      <div class="service">
+      <div class="service reveal-item">
         <div class="service-icon">
           <img src="images/img4.png" alt="" width="52" height="52" loading="lazy" decoding="async">
           <span class="service-kw">Consultoria</span>
@@ -438,19 +442,19 @@
       <div>
         <p class="track-title">Processo — Consultoria</p>
         <ol class="steps">
-          <li class="step"><span class="step-num">01</span><div><h4>Nivelamento</h4><p>Conversa inicial pra entender onde você está com IA hoje.</p></div></li>
-          <li class="step"><span class="step-num">02</span><div><h4>Trilha sob medida</h4><p>Monto aula por aula, sempre perguntando o que você quer e precisa aprender.</p></div></li>
-          <li class="step"><span class="step-num">03</span><div><h4>Acompanhamento</h4><p>Ajusto o conteúdo conforme seu interesse e seu ritmo.</p></div></li>
-          <li class="step"><span class="step-num">04</span><div><h4>Pacote fechado</h4><p>Um valor único por plano, sem surpresa no meio do caminho.</p></div></li>
+          <li class="step reveal-item"><span class="step-num">01</span><div><h4>Nivelamento</h4><p>Conversa inicial pra entender onde você está com IA hoje.</p></div></li>
+          <li class="step reveal-item"><span class="step-num">02</span><div><h4>Trilha sob medida</h4><p>Monto aula por aula, sempre perguntando o que você quer e precisa aprender.</p></div></li>
+          <li class="step reveal-item"><span class="step-num">03</span><div><h4>Acompanhamento</h4><p>Ajusto o conteúdo conforme seu interesse e seu ritmo.</p></div></li>
+          <li class="step reveal-item"><span class="step-num">04</span><div><h4>Pacote fechado</h4><p>Um valor único por plano, sem surpresa no meio do caminho.</p></div></li>
         </ol>
       </div>
       <div>
         <p class="track-title">Processo — Automação</p>
         <ol class="steps">
-          <li class="step"><span class="step-num">01</span><div><h4>Diagnóstico</h4><p>Conversa pra entender o problema de verdade.</p></div></li>
-          <li class="step"><span class="step-num">02</span><div><h4>Proposta</h4><p>Fechamos valor e prazo do projeto, mais um valor recorrente pra manter o sistema funcionando.</p></div></li>
-          <li class="step"><span class="step-num">03</span><div><h4>Construção</h4><p>Eu construo o sistema.</p></div></li>
-          <li class="step"><span class="step-num">04</span><div><h4>Entrega</h4><p>Na data combinada, repasso credenciais e dados. O sistema é seu.</p></div></li>
+          <li class="step reveal-item"><span class="step-num">01</span><div><h4>Diagnóstico</h4><p>Conversa pra entender o problema de verdade.</p></div></li>
+          <li class="step reveal-item"><span class="step-num">02</span><div><h4>Proposta</h4><p>Fechamos valor e prazo do projeto, mais um valor recorrente pra manter o sistema funcionando.</p></div></li>
+          <li class="step reveal-item"><span class="step-num">03</span><div><h4>Construção</h4><p>Eu construo o sistema.</p></div></li>
+          <li class="step reveal-item"><span class="step-num">04</span><div><h4>Entrega</h4><p>Na data combinada, repasso credenciais e dados. O sistema é seu.</p></div></li>
         </ol>
       </div>
     </div>
@@ -461,9 +465,9 @@
   <div class="wrap">
     <span class="strip-label">Ferramentas</span>
     <div class="tools-row">
-      <span class="tool-tag">n8n</span>
-      <span class="tool-tag">Claude / Claude Code</span>
-      <span class="tool-tag">APIs &amp; integrações customizadas</span>
+      <span class="tool-tag reveal-item">n8n</span>
+      <span class="tool-tag reveal-item">Claude / Claude Code</span>
+      <span class="tool-tag reveal-item">APIs &amp; integrações customizadas</span>
     </div>
   </div>
 </section>
@@ -509,10 +513,10 @@
 
       <div class="contact-list">
         <p class="contact-list-label">Outras formas de contato</p>
-        <a class="contact-row primary" href="https://instagram.com/ana.nocode" target="_blank" rel="noopener">
+        <a class="contact-row primary reveal-item" href="https://instagram.com/ana.nocode" target="_blank" rel="noopener">
           <span class="label">Instagram</span><span class="value">@ana.nocode</span>
         </a>
-        <a class="contact-row" href="https://www.linkedin.com/in/analuizadigiacomo" target="_blank" rel="noopener">
+        <a class="contact-row reveal-item" href="https://www.linkedin.com/in/analuizadigiacomo" target="_blank" rel="noopener">
           <span class="label">LinkedIn</span><span class="value">/in/analuizadigiacomo</span>
         </a>
       </div>
@@ -553,7 +557,12 @@
 
 <script>
   (function () {
-    var els = document.querySelectorAll('.reveal');
+    document.querySelectorAll('.services, .steps, .contact-list, .tools-row').forEach(function (container) {
+      var items = container.querySelectorAll('.reveal-item');
+      items.forEach(function (item, i) { item.style.transitionDelay = (i * 90) + 'ms'; });
+    });
+
+    var els = document.querySelectorAll('.reveal, .reveal-item');
     if (!('IntersectionObserver' in window)) {
       els.forEach(function (el) { el.classList.add('in'); });
       return;
