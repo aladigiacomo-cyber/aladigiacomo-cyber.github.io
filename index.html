@@ -206,6 +206,51 @@
   .terminal-compact { margin-top: 20px; }
   .terminal-compact .terminal-body { padding: 16px; }
   .terminal-compact .terminal-body p { font-size: 12.5px; }
+
+  .flow-body {
+    padding: 14px;
+    background-color: #eef0f6;
+    background-image: radial-gradient(rgba(20, 23, 40, .14) 1px, transparent 1.2px);
+    background-size: 16px 16px;
+  }
+  .flow-body svg { display: block; width: 100%; height: auto; }
+
+  .chat-body { padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+  .chat-msg {
+    max-width: 86%;
+    padding: 10px 14px;
+    border-radius: 14px;
+    font-family: var(--font-sans);
+    font-size: 13.5px;
+    line-height: 1.5;
+  }
+  .chat-msg-user {
+    align-self: flex-end;
+    background: var(--indigo);
+    color: #fff;
+    border-bottom-right-radius: 4px;
+  }
+  .chat-msg-claude {
+    align-self: flex-start;
+    background: rgba(255, 255, 255, .07);
+    color: #dbe4f5;
+    border-bottom-left-radius: 4px;
+  }
+  .chat-skill {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted-dark);
+    background: rgba(75, 63, 242, .14);
+    border: 1px solid rgba(75, 63, 242, .32);
+    padding: 5px 11px;
+    border-radius: 999px;
+  }
+  .chat-skill svg { flex: none; color: var(--blue-bright); }
+  .chat-skill-name { color: var(--blue-bright); font-weight: 700; }
   .terminal-body .t-muted { color: var(--muted-dark); }
   .terminal-body .t-arrow { color: var(--muted-dark); margin-right: 2px; }
   .terminal-body .t-accent { color: var(--blue-bright); }
@@ -493,14 +538,71 @@
               <span class="terminal-dot terminal-dot-red"></span>
               <span class="terminal-dot terminal-dot-yellow"></span>
               <span class="terminal-dot terminal-dot-green"></span>
-              <span class="terminal-title">automação · n8n</span>
+              <span class="terminal-title">n8n · workflow</span>
             </div>
-            <div class="terminal-body">
-              <p><span class="t-muted">$</span> workflow <span class="t-accent">conciliação-financeira</span></p>
-              <p><span class="t-arrow">▸</span> gatilho: novo pagamento recebido</p>
-              <p><span class="t-arrow">▸</span> conferindo valor com o pedido</p>
-              <p><span class="t-ok">✓</span> planilha atualizada <span class="t-muted">(0.9s)</span></p>
-              <p><span class="t-ok">✓</span> recibo enviado ao cliente</p>
+            <div class="flow-body">
+              <svg viewBox="0 0 600 170" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Workflow no n8n: Webhook, IF, CRM e Notify conectados em sequência">
+                <defs>
+                  <marker id="flowArrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+                    <path d="M0 0 L6 3 L0 6 Z" fill="#b9c0d4"/>
+                  </marker>
+                </defs>
+                <g fill="none" stroke="#c7ccd9" stroke-width="2">
+                  <path d="M108 85 H172" marker-end="url(#flowArrow)"/>
+                  <path d="M268 85 H332" marker-end="url(#flowArrow)"/>
+                  <path d="M428 85 H492" marker-end="url(#flowArrow)"/>
+                </g>
+
+                <g transform="translate(12,57)">
+                  <rect width="96" height="56" rx="10" fill="#fff" stroke="#dfe2ec" stroke-width="1.5"/>
+                  <rect width="96" height="6" rx="3" fill="#4B3FF2"/>
+                  <circle cx="86" cy="10" r="7" fill="#28c840"/>
+                  <path d="M83 10 L85.2 12.3 L89.3 7.8" stroke="#fff" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                  <g transform="translate(12,17)" stroke="#4B3FF2" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 1 L3 10 H8 L7 15 L13 6 H8 Z"/>
+                  </g>
+                  <text x="34" y="27.5" font-family="Arial, sans-serif" font-size="11.5" font-weight="700" fill="#14171C">Webhook</text>
+                  <text x="10" y="42" font-family="Arial, sans-serif" font-size="9.5" fill="#8A8F98">novo lead</text>
+                </g>
+
+                <g transform="translate(172,57)">
+                  <rect width="96" height="56" rx="10" fill="#fff" stroke="#dfe2ec" stroke-width="1.5"/>
+                  <rect width="96" height="6" rx="3" fill="#2f5ce0"/>
+                  <circle cx="86" cy="10" r="7" fill="#28c840"/>
+                  <path d="M83 10 L85.2 12.3 L89.3 7.8" stroke="#fff" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                  <g transform="translate(13,16)" stroke="#2f5ce0" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M7 0 V7 M7 7 L1 16 M7 7 L13 16"/>
+                  </g>
+                  <text x="34" y="27.5" font-family="Arial, sans-serif" font-size="11.5" font-weight="700" fill="#14171C">IF</text>
+                  <text x="10" y="42" font-family="Arial, sans-serif" font-size="9.5" fill="#8A8F98">qualificado?</text>
+                </g>
+
+                <g transform="translate(332,57)">
+                  <rect width="96" height="56" rx="10" fill="#fff" stroke="#dfe2ec" stroke-width="1.5"/>
+                  <rect width="96" height="6" rx="3" fill="#4fc8ff"/>
+                  <circle cx="86" cy="10" r="7" fill="#28c840"/>
+                  <path d="M83 10 L85.2 12.3 L89.3 7.8" stroke="#fff" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                  <g transform="translate(13,15)" stroke="#2f5ce0" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <ellipse cx="7" cy="3" rx="7" ry="3"/>
+                    <path d="M0 3 V13 A7 3 0 0 0 14 13 V3"/>
+                  </g>
+                  <text x="34" y="27.5" font-family="Arial, sans-serif" font-size="11.5" font-weight="700" fill="#14171C">CRM</text>
+                  <text x="10" y="42" font-family="Arial, sans-serif" font-size="9.5" fill="#8A8F98">atualiza dados</text>
+                </g>
+
+                <g transform="translate(492,57)">
+                  <rect width="96" height="56" rx="10" fill="#fff" stroke="#dfe2ec" stroke-width="1.5"/>
+                  <rect width="96" height="6" rx="3" fill="#28c840"/>
+                  <circle cx="86" cy="10" r="7" fill="#28c840"/>
+                  <path d="M83 10 L85.2 12.3 L89.3 7.8" stroke="#fff" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                  <g transform="translate(13,16)" stroke="#1f9e37" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="0" y="0" width="16" height="11" rx="3"/>
+                    <path d="M4 11 L2 15 L7 11"/>
+                  </g>
+                  <text x="34" y="27.5" font-family="Arial, sans-serif" font-size="11.5" font-weight="700" fill="#14171C">Notify</text>
+                  <text x="10" y="42" font-family="Arial, sans-serif" font-size="9.5" fill="#8A8F98">envia WhatsApp</text>
+                </g>
+              </svg>
             </div>
           </div>
         </div>
@@ -518,14 +620,15 @@
               <span class="terminal-dot terminal-dot-red"></span>
               <span class="terminal-dot terminal-dot-yellow"></span>
               <span class="terminal-dot terminal-dot-green"></span>
-              <span class="terminal-title">agente · triagem</span>
+              <span class="terminal-title">conversa · claude</span>
             </div>
-            <div class="terminal-body">
-              <p><span class="t-muted">$</span> mensagem: <span class="t-accent">"quero cancelar meu pedido"</span></p>
-              <p><span class="t-arrow">▸</span> IA classifica: cancelamento · urgência alta</p>
-              <p><span class="t-ok">✓</span> resposta inicial enviada <span class="t-muted">(2.1s)</span></p>
-              <p><span class="t-ok">✓</span> caso encaminhado ao time quando precisa</p>
-              <p class="t-status"><span class="t-muted">critério:</span> IA decide, pessoa confirma</p>
+            <div class="chat-body">
+              <div class="chat-msg chat-msg-user">cria as legendas dessa semana a partir do calendário de conteúdo</div>
+              <div class="chat-skill">
+                <svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 1 L3 10 H8 L7 15 L13 6 H8 Z"/></svg>
+                invocando skill <span class="chat-skill-name">social-media</span>
+              </div>
+              <div class="chat-msg chat-msg-claude">prontas as 5 legendas da semana, já no seu tom de voz.</div>
             </div>
           </div>
         </div>
@@ -538,21 +641,6 @@
         <div>
           <h3>Claude / Claude Code</h3>
           <p>Apoio para usar Claude e Claude Code de verdade no seu dia a dia — da configuração inicial a fluxos avançados de IA aplicada ao seu trabalho.</p>
-          <div class="terminal terminal-compact">
-            <div class="terminal-bar">
-              <span class="terminal-dot terminal-dot-red"></span>
-              <span class="terminal-dot terminal-dot-yellow"></span>
-              <span class="terminal-dot terminal-dot-green"></span>
-              <span class="terminal-title">consultoria · claude code</span>
-            </div>
-            <div class="terminal-body">
-              <p><span class="t-muted">$</span> claude</p>
-              <p><span class="t-arrow">▸</span> configurando seu fluxo de trabalho com você</p>
-              <p><span class="t-ok">✓</span> automações do dia a dia mapeadas</p>
-              <p><span class="t-ok">✓</span> pronto pra você usar sozinho</p>
-              <p class="t-status"><span class="t-muted">critério:</span> setup guiado, você no controle</p>
-            </div>
-          </div>
         </div>
       </div>
     </div>
