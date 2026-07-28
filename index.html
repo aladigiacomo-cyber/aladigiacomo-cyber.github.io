@@ -531,15 +531,20 @@
 
 <script>
   (function () {
-    // iOS Safari only rasterizes off-screen tiles lazily on the first real
-    // scroll gesture, which causes a one-time stutter. Nudging the scroll
-    // position by 1px right after load forces that work to happen while
-    // idle instead of during the user's first swipe.
+    // Mobile browsers (especially in-app webviews) only rasterize off-screen
+    // tiles lazily on the user's first real scroll gesture, causing a one-time
+    // stutter. Nudging the scroll position by 1px right after load forces that
+    // work to happen while idle instead of during the user's first swipe.
+    // Each scrollTo must land in its own frame (with an explicit "instant"
+    // behavior) or it gets coalesced away by html's scroll-behavior:smooth
+    // before ever painting.
     if (window.scrollY === 0) {
       window.addEventListener('load', function () {
         requestAnimationFrame(function () {
-          window.scrollTo(0, 1);
-          window.scrollTo(0, 0);
+          window.scrollTo({ top: 1, behavior: 'instant' });
+          requestAnimationFrame(function () {
+            window.scrollTo({ top: 0, behavior: 'instant' });
+          });
         });
       });
     }
