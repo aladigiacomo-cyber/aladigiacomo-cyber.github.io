@@ -357,24 +357,19 @@
   /* O QUE EU FAÇO */
   .services { border-top: 1px solid var(--line-dark); }
   .service {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 4px;
     padding: clamp(28px, 5vw, 44px) 0;
     border-bottom: 1px solid var(--line-dark);
-  }
-  @media (min-width: 760px) {
-    .service { grid-template-columns: 1.1fr 1.4fr; align-items: baseline; gap: 32px; }
   }
   .service-icon {
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 12px;
+    margin-bottom: 16px;
   }
   .service-icon img {
-    width: 52px;
-    height: 52px;
-    border-radius: 12px;
+    width: 36px;
+    height: 36px;
+    border-radius: 9px;
     flex: none;
   }
   .service-kw {
