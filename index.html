@@ -531,6 +531,21 @@
 
 <script>
   (function () {
+    // iOS Safari only rasterizes off-screen tiles lazily on the first real
+    // scroll gesture, which causes a one-time stutter. Nudging the scroll
+    // position by 1px right after load forces that work to happen while
+    // idle instead of during the user's first swipe.
+    if (window.scrollY === 0) {
+      window.addEventListener('load', function () {
+        requestAnimationFrame(function () {
+          window.scrollTo(0, 1);
+          window.scrollTo(0, 0);
+        });
+      });
+    }
+  })();
+
+  (function () {
     var els = document.querySelectorAll('.reveal');
     if (!('IntersectionObserver' in window)) {
       els.forEach(function (el) { el.classList.add('in'); });
