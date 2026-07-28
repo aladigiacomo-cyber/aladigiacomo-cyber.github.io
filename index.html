@@ -386,12 +386,43 @@
   /* COMO EU TRABALHO */
   .tracks { display: grid; gap: clamp(36px, 6vw, 60px); }
   @media (min-width: 780px) { .tracks { grid-template-columns: 1fr 1fr; } }
-  .track-title { font-size: 13.5px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--blue); margin: 0 0 24px; }
+  .track-title { font-size: 13.5px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--blue); margin: 0 0 28px; }
   .steps { list-style: none; margin: 0; padding: 0; }
-  .step { display: grid; grid-template-columns: 40px 1fr; gap: 14px; padding: 17px 0; border-top: 1px solid var(--line-light); }
-  .step:last-child { border-bottom: 1px solid var(--line-light); }
-  .step-num { font-family: var(--font-mono); font-size: 20px; font-weight: 800; color: var(--blue); padding-top: 1px; }
-  .step h4 { font-size: 15.5px; font-weight: 700; margin: 0 0 4px; color: var(--ink); letter-spacing: -0.005em; }
+  .step {
+    position: relative;
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    gap: 16px;
+    padding: 0 0 28px;
+  }
+  .step:last-child { padding-bottom: 0; }
+  .step::after {
+    content: "";
+    position: absolute;
+    left: 19px;
+    top: 40px;
+    bottom: -2px;
+    width: 2px;
+    background: var(--line-light);
+  }
+  .step:last-child::after { display: none; }
+  .step-num {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--blue);
+    font-family: var(--font-mono);
+    font-size: 15px;
+    font-weight: 800;
+    color: #fff;
+    flex: none;
+  }
+  .step h4 { font-size: 15.5px; font-weight: 700; margin: 8px 0 4px; color: var(--ink); letter-spacing: -0.005em; }
   .step p { font-size: 14.5px; color: var(--muted-light); margin: 0; }
 
   /* FERRAMENTAS strip */
