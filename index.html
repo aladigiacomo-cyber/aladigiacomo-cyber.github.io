@@ -4,6 +4,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ana Luiza Adinolfi — Automação &amp; IA</title>
+<meta name="description" content="Automação de processos com n8n, soluções com inteligência artificial e consultoria em Claude / Claude Code — para quem quer escalar sem contratar um time inteiro.">
+<link rel="canonical" href="https://aladigiacomo-cyber.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:url" content="https://aladigiacomo-cyber.github.io/">
+<meta property="og:title" content="Ana Luiza Adinolfi — Automação & IA">
+<meta property="og:description" content="Eu construo os bastidores que fazem seu negócio rodar sozinho.">
+<meta property="og:image" content="https://aladigiacomo-cyber.github.io/images/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Ana Luiza Adinolfi — Automação & IA">
+<meta name="twitter:description" content="Eu construo os bastidores que fazem seu negócio rodar sozinho.">
+<meta name="twitter:image" content="https://aladigiacomo-cyber.github.io/images/og-cover.png">
 <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
 <style>
   :root {
@@ -150,6 +164,49 @@
   .lede em { font-style: normal; color: var(--blue); }
   .on-light p { color: var(--muted-light); }
   .on-light .lede { color: var(--ink); }
+
+  .terminal {
+    margin-top: clamp(28px, 5vw, 40px);
+    background: #0c1424;
+    border: 1px solid rgba(75, 63, 242, .25);
+    border-radius: 12px;
+    box-shadow: 0 20px 50px -20px rgba(10, 23, 48, .35);
+    overflow: hidden;
+  }
+  .terminal-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, .03);
+    border-bottom: 1px solid rgba(255, 255, 255, .06);
+  }
+  .terminal-dot { width: 10px; height: 10px; border-radius: 50%; flex: none; }
+  .terminal-dot-red { background: #ff5f57; }
+  .terminal-dot-yellow { background: #febc2e; }
+  .terminal-dot-green { background: #28c840; }
+  .terminal-title {
+    margin-left: 6px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .04em;
+    color: var(--muted-dark);
+  }
+  .terminal-body { padding: clamp(18px, 3vw, 26px); }
+  .terminal-body p {
+    margin: 0 0 10px;
+    font-family: var(--font-mono);
+    font-size: clamp(12.5px, 1.8vw, 14.5px);
+    line-height: 1.7;
+    color: #dbe4f5;
+  }
+  .terminal-body p:last-child { margin-bottom: 0; }
+  .terminal-body .t-muted { color: var(--muted-dark); }
+  .terminal-body .t-arrow { color: var(--muted-dark); margin-right: 2px; }
+  .terminal-body .t-accent { color: var(--blue-bright); }
+  .terminal-body .t-ok { color: #4fe08d; margin-right: 2px; }
+  .terminal-body .t-status { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,.08); color: var(--muted-dark); }
 
   /* O QUE EU FAÇO */
   .services { border-top: 1px solid var(--line-dark); }
@@ -393,6 +450,24 @@
       <p class="lede">Eu sou a Ana. Trabalho na fronteira entre <em>automação</em> e <em>inteligência artificial</em>.</p>
       <p>Pego processos que hoje dependem de alguém copiar, colar, checar e lembrar — e transformo em sistemas que rodam sozinhos, usando n8n, IA e integrações sob medida.</p>
       <p>Não vendo automação de prateleira. Cada sistema é desenhado a partir do jeito real como o seu negócio funciona hoje, não de um template pronto.</p>
+
+      <div class="terminal reveal-item">
+        <div class="terminal-bar">
+          <span class="terminal-dot terminal-dot-red"></span>
+          <span class="terminal-dot terminal-dot-yellow"></span>
+          <span class="terminal-dot terminal-dot-green"></span>
+          <span class="terminal-title">automação · n8n</span>
+        </div>
+        <div class="terminal-body">
+          <p><span class="t-muted">$</span> workflow <span class="t-accent">novo-lead-instagram</span></p>
+          <p><span class="t-arrow">▸</span> gatilho: nova mensagem recebida no Instagram</p>
+          <p><span class="t-arrow">▸</span> classificando a intenção do lead com IA</p>
+          <p><span class="t-arrow">▸</span> registrando os dados no CRM</p>
+          <p><span class="t-ok">✓</span> resposta automática enviada <span class="t-muted">(3.8s)</span></p>
+          <p><span class="t-ok">✓</span> lead qualificado e notificado no WhatsApp</p>
+          <p class="t-status"><span class="t-muted">status:</span> concluído · 0 intervenção manual</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
