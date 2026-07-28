@@ -24,7 +24,6 @@
   }
 
   * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
   html, body {
     margin: 0;
     padding: 0;
@@ -34,7 +33,6 @@
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
   }
-  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
   a { color: inherit; }
   ::selection { background: var(--blue-bright); color: var(--navy); }
@@ -530,26 +528,6 @@
 </section>
 
 <script>
-  (function () {
-    // Mobile browsers (especially in-app webviews) only rasterize off-screen
-    // tiles lazily on the user's first real scroll gesture, causing a one-time
-    // stutter. Nudging the scroll position by 1px right after load forces that
-    // work to happen while idle instead of during the user's first swipe.
-    // Each scrollTo must land in its own frame (with an explicit "instant"
-    // behavior) or it gets coalesced away by html's scroll-behavior:smooth
-    // before ever painting.
-    if (window.scrollY === 0) {
-      window.addEventListener('load', function () {
-        requestAnimationFrame(function () {
-          window.scrollTo({ top: 1, behavior: 'instant' });
-          requestAnimationFrame(function () {
-            window.scrollTo({ top: 0, behavior: 'instant' });
-          });
-        });
-      });
-    }
-  })();
-
   (function () {
     var els = document.querySelectorAll('.reveal');
     if (!('IntersectionObserver' in window)) {
