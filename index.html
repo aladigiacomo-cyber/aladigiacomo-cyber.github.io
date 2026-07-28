@@ -344,43 +344,10 @@
   .reveal.in { opacity: 1; transform: translateY(0); }
   @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
 
-  /* BRAND MARK */
-  .brand-mark {
-    position: fixed;
-    top: 16px;
-    left: 16px;
-    z-index: 50;
-    transform: translateZ(0);
-    will-change: transform;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 14px 8px 10px;
-    border-radius: 999px;
-    background: rgba(8, 18, 38, 0.86);
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    color: #eaf1ff;
-  }
-  .brand-mark svg { flex: none; color: var(--blue-bright); }
-  .brand-mark span {
-    font-weight: 800;
-    font-size: 13px;
-    letter-spacing: -0.01em;
-  }
 
 </style>
 </head>
 <body>
-
-<div class="brand-mark">
-  <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
-    <path d="M3 17 L9 17 L9 12 L15 12 L15 7 L21 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/>
-    <circle cx="9" cy="17" r="2.2" fill="currentColor"/>
-    <circle cx="15" cy="12" r="2.2" fill="currentColor" opacity=".8"/>
-    <circle cx="21" cy="7" r="2.2" fill="currentColor"/>
-  </svg>
-  <span>AA</span>
-</div>
 
 <section class="hero on-dark">
   <div class="wrap">
