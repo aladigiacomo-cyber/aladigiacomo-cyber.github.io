@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ana Luiza Adinolfi — Automação &amp; IA</title>
+<link rel="icon" type="image/svg+xml" href="images/favicon.svg">
 <style>
   :root {
     --navy: #0a1730;
@@ -80,6 +81,13 @@
     color: var(--blue-bright);
     margin: 0 0 24px;
   }
+
+  .hero-logo { margin: 0 0 28px; }
+  .hero-logo svg { height: 34px; width: auto; }
+  .hero-logo .logo-a-paper { stroke: #F5F4F0; }
+  .hero-logo .logo-a-indigo { stroke: #4B3FF2; stroke-opacity: .88; }
+  .hero-logo .logo-word-a { font-family: var(--font-sans); font-weight: 500; fill: #F5F4F0; }
+  .hero-logo .logo-word-nocode { font-family: var(--font-mono); font-weight: 500; fill: #4B3FF2; }
   .name {
     font-weight: 900;
     font-size: clamp(24px, 7.4vw, 92px);
@@ -329,6 +337,9 @@
     color: var(--muted-dark);
   }
   .footer-tagline svg { flex: none; opacity: .8; }
+  .footer-wordmark { height: 13px; width: auto; opacity: 1; text-transform: none; }
+  .footer-wordmark .logo-word-a { font-family: var(--font-sans); font-weight: 500; fill: var(--muted-dark); }
+  .footer-wordmark .logo-word-nocode { font-family: var(--font-mono); font-weight: 500; fill: #4B3FF2; }
 
   .contact-section {
     background-image:
@@ -349,6 +360,19 @@
 
 <section class="hero on-dark">
   <div class="wrap">
+    <div class="hero-logo">
+      <svg viewBox="0 0 480 130" role="img" aria-label="ana.nocode">
+        <g transform="translate(10,5)">
+          <g transform="translate(0,-1)" class="logo-a-paper" fill="none" stroke-width="5" stroke-linecap="round">
+            <path d="M50 12 L20 100"/><path d="M50 12 L80 100"/><path d="M32 64 L68 64"/>
+          </g>
+          <g transform="translate(16,9)" class="logo-a-indigo" fill="none" stroke-width="5" stroke-linecap="round">
+            <path d="M50 12 L20 100"/><path d="M50 12 L80 100"/><path d="M32 64 L68 64"/>
+          </g>
+        </g>
+        <text x="132" y="78" font-size="34"><tspan class="logo-word-a">ana.</tspan><tspan class="logo-word-nocode">nocode</tspan></text>
+      </svg>
+    </div>
     <p class="eyebrow">n8n · IA · Claude Code — sistemas sob medida</p>
     <h1 class="name">Ana Luiza Adinolfi</h1>
     <p class="headline">Eu construo os bastidores que fazem seu negócio <em>rodar sozinho</em>.</p>
@@ -518,11 +542,10 @@
       </a>
     </div>
     <p class="footer-tagline">
-      <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
-        <path d="M12 3 L19 6 V11 C19 16 16 19.5 12 21 C8 19.5 5 16 5 11 V6 Z"/>
-        <path d="M9 12 L11 14 L15 9.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <svg class="footer-wordmark" viewBox="0 0 200 40" role="img" aria-label="ana.nocode">
+        <text x="4" y="30" font-size="30"><tspan class="logo-word-a">ana.</tspan><tspan class="logo-word-nocode">nocode</tspan></text>
       </svg>
-      Ana Luiza Adinolfi &middot; 2026 &middot; Automação &amp; IA
+      &middot; 2026 &middot; Automação &amp; IA
     </p>
   </footer>
 </section>
