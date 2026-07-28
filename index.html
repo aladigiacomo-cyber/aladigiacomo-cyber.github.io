@@ -12,6 +12,7 @@
     --ink: #0e1830;
     --blue: #2f5ce0;
     --blue-bright: #4fc8ff;
+    --indigo: #4B3FF2;
     --muted-light: #5b6478;
     --muted-dark: #93a2c2;
     --line-light: rgba(14, 24, 48, 0.1);
@@ -131,14 +132,14 @@
     font-size: 16px;
     font-weight: 700;
     text-decoration: none;
-    color: var(--navy);
-    background: var(--blue-bright);
+    color: #fff;
+    background: var(--indigo);
     padding: 16px 28px;
     border-radius: 8px;
-    box-shadow: 0 8px 30px -8px rgba(79,200,255,.55);
+    box-shadow: 0 8px 30px -8px rgba(75,63,242,.55);
     transition: transform .18s ease, box-shadow .18s ease;
   }
-  .btn:hover { transform: translateY(-2px); box-shadow: 0 12px 34px -6px rgba(79,200,255,.7); }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 12px 34px -6px rgba(75,63,242,.7); }
   .btn::after { content: "→"; transition: transform .18s ease; }
   .btn:hover::after { transform: translateX(3px); }
 
@@ -196,7 +197,7 @@
   .step p { font-size: 14.5px; color: var(--muted-light); margin: 0; }
 
   /* FERRAMENTAS strip */
-  .strip { background: var(--blue); color: #fff; }
+  .strip { background: var(--indigo); color: #fff; }
   .strip .wrap { padding: clamp(30px, 5vw, 44px) var(--pad); display: flex; flex-wrap: wrap; align-items: center; gap: 18px 28px; }
   .strip-label { font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; opacity: .85; }
   .tools-row { display: flex; flex-wrap: wrap; gap: 10px 22px; }
@@ -361,7 +362,7 @@
 <section class="hero on-dark">
   <div class="wrap">
     <div class="hero-logo">
-      <svg viewBox="0 0 480 130" role="img" aria-label="ana.nocode">
+      <svg viewBox="20 6 308 118" role="img" aria-label="ana.nocode">
         <g transform="translate(10,5)">
           <g transform="translate(0,-1)" class="logo-a-paper" fill="none" stroke-width="5" stroke-linecap="round">
             <path d="M50 12 L20 100"/><path d="M50 12 L80 100"/><path d="M32 64 L68 64"/>
