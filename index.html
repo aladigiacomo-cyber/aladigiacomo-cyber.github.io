@@ -207,6 +207,56 @@
   .terminal-compact .terminal-body { padding: 16px; }
   .terminal-compact .terminal-body p { font-size: 12.5px; }
 
+  /* n8n workflow mockup */
+  .n8n-mock {
+    margin-top: 20px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #e4e7f0;
+    box-shadow: 0 20px 50px -20px rgba(10, 23, 48, .35);
+  }
+  .n8n-topbar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    background: #fff;
+    border-bottom: 1px solid #e4e7f0;
+  }
+  .n8n-mark {
+    font-family: var(--font-mono);
+    font-weight: 800;
+    font-size: 11px;
+    color: #fff;
+    background: #ea4560;
+    padding: 3px 7px;
+    border-radius: 5px;
+    letter-spacing: .02em;
+    flex: none;
+  }
+  .n8n-wf-name {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 600;
+    color: #20232b;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+  }
+  .n8n-spacer { flex: 1; min-width: 8px; }
+  .n8n-active { font-family: var(--font-mono); font-size: 10px; color: #28c840; font-weight: 700; white-space: nowrap; flex: none; }
+  .n8n-execute {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 700;
+    color: #fff;
+    background: #ea4560;
+    padding: 5px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+    flex: none;
+  }
   .flow-body {
     padding: 14px;
     background-color: #eef0f6;
@@ -215,42 +265,71 @@
   }
   .flow-body svg { display: block; width: 100%; height: auto; }
 
-  .chat-body { padding: 16px; display: flex; flex-direction: column; gap: 10px; }
-  .chat-msg {
-    max-width: 86%;
+  /* Claude conversation mockup */
+  .claude-mock {
+    margin-top: 20px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #e2dad0;
+    box-shadow: 0 20px 50px -20px rgba(10, 23, 48, .35);
+    background: #F5F1EC;
+  }
+  .claude-topbar {
+    display: flex;
+    align-items: center;
+    gap: 7px;
     padding: 10px 14px;
-    border-radius: 14px;
-    font-family: var(--font-sans);
-    font-size: 13.5px;
-    line-height: 1.5;
+    background: #EFE9E1;
+    border-bottom: 1px solid #e2dad0;
   }
-  .chat-msg-user {
+  .claude-mark { display: flex; color: #C96442; }
+  .claude-title { font-family: var(--font-sans); font-weight: 700; font-size: 12px; color: #3d3929; }
+  .claude-body { padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+  .claude-msg-user {
     align-self: flex-end;
-    background: var(--indigo);
-    color: #fff;
-    border-bottom-right-radius: 4px;
+    max-width: 86%;
+    background: #fff;
+    border: 1px solid #e6e0d6;
+    padding: 9px 13px;
+    border-radius: 10px;
+    font-family: var(--font-sans);
+    font-size: 13px;
+    line-height: 1.5;
+    color: #3d3929;
   }
-  .chat-msg-claude {
-    align-self: flex-start;
-    background: rgba(255, 255, 255, .07);
-    color: #dbe4f5;
-    border-bottom-left-radius: 4px;
-  }
-  .chat-skill {
+  .claude-tool {
     align-self: flex-start;
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: 7px;
     font-family: var(--font-mono);
     font-size: 11px;
-    color: var(--muted-dark);
-    background: rgba(75, 63, 242, .14);
-    border: 1px solid rgba(75, 63, 242, .32);
-    padding: 5px 11px;
-    border-radius: 999px;
+    color: #8a8471;
+    background: rgba(201, 100, 66, .1);
+    border: 1px solid rgba(201, 100, 66, .28);
+    padding: 5px 10px;
+    border-radius: 7px;
   }
-  .chat-skill svg { flex: none; color: var(--blue-bright); }
-  .chat-skill-name { color: var(--blue-bright); font-weight: 700; }
+  .claude-tool-dot { width: 7px; height: 7px; border-radius: 50%; background: #C96442; flex: none; }
+  .claude-tool-name { color: #C96442; font-weight: 700; }
+  .claude-reply { display: flex; gap: 10px; align-items: flex-start; }
+  .claude-avatar {
+    flex: none;
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    background: #C96442;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .claude-reply-text {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    line-height: 1.55;
+    color: #3d3929;
+    padding-top: 2px;
+  }
   .terminal-body .t-muted { color: var(--muted-dark); }
   .terminal-body .t-arrow { color: var(--muted-dark); margin-right: 2px; }
   .terminal-body .t-accent { color: var(--blue-bright); }
@@ -533,12 +612,13 @@
         <div>
           <h3>Processos com n8n</h3>
           <p>Fluxos que conectam suas ferramentas e eliminam tarefa repetitiva: e-mail, planilha, CRM, WhatsApp, formulário — tudo conversando entre si, sem ninguém copiando e colando nada.</p>
-          <div class="terminal terminal-compact">
-            <div class="terminal-bar">
-              <span class="terminal-dot terminal-dot-red"></span>
-              <span class="terminal-dot terminal-dot-yellow"></span>
-              <span class="terminal-dot terminal-dot-green"></span>
-              <span class="terminal-title">n8n · workflow</span>
+          <div class="n8n-mock reveal-item">
+            <div class="n8n-topbar">
+              <span class="n8n-mark">n8n</span>
+              <span class="n8n-wf-name">novo-lead-instagram</span>
+              <span class="n8n-spacer"></span>
+              <span class="n8n-active">● Ativo</span>
+              <span class="n8n-execute">▶ Executar</span>
             </div>
             <div class="flow-body">
               <svg viewBox="0 0 600 170" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Workflow no n8n: Webhook, IF, CRM e Notify conectados em sequência">
@@ -554,53 +634,59 @@
                 </g>
 
                 <g transform="translate(12,57)">
-                  <rect width="96" height="56" rx="10" fill="#fff" stroke="#dfe2ec" stroke-width="1.5"/>
-                  <rect width="96" height="6" rx="3" fill="#4B3FF2"/>
-                  <circle cx="86" cy="10" r="7" fill="#28c840"/>
-                  <path d="M83 10 L85.2 12.3 L89.3 7.8" stroke="#fff" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                  <g transform="translate(12,17)" stroke="#4B3FF2" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M9 1 L3 10 H8 L7 15 L13 6 H8 Z"/>
+                  <rect width="96" height="56" rx="8" fill="#fff" stroke="#dfe2ec" stroke-width="1.5"/>
+                  <rect x="8" y="8" width="26" height="26" rx="6" fill="#4B3FF2"/>
+                  <g transform="translate(15,15)" stroke="#fff" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M7 0 L2 8 H6 L5.5 13 L11 5 H7 Z"/>
                   </g>
-                  <text x="34" y="27.5" font-family="Arial, sans-serif" font-size="11.5" font-weight="700" fill="#14171C">Webhook</text>
-                  <text x="10" y="42" font-family="Arial, sans-serif" font-size="9.5" fill="#8A8F98">novo lead</text>
+                  <text x="42" y="26" font-family="Arial, sans-serif" font-size="11" font-weight="700" fill="#20232b">Webhook</text>
+                  <text x="42" y="40" font-family="Arial, sans-serif" font-size="9" fill="#8A8F98">novo lead</text>
+                  <circle cx="96" cy="28" r="3" fill="#c7ccd9"/>
+                  <circle cx="86" cy="9" r="6.5" fill="#28c840"/>
+                  <path d="M83.2 9 L85.1 11 L88.8 6.8" stroke="#fff" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
                 </g>
 
                 <g transform="translate(172,57)">
-                  <rect width="96" height="56" rx="10" fill="#fff" stroke="#dfe2ec" stroke-width="1.5"/>
-                  <rect width="96" height="6" rx="3" fill="#2f5ce0"/>
-                  <circle cx="86" cy="10" r="7" fill="#28c840"/>
-                  <path d="M83 10 L85.2 12.3 L89.3 7.8" stroke="#fff" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                  <g transform="translate(13,16)" stroke="#2f5ce0" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M7 0 V7 M7 7 L1 16 M7 7 L13 16"/>
+                  <rect width="96" height="56" rx="8" fill="#fff" stroke="#dfe2ec" stroke-width="1.5"/>
+                  <rect x="8" y="8" width="26" height="26" rx="6" fill="#2f5ce0"/>
+                  <g transform="translate(16,14)" stroke="#fff" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 0 V6 M6 6 L1 14 M6 6 L11 14"/>
                   </g>
-                  <text x="34" y="27.5" font-family="Arial, sans-serif" font-size="11.5" font-weight="700" fill="#14171C">IF</text>
-                  <text x="10" y="42" font-family="Arial, sans-serif" font-size="9.5" fill="#8A8F98">qualificado?</text>
+                  <text x="42" y="26" font-family="Arial, sans-serif" font-size="11" font-weight="700" fill="#20232b">IF</text>
+                  <text x="42" y="40" font-family="Arial, sans-serif" font-size="9" fill="#8A8F98">qualificado?</text>
+                  <circle cx="0" cy="28" r="3" fill="#c7ccd9"/>
+                  <circle cx="96" cy="28" r="3" fill="#c7ccd9"/>
+                  <circle cx="86" cy="9" r="6.5" fill="#28c840"/>
+                  <path d="M83.2 9 L85.1 11 L88.8 6.8" stroke="#fff" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
                 </g>
 
                 <g transform="translate(332,57)">
-                  <rect width="96" height="56" rx="10" fill="#fff" stroke="#dfe2ec" stroke-width="1.5"/>
-                  <rect width="96" height="6" rx="3" fill="#4fc8ff"/>
-                  <circle cx="86" cy="10" r="7" fill="#28c840"/>
-                  <path d="M83 10 L85.2 12.3 L89.3 7.8" stroke="#fff" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                  <g transform="translate(13,15)" stroke="#2f5ce0" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <ellipse cx="7" cy="3" rx="7" ry="3"/>
-                    <path d="M0 3 V13 A7 3 0 0 0 14 13 V3"/>
+                  <rect width="96" height="56" rx="8" fill="#fff" stroke="#dfe2ec" stroke-width="1.5"/>
+                  <rect x="8" y="8" width="26" height="26" rx="6" fill="#0f9ecb"/>
+                  <g transform="translate(15,13)" stroke="#fff" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <ellipse cx="6" cy="2.5" rx="6" ry="2.5"/>
+                    <path d="M0 2.5 V11 A6 2.5 0 0 0 12 11 V2.5"/>
                   </g>
-                  <text x="34" y="27.5" font-family="Arial, sans-serif" font-size="11.5" font-weight="700" fill="#14171C">CRM</text>
-                  <text x="10" y="42" font-family="Arial, sans-serif" font-size="9.5" fill="#8A8F98">atualiza dados</text>
+                  <text x="42" y="26" font-family="Arial, sans-serif" font-size="11" font-weight="700" fill="#20232b">CRM</text>
+                  <text x="42" y="40" font-family="Arial, sans-serif" font-size="9" fill="#8A8F98">atualiza dados</text>
+                  <circle cx="0" cy="28" r="3" fill="#c7ccd9"/>
+                  <circle cx="96" cy="28" r="3" fill="#c7ccd9"/>
+                  <circle cx="86" cy="9" r="6.5" fill="#28c840"/>
+                  <path d="M83.2 9 L85.1 11 L88.8 6.8" stroke="#fff" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
                 </g>
 
                 <g transform="translate(492,57)">
-                  <rect width="96" height="56" rx="10" fill="#fff" stroke="#dfe2ec" stroke-width="1.5"/>
-                  <rect width="96" height="6" rx="3" fill="#28c840"/>
-                  <circle cx="86" cy="10" r="7" fill="#28c840"/>
-                  <path d="M83 10 L85.2 12.3 L89.3 7.8" stroke="#fff" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                  <g transform="translate(13,16)" stroke="#1f9e37" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="0" y="0" width="16" height="11" rx="3"/>
-                    <path d="M4 11 L2 15 L7 11"/>
+                  <rect width="96" height="56" rx="8" fill="#fff" stroke="#dfe2ec" stroke-width="1.5"/>
+                  <rect x="8" y="8" width="26" height="26" rx="6" fill="#1f9e37"/>
+                  <g transform="translate(15,15)" stroke="#fff" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="0" y="0" width="14" height="10" rx="2.5"/>
+                    <path d="M3.5 10 L2 13 L6 10"/>
                   </g>
-                  <text x="34" y="27.5" font-family="Arial, sans-serif" font-size="11.5" font-weight="700" fill="#14171C">Notify</text>
-                  <text x="10" y="42" font-family="Arial, sans-serif" font-size="9.5" fill="#8A8F98">envia WhatsApp</text>
+                  <text x="42" y="26" font-family="Arial, sans-serif" font-size="11" font-weight="700" fill="#20232b">Notify</text>
+                  <text x="42" y="40" font-family="Arial, sans-serif" font-size="9" fill="#8A8F98">envia WhatsApp</text>
+                  <circle cx="0" cy="28" r="3" fill="#c7ccd9"/>
+                  <circle cx="86" cy="9" r="6.5" fill="#28c840"/>
+                  <path d="M83.2 9 L85.1 11 L88.8 6.8" stroke="#fff" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
                 </g>
               </svg>
             </div>
@@ -615,20 +701,24 @@
         <div>
           <h3>Soluções com inteligência artificial</h3>
           <p>Agentes e integrações de IA aplicados a um problema real do seu negócio: triagem de atendimento, geração de conteúdo, análise de dados. IA que resolve gargalo, não IA por IA.</p>
-          <div class="terminal terminal-compact">
-            <div class="terminal-bar">
-              <span class="terminal-dot terminal-dot-red"></span>
-              <span class="terminal-dot terminal-dot-yellow"></span>
-              <span class="terminal-dot terminal-dot-green"></span>
-              <span class="terminal-title">conversa · claude</span>
+          <div class="claude-mock reveal-item">
+            <div class="claude-topbar">
+              <span class="claude-mark">
+                <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"><path d="M12 3 V21 M4.5 7 L19.5 17 M19.5 7 L4.5 17"/></svg>
+              </span>
+              <span class="claude-title">Claude</span>
             </div>
-            <div class="chat-body">
-              <div class="chat-msg chat-msg-user">cria as legendas dessa semana a partir do calendário de conteúdo</div>
-              <div class="chat-skill">
-                <svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 1 L3 10 H8 L7 15 L13 6 H8 Z"/></svg>
-                invocando skill <span class="chat-skill-name">social-media</span>
+            <div class="claude-body">
+              <div class="claude-msg-user">cria as legendas dessa semana a partir do calendário de conteúdo</div>
+              <div class="claude-tool">
+                <span class="claude-tool-dot"></span> Skill <span class="claude-tool-name">social-media</span>
               </div>
-              <div class="chat-msg chat-msg-claude">prontas as 5 legendas da semana, já no seu tom de voz.</div>
+              <div class="claude-reply">
+                <span class="claude-avatar">
+                  <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><path d="M12 3 V21 M4.5 7 L19.5 17 M19.5 7 L4.5 17"/></svg>
+                </span>
+                <span class="claude-reply-text">Prontas as 5 legendas da semana, já no seu tom de voz.</span>
+              </div>
             </div>
           </div>
         </div>
