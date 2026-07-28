@@ -24,6 +24,7 @@
   }
 
   * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
   html, body {
     margin: 0;
     padding: 0;
@@ -33,6 +34,7 @@
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
   }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
   a { color: inherit; }
   ::selection { background: var(--blue-bright); color: var(--navy); }
@@ -211,6 +213,7 @@
   .contact-row.primary .value { color: var(--blue-bright); }
 
   .contact-form-card {
+    scroll-margin-top: 24px;
     margin: 8px 0 40px;
     background: rgba(255, 255, 255, .03);
     border: 1px solid var(--line-dark);
@@ -515,14 +518,10 @@
       </form>
 
       <div class="contact-list">
-        <p class="contact-list-label">Ou fala direto:</p>
+        <p class="contact-list-label">Outras formas de contato</p>
         <a class="contact-row primary" href="https://instagram.com/ana.nocode" target="_blank" rel="noopener">
           <span class="label">Instagram</span><span class="value">@ana.nocode</span>
         </a>
-        <button type="button" class="contact-row" data-copy="aladigiacomo@gmail.com">
-          <span class="label">E-mail</span><span class="value">aladigiacomo@gmail.com</span>
-          <span class="copy-toast" role="status">Copiado!</span>
-        </button>
         <a class="contact-row" href="https://www.linkedin.com/in/analuizadigiacomo" target="_blank" rel="noopener">
           <span class="label">LinkedIn</span><span class="value">/in/analuizadigiacomo</span>
         </a>
@@ -546,13 +545,12 @@
           <path d="M11.5 17 V10 M11.5 13 C11.5 11 14.5 10.8 14.5 13 V17" stroke-linecap="round"/>
         </svg>
       </a>
-      <button type="button" class="social-link" data-copy="aladigiacomo@gmail.com" aria-label="Copiar e-mail">
+      <a class="social-link" href="#contact-form" aria-label="Ir para o formulário de contato">
         <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.6">
           <rect x="3" y="5" width="18" height="14" rx="3"/>
           <path d="M4 7 L12 13 L20 7" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-        <span class="copy-toast" role="status">Copiado!</span>
-      </button>
+      </a>
     </div>
     <p class="footer-tagline">
       <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
