@@ -157,6 +157,32 @@
   .btn::after { content: "→"; transition: transform .18s ease; }
   .btn:hover::after { transform: translateX(3px); }
 
+  /* NA PRÁTICA — exemplos concretos */
+  .examples-grid { display: grid; gap: 14px; }
+  @media (min-width: 700px) { .examples-grid { grid-template-columns: 1fr 1fr; } }
+  .example-card {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    background: rgba(255, 255, 255, .03);
+    border: 1px solid var(--line-dark);
+    border-radius: 12px;
+    padding: 18px 20px;
+  }
+  .example-card .check {
+    flex: none;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--indigo);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+  }
+  .example-card p { margin: 0; font-size: 15px; line-height: 1.55; color: #dbe4f5; }
+  .example-card .arrow { color: var(--blue-bright); font-weight: 700; }
+
   /* SOBRE */
   p { margin: 0 0 20px; line-height: 1.7; font-size: 17px; }
   p:last-child { margin-bottom: 0; }
@@ -383,6 +409,11 @@
   .service h3 { font-size: clamp(19px, 2.4vw, 22px); font-weight: 700; margin: 0 0 10px; color: #f5f7fb; letter-spacing: -0.01em; }
   .service p { color: var(--muted-dark); font-size: 16px; margin: 0; max-width: 100%; }
 
+  /* FAQ */
+  .faq-list { display: flex; flex-direction: column; gap: 30px; max-width: var(--measure); }
+  .faq-item h4 { font-size: clamp(16.5px, 2vw, 18px); font-weight: 700; margin: 0 0 8px; color: #f5f7fb; letter-spacing: -0.005em; }
+  .faq-item p { font-size: 15px; color: var(--muted-dark); margin: 0; max-width: 100%; }
+
   /* COMO EU TRABALHO */
   .tracks { display: grid; gap: clamp(36px, 6vw, 60px); }
   @media (min-width: 780px) { .tracks { grid-template-columns: 1fr 1fr; } }
@@ -425,6 +456,29 @@
   .step h4 { font-size: 15.5px; font-weight: 700; margin: 8px 0 4px; color: var(--ink); letter-spacing: -0.005em; }
   .step p { font-size: 14.5px; color: var(--muted-light); margin: 0; }
 
+  .guarantee-badge {
+    margin-top: clamp(36px, 6vw, 60px);
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    background: rgba(47, 92, 224, .06);
+    border: 1px solid rgba(47, 92, 224, .22);
+    border-radius: 14px;
+    padding: 22px 26px;
+  }
+  .guarantee-badge .shield {
+    flex: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .guarantee-badge h4 { margin: 0 0 4px; font-size: 16px; font-weight: 800; color: var(--ink); }
+  .guarantee-badge p { margin: 0; font-size: 14.5px; color: var(--muted-light); }
+
   /* FERRAMENTAS strip */
   .strip { background: var(--indigo); color: #fff; }
   .strip .wrap { padding: clamp(30px, 5vw, 44px) var(--pad); display: flex; flex-wrap: wrap; align-items: center; gap: 18px 28px; }
@@ -435,8 +489,9 @@
   .tool-tag:first-child::before { content: ""; margin: 0; }
 
   /* CONTATO */
-  .contact-cta { font-weight: 900; font-size: clamp(30px, 6vw, 52px); letter-spacing: -0.02em; margin: 0 0 40px; text-wrap: balance; color: #fff; }
+  .contact-cta { font-weight: 900; font-size: clamp(30px, 6vw, 52px); letter-spacing: -0.02em; margin: 0 0 14px; text-wrap: balance; color: #fff; }
   .contact-cta em { font-style: normal; color: var(--indigo); }
+  .contact-sub { font-size: 15.5px; color: var(--muted-dark); max-width: 520px; margin: 0 0 40px; }
   .contact-list { display: flex; flex-direction: column; gap: 2px; margin-bottom: 8px; }
   .contact-row {
     display: flex; align-items: baseline; justify-content: space-between; gap: 16px;
@@ -610,8 +665,40 @@
     <p class="eyebrow">n8n · IA · Claude Code — sistemas sob medida</p>
     <h1 class="name">Ana Luiza Adinolfi</h1>
     <p class="headline">Eu construo os bastidores que fazem seu negócio <em>rodar sozinho</em>.</p>
-    <p class="sub">Automação de processos com n8n, soluções com inteligência artificial e consultoria em&nbsp;Claude&nbsp;/&nbsp;Claude&nbsp;Code — para quem quer escalar sem contratar um time inteiro.</p>
-    <a class="btn" href="https://instagram.com/ana.nocode" target="_blank" rel="noopener">Fala comigo no Instagram</a>
+    <p class="sub">As tarefas repetitivas do seu negócio passam a acontecer sozinhas — eu desenho e construo o sistema (com n8n, IA e Claude&nbsp;Code), você só acompanha.</p>
+    <a class="btn" href="https://instagram.com/ana.nocode" target="_blank" rel="noopener">Quero meu diagnóstico grátis</a>
+  </div>
+</section>
+
+<section class="on-dark reveal">
+  <div class="wrap">
+    <div class="ref"><span class="rule"></span> Na prática <span class="rule"></span></div>
+    <div class="examples-grid">
+      <div class="example-card reveal-item">
+        <span class="check">
+          <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12 L10 17 L19 7"/></svg>
+        </span>
+        <p>Confirmação de consulta que hoje alguém manda uma por uma no WhatsApp <span class="arrow">→</span> sai sozinha, todo dia, 24h antes.</p>
+      </div>
+      <div class="example-card reveal-item">
+        <span class="check">
+          <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12 L10 17 L19 7"/></svg>
+        </span>
+        <p>Comprovante de pagamento que precisa ser conferido e lançado na planilha <span class="arrow">→</span> é lido e lançado sozinho.</p>
+      </div>
+      <div class="example-card reveal-item">
+        <span class="check">
+          <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12 L10 17 L19 7"/></svg>
+        </span>
+        <p>"Quanto custa? Como funciona?" no direct do Instagram, que hoje demora horas pra alguém responder <span class="arrow">→</span> é respondido na hora, e só chega até você quando o lead está pronto pra fechar.</p>
+      </div>
+      <div class="example-card reveal-item">
+        <span class="check">
+          <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12 L10 17 L19 7"/></svg>
+        </span>
+        <p>Relatório do mês que alguém junta manualmente de 3 planilhas <span class="arrow">→</span> chega pronto na sua caixa, todo mês, no mesmo dia.</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -794,11 +881,47 @@
       <div>
         <p class="track-title">Processo — Automação</p>
         <ol class="steps">
-          <li class="step reveal-item"><span class="step-num">01</span><div><h4>Diagnóstico</h4><p>Conversa pra entender o problema de verdade.</p></div></li>
-          <li class="step reveal-item"><span class="step-num">02</span><div><h4>Proposta</h4><p>Fechamos valor e prazo do projeto, mais um valor recorrente pra manter o sistema funcionando.</p></div></li>
-          <li class="step reveal-item"><span class="step-num">03</span><div><h4>Construção</h4><p>Eu construo o sistema.</p></div></li>
-          <li class="step reveal-item"><span class="step-num">04</span><div><h4>Entrega</h4><p>Na data combinada, repasso credenciais e dados. O sistema é seu.</p></div></li>
+          <li class="step reveal-item"><span class="step-num">01</span><div><h4>Diagnóstico (sem custo)</h4><p>Conversa pra entender o problema de verdade, sem compromisso de fechar nada.</p></div></li>
+          <li class="step reveal-item"><span class="step-num">02</span><div><h4>Desenho da automação</h4><p>Mostro exatamente como o sistema vai funcionar, com valor e prazo fechados. Nada é construído antes de você aprovar esse desenho.</p></div></li>
+          <li class="step reveal-item"><span class="step-num">03</span><div><h4>Implementação</h4><p>Eu construo o sistema.</p></div></li>
+          <li class="step reveal-item"><span class="step-num">04</span><div><h4>Entrega + garantia</h4><p>Repasso credenciais e dados — o sistema é seu. E você tem 15 dias de ajuste incluído, sem custo extra.</p></div></li>
         </ol>
+      </div>
+    </div>
+
+    <div class="guarantee-badge reveal-item">
+      <span class="shield">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 L19 6 V11 C19 16 16 19.5 12 21 C8 19.5 5 16 5 11 V6 Z"/><path d="M9 12 L11 14 L15 9.5"/></svg>
+      </span>
+      <div>
+        <h4>15 dias de ajuste incluídos</h4>
+        <p>Depois da entrega, qualquer ajuste no que foi combinado no desenho é por minha conta, sem custo extra, por 15 dias. Depois disso, se quiser suporte contínuo, tem um plano de manutenção opcional — nunca obrigatório.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Quando houver depoimentos reais, uma seção de prova social entra aqui, entre "Como eu trabalho" e "Perguntas frequentes". Não preencher com nada fictício até lá. -->
+
+<section class="on-dark reveal">
+  <div class="wrap">
+    <div class="ref"><span class="rule"></span> Perguntas frequentes <span class="rule"></span></div>
+    <div class="faq-list">
+      <div class="faq-item reveal-item">
+        <h4>Quanto custa?</h4>
+        <p>Cada automação é diferente, então não dá pra cravar um valor fixo aqui. Você sabe exatamente quanto custa logo depois do diagnóstico gratuito — antes de qualquer compromisso.</p>
+      </div>
+      <div class="faq-item reveal-item">
+        <h4>Funciona com as ferramentas que eu já uso?</h4>
+        <p>Trabalho com n8n, que se conecta nativamente com centenas de ferramentas — WhatsApp, e-mail, CRMs, planilhas, formulários. Se a sua ferramenta tiver algum tipo de API, geralmente dá pra integrar mesmo sem uma conexão pronta.</p>
+      </div>
+      <div class="faq-item reveal-item">
+        <h4>O que acontece depois dos 15 dias de garantia?</h4>
+        <p>O sistema é 100% seu, sem contrato preso. Se quiser suporte contínuo ou novos ajustes depois disso, existe um plano de manutenção opcional — mas nunca é obrigatório.</p>
+      </div>
+      <div class="faq-item reveal-item">
+        <h4>Meus dados ficam seguros? De quem é o sistema no final?</h4>
+        <p>O sistema roda nas suas próprias contas e ferramentas. Eu não fico com acesso nem com seus dados depois da entrega — as credenciais e o sistema são repassados pra você no final.</p>
       </div>
     </div>
   </div>
@@ -820,6 +943,7 @@
     <div class="ref"><span class="rule"></span> Contato <span class="rule"></span></div>
     <div class="col">
       <p class="contact-cta">Bora <em>automatizar</em>? Me chama.</p>
+      <p class="contact-sub">É o primeiro passo pro seu diagnóstico gratuito. Sem custo, sem compromisso — e com 15 dias de ajuste incluído quando o projeto sair do papel.</p>
 
       <form class="contact-form-card" id="contact-form" action="https://formsubmit.co/ajax/aladigiacomo@gmail.com" method="POST">
         <input type="hidden" name="_subject" value="Novo contato — site Ana Luiza Adinolfi">
@@ -900,7 +1024,7 @@
 
 <script>
   (function () {
-    document.querySelectorAll('.services, .steps, .contact-list, .tools-row').forEach(function (container) {
+    document.querySelectorAll('.services, .steps, .contact-list, .tools-row, .examples-grid, .faq-list').forEach(function (container) {
       var items = container.querySelectorAll('.reveal-item');
       items.forEach(function (item, i) { item.style.transitionDelay = (i * 90) + 'ms'; });
     });
