@@ -992,6 +992,20 @@
   })();
 
   (function () {
+    // Smooth-scroll only on explicit clicks of in-page anchors (not a global
+    // scroll-behavior), so it can't interfere with native touch scrolling.
+    var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+      link.addEventListener('click', function (e) {
+        var target = document.getElementById(link.getAttribute('href').slice(1));
+        if (!target) return;
+        e.preventDefault();
+        target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+      });
+    });
+  })();
+
+  (function () {
     function fallbackCopy(text) {
       var ta = document.createElement('textarea');
       ta.value = text;
