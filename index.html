@@ -157,32 +157,6 @@
   .btn::after { content: "→"; transition: transform .18s ease; }
   .btn:hover::after { transform: translateX(3px); }
 
-  /* NA PRÁTICA — exemplos concretos */
-  .examples-grid { display: grid; gap: 14px; }
-  @media (min-width: 700px) { .examples-grid { grid-template-columns: 1fr 1fr; } }
-  .example-card {
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-    background: rgba(255, 255, 255, .03);
-    border: 1px solid var(--line-dark);
-    border-radius: 12px;
-    padding: 18px 20px;
-  }
-  .example-card .check {
-    flex: none;
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    background: var(--indigo);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 2px;
-  }
-  .example-card p { margin: 0; font-size: 15px; line-height: 1.55; color: #dbe4f5; }
-  .example-card .arrow { color: var(--blue-bright); font-weight: 700; }
-
   /* SOBRE */
   p { margin: 0 0 20px; line-height: 1.7; font-size: 17px; }
   p:last-child { margin-bottom: 0; }
@@ -666,39 +640,7 @@
     <h1 class="name">Ana Luiza Adinolfi</h1>
     <p class="headline">Eu construo os bastidores que fazem seu negócio <em>rodar sozinho</em>.</p>
     <p class="sub">As tarefas repetitivas do seu negócio passam a acontecer sozinhas — eu desenho e construo o sistema (com n8n, IA e Claude&nbsp;Code), você só acompanha.</p>
-    <a class="btn" href="https://instagram.com/ana.nocode" target="_blank" rel="noopener">Quero meu diagnóstico grátis</a>
-  </div>
-</section>
-
-<section class="on-dark reveal">
-  <div class="wrap">
-    <div class="ref"><span class="rule"></span> Na prática <span class="rule"></span></div>
-    <div class="examples-grid">
-      <div class="example-card reveal-item">
-        <span class="check">
-          <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12 L10 17 L19 7"/></svg>
-        </span>
-        <p>Confirmação de consulta que hoje alguém manda uma por uma no WhatsApp <span class="arrow">→</span> sai sozinha, todo dia, 24h antes.</p>
-      </div>
-      <div class="example-card reveal-item">
-        <span class="check">
-          <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12 L10 17 L19 7"/></svg>
-        </span>
-        <p>Comprovante de pagamento que precisa ser conferido e lançado na planilha <span class="arrow">→</span> é lido e lançado sozinho.</p>
-      </div>
-      <div class="example-card reveal-item">
-        <span class="check">
-          <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12 L10 17 L19 7"/></svg>
-        </span>
-        <p>"Quanto custa? Como funciona?" no direct do Instagram, que hoje demora horas pra alguém responder <span class="arrow">→</span> é respondido na hora, e só chega até você quando o lead está pronto pra fechar.</p>
-      </div>
-      <div class="example-card reveal-item">
-        <span class="check">
-          <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12 L10 17 L19 7"/></svg>
-        </span>
-        <p>Relatório do mês que alguém junta manualmente de 3 planilhas <span class="arrow">→</span> chega pronto na sua caixa, todo mês, no mesmo dia.</p>
-      </div>
-    </div>
+    <a class="btn" href="#contact-form">Fale comigo</a>
   </div>
 </section>
 
@@ -875,7 +817,7 @@
           <li class="step reveal-item"><span class="step-num">01</span><div><h4>Nivelamento</h4><p>Conversa inicial pra entender onde você está com IA hoje.</p></div></li>
           <li class="step reveal-item"><span class="step-num">02</span><div><h4>Trilha sob medida</h4><p>Monto aula por aula, sempre perguntando o que você quer e precisa aprender.</p></div></li>
           <li class="step reveal-item"><span class="step-num">03</span><div><h4>Acompanhamento</h4><p>Ajusto o conteúdo conforme seu interesse e seu ritmo.</p></div></li>
-          <li class="step reveal-item"><span class="step-num">04</span><div><h4>Pacote fechado</h4><p>Um valor único por plano, sem surpresa no meio do caminho.</p></div></li>
+          <li class="step reveal-item"><span class="step-num">04</span><div><h4>Cobrança por sessão</h4><p>Você paga por sessão, não um pacote fechado — sem surpresa no meio do caminho.</p></div></li>
         </ol>
       </div>
       <div>
@@ -895,7 +837,7 @@
       </span>
       <div>
         <h4>15 dias de ajuste incluídos</h4>
-        <p>Depois da entrega, qualquer ajuste no que foi combinado no desenho é por minha conta, sem custo extra, por 15 dias. Depois disso, se quiser suporte contínuo, tem um plano de manutenção opcional — nunca obrigatório.</p>
+        <p>Depois da entrega, qualquer ajuste no que foi combinado no desenho é por minha conta, sem custo extra, por 15 dias. Depois disso, se quiser suporte contínuo, tem um plano de manutenção opcional.</p>
       </div>
     </div>
   </div>
@@ -917,7 +859,7 @@
       </div>
       <div class="faq-item reveal-item">
         <h4>O que acontece depois dos 15 dias de garantia?</h4>
-        <p>O sistema é 100% seu, sem contrato preso. Se quiser suporte contínuo ou novos ajustes depois disso, existe um plano de manutenção opcional — mas nunca é obrigatório.</p>
+        <p>O sistema é 100% seu, sem contrato preso. Se quiser suporte contínuo ou novos ajustes depois disso, existe um plano de manutenção opcional.</p>
       </div>
       <div class="faq-item reveal-item">
         <h4>Meus dados ficam seguros? De quem é o sistema no final?</h4>
@@ -1024,7 +966,7 @@
 
 <script>
   (function () {
-    document.querySelectorAll('.services, .steps, .contact-list, .tools-row, .examples-grid, .faq-list').forEach(function (container) {
+    document.querySelectorAll('.services, .steps, .contact-list, .tools-row, .faq-list').forEach(function (container) {
       var items = container.querySelectorAll('.reveal-item');
       items.forEach(function (item, i) { item.style.transitionDelay = (i * 90) + 'ms'; });
     });
