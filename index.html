@@ -122,10 +122,14 @@
   .name {
     font-family: var(--font-mono);
     font-weight: 800;
-    font-size: clamp(30px, 5.6vw, 64px);
+    font-size: clamp(24px, 4.4vw, 44px);
     letter-spacing: -0.02em;
     line-height: 1.05;
     margin: 0 0 20px;
+    white-space: nowrap;
+  }
+  @media (min-width: 960px) {
+    .name { font-size: clamp(24px, 2.6vw, 36px); }
   }
   .name em { font-style: normal; color: var(--indigo-on-dark); }
   .headline {
@@ -484,7 +488,11 @@
     bottom: -2px;
     width: 2px;
     background: var(--line-light);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform .5s ease .15s;
   }
+  .step.in::after { transform: scaleY(1); }
   .step:last-child::after { display: none; }
   .step-num {
     position: relative;
@@ -501,9 +509,13 @@
     font-weight: 800;
     color: #fff;
     flex: none;
+    transition: transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s ease;
   }
-  .step h3 { font-size: 15.5px; font-weight: 700; margin: 8px 0 4px; color: var(--ink); letter-spacing: -0.005em; }
+  .step h3 { font-size: 15.5px; font-weight: 700; margin: 8px 0 4px; color: var(--ink); letter-spacing: -0.005em; transition: color .2s ease; }
   .step p { font-size: 14.5px; color: var(--muted-light); margin: 0; }
+  .step:hover { --hx: 6px; }
+  .step:hover .step-num { transform: scale(1.12); box-shadow: 0 0 0 6px rgba(75,63,242,.14); }
+  .step:hover h3 { color: var(--indigo); }
 
   .guarantee-badge {
     margin-top: clamp(36px, 6vw, 60px);
@@ -514,6 +526,12 @@
     border: 1px solid rgba(75, 63, 242, .22);
     border-radius: 14px;
     padding: 22px 26px;
+    transition: border-color .3s ease, background-color .3s ease;
+  }
+  .guarantee-badge:hover {
+    --hy: -3px;
+    border-color: rgba(75, 63, 242, .4);
+    background-color: rgba(75, 63, 242, .1);
   }
   .guarantee-badge .shield {
     flex: none;
@@ -685,12 +703,13 @@
     transform: translateY(16px) scale(.96) translateX(var(--hx, 0px));
     transition: opacity .6s ease-out, transform .62s cubic-bezier(.34, 1.56, .64, 1);
   }
-  .reveal-item.in { opacity: 1; transform: translateY(0) scale(1) translateX(var(--hx, 0px)); }
+  .reveal-item.in { opacity: 1; transform: translateY(var(--hy, 0px)) scale(1) translateX(var(--hx, 0px)); }
   @media (prefers-reduced-motion: reduce) {
     .reveal, .reveal-item { opacity: 1; transform: none; transition: none; }
     .hero-cta::before { animation: none; opacity: .7; transform: none; }
     .faq-track { animation: none !important; }
     .terminal-cursor { animation: none; opacity: .6; }
+    .step::after { transition: none; transform: scaleY(1); }
   }
 
 
@@ -745,10 +764,10 @@
 <section class="on-light reveal">
   <div class="wrap">
     <h2 class="ref"><span class="rule"></span> Sobre <span class="rule"></span></h2>
-    <div class="col">
-      <p class="lede">Eu sou a Ana. Trabalho na fronteira entre <em>automação</em> e <em>inteligência artificial</em>.</p>
-      <p>Pego processos que hoje dependem de alguém copiar, colar, checar e lembrar — e transformo em sistemas que rodam sozinhos, usando n8n, IA e integrações sob medida.</p>
-      <p>Não vendo automação de prateleira. Cada sistema é desenhado a partir do jeito real como o seu negócio funciona hoje, não de um template pronto.</p>
+    <div class="col sobre-col">
+      <p class="lede reveal-item">Eu sou a Ana. Trabalho na fronteira entre <em>automação</em> e <em>inteligência artificial</em>.</p>
+      <p class="reveal-item">Pego processos que hoje dependem de alguém copiar, colar, checar e lembrar — e transformo em sistemas que rodam sozinhos, usando n8n, IA e integrações sob medida.</p>
+      <p class="reveal-item">Não vendo automação de prateleira. Cada sistema é desenhado a partir do jeito real como o seu negócio funciona hoje, não de um template pronto.</p>
     </div>
   </div>
 </section>
@@ -1086,7 +1105,7 @@
 
 <script>
   (function () {
-    document.querySelectorAll('.services, .steps, .contact-list, .tools-row, .terminal-body').forEach(function (container) {
+    document.querySelectorAll('.services, .steps, .contact-list, .tools-row, .terminal-body, .sobre-col').forEach(function (container) {
       var items = container.querySelectorAll('.reveal-item');
       items.forEach(function (item, i) { item.style.transitionDelay = (i * 90) + 'ms'; });
     });
@@ -1241,6 +1260,31 @@
           btn.style.setProperty('--my', '0px');
         });
       });
+    } catch (e) {}
+  })();
+
+  (function () {
+    try {
+      var hero = document.querySelector('.hero');
+      var heroText = document.querySelector('.hero-text');
+      var heroTerm = document.querySelector('.hero-terminal');
+      if (!hero || !heroText || !heroTerm) return;
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      var ticking = false;
+      function update() {
+        var y = window.scrollY || window.pageYOffset;
+        var progress = Math.min(Math.max(y / hero.offsetHeight, 0), 1);
+        heroText.style.transform = 'translate3d(0,' + (progress * 34).toFixed(1) + 'px,0)';
+        heroText.style.opacity = String(1 - progress * 0.95);
+        heroTerm.style.transform = 'translate3d(0,' + (progress * -20).toFixed(1) + 'px,0)';
+        heroTerm.style.opacity = String(1 - progress * 0.75);
+        ticking = false;
+      }
+      window.addEventListener('scroll', function () {
+        if (!ticking) { requestAnimationFrame(update); ticking = true; }
+      }, { passive: true });
+      update();
     } catch (e) {}
   })();
 </script>
