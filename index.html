@@ -25,7 +25,6 @@
     --navy: #0a1730;
     --paper: #f5f7fb;
     --ink: #0e1830;
-    --blue-bright: #4fc8ff;
     --indigo: #4B3FF2;
     --indigo-on-dark: #9b8fff;
     --muted-light: #5b6478;
@@ -52,8 +51,8 @@
   }
 
   a { color: inherit; }
-  ::selection { background: var(--blue-bright); color: var(--navy); }
-  a:focus-visible, button:focus-visible { outline: 2px solid var(--blue-bright); outline-offset: 3px; }
+  ::selection { background: var(--indigo); color: #fff; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--indigo-on-dark); outline-offset: 3px; }
 
   section { position: relative; }
   .wrap { max-width: 900px; margin: 0 auto; padding: clamp(56px, 11vw, 108px) var(--pad); }
@@ -73,7 +72,7 @@
     letter-spacing: .14em;
     text-transform: uppercase;
   }
-  .on-dark .ref { color: var(--blue-bright); }
+  .on-dark .ref { color: var(--indigo-on-dark); }
   .on-light .ref { color: var(--indigo); }
   .ref .rule { flex: 1; height: 1px; background: currentColor; opacity: .25; }
 
@@ -112,7 +111,7 @@
     margin: 0 0 28px;
     white-space: nowrap;
   }
-  .name em { font-style: normal; color: var(--blue-bright); }
+  .name em { font-style: normal; color: var(--indigo-on-dark); }
   .headline {
     font-weight: 700;
     font-size: clamp(22px, 5vw, 30px);
@@ -253,7 +252,7 @@
     white-space: nowrap;
     flex: none;
   }
-  .n8n-publish-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--blue-bright); flex: none; }
+  .n8n-publish-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--indigo-on-dark); flex: none; }
   .n8n-tabs { display: flex; gap: 4px; padding: 8px 14px 10px; }
   .n8n-tab {
     font-family: var(--font-sans);
@@ -318,7 +317,7 @@
     font-style: italic;
     color: var(--muted-dark);
   }
-  .claude-status b { font-style: normal; font-weight: 600; color: var(--blue-bright); }
+  .claude-status b { font-style: normal; font-weight: 600; color: var(--indigo-on-dark); }
   .claude-response {
     font-family: Georgia, 'Times New Roman', serif;
     font-size: 14px;
@@ -351,7 +350,7 @@
   }
   .terminal-body .t-muted { color: var(--muted-dark); }
   .terminal-body .t-arrow { color: var(--muted-dark); margin-right: 2px; }
-  .terminal-body .t-accent { color: var(--blue-bright); }
+  .terminal-body .t-accent { color: var(--indigo-on-dark); }
   .terminal-body .t-ok { color: #4fe08d; margin-right: 2px; }
   .terminal-body .t-status { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,.08); color: var(--muted-dark); }
 
@@ -378,7 +377,7 @@
     font-size: 13px;
     letter-spacing: .08em;
     text-transform: uppercase;
-    color: var(--blue-bright);
+    color: var(--indigo-on-dark);
     line-height: 1.3;
   }
   .service h3 { font-size: clamp(19px, 2.4vw, 22px); font-weight: 700; margin: 0 0 10px; color: #f5f7fb; letter-spacing: -0.01em; }
@@ -455,11 +454,11 @@
   .guarantee-badge p { margin: 0; font-size: 14.5px; color: var(--muted-light); }
 
   /* FERRAMENTAS strip */
-  .strip { background: var(--navy); color: #fff; border-top: 1px solid var(--line-dark); border-bottom: 1px solid var(--line-dark); }
+  .strip { background: var(--indigo); color: #fff; }
   .strip .wrap { padding: clamp(30px, 5vw, 44px) var(--pad); display: flex; flex-wrap: wrap; align-items: center; gap: 18px 28px; }
-  .strip-label { font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--blue-bright); }
+  .strip-label { font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; opacity: .85; }
   .tools-row { display: flex; flex-wrap: wrap; gap: 10px 22px; }
-  .tool-tag { font-size: 15px; font-weight: 700; color: var(--indigo-on-dark); }
+  .tool-tag { font-size: 15px; font-weight: 700; }
   .tool-tag::before { content: "•"; margin-right: 10px; opacity: .6; }
   .tool-tag:first-child::before { content: ""; margin: 0; }
 
@@ -476,7 +475,7 @@
   }
   .contact-row .label { font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted-dark); }
   .contact-row .value { font-size: clamp(17px, 2.6vw, 21px); font-weight: 700; transition: color .18s ease; }
-  .contact-row:hover .value { color: var(--blue-bright); }
+  .contact-row:hover .value { color: var(--indigo-on-dark); }
   .contact-row.primary .value { color: var(--indigo-on-dark); }
 
   .contact-form-card {
@@ -490,7 +489,7 @@
   .form-row { display: grid; gap: 20px; margin-bottom: 20px; }
   @media (min-width: 640px) { .form-row.two { grid-template-columns: 1fr 1fr; } }
   .form-field label { display: block; font-size: 14px; font-weight: 700; margin-bottom: 10px; color: #f5f7fb; }
-  .form-field label .req { color: var(--blue-bright); margin-left: 3px; }
+  .form-field label .req { color: var(--indigo-on-dark); margin-left: 3px; }
   .form-field input, .form-field textarea {
     width: 100%;
     background: rgba(255, 255, 255, .025);
@@ -506,8 +505,8 @@
   .form-field input::placeholder, .form-field textarea::placeholder { color: var(--muted-dark); opacity: .75; }
   .form-field input:focus, .form-field textarea:focus {
     outline: none;
-    border-color: var(--blue-bright);
-    background: rgba(79, 200, 255, .05);
+    border-color: var(--indigo-on-dark);
+    background: rgba(155, 143, 255, .06);
   }
   .form-field textarea { min-height: 130px; resize: vertical; }
   .form-submit-row { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; margin-top: 4px; }
@@ -515,7 +514,7 @@
   .form-submit-row .btn[disabled] { opacity: .6; cursor: not-allowed; transform: none; }
   .form-note { font-size: 13px; color: var(--muted-dark); margin: 0; }
   .form-status { font-size: 14px; font-weight: 600; margin: 16px 0 0; min-height: 20px; }
-  .form-status.success { color: var(--blue-bright); }
+  .form-status.success { color: var(--indigo-on-dark); }
   .form-status.error { color: #ff8f8f; }
   .contact-list-label { font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted-dark); margin: 0 0 4px; }
 
@@ -534,8 +533,8 @@
     transition: color .18s ease, border-color .18s ease, transform .18s ease;
   }
   .social-link:hover {
-    color: var(--blue-bright);
-    border-color: var(--blue-bright);
+    color: var(--indigo-on-dark);
+    border-color: var(--indigo-on-dark);
     transform: translateY(-2px);
   }
 
@@ -564,8 +563,8 @@
     bottom: calc(100% + 8px);
     left: 50%;
     transform: translateX(-50%) translateY(4px);
-    background: var(--blue-bright);
-    color: var(--navy);
+    background: var(--indigo);
+    color: #fff;
     font-family: var(--font-mono);
     font-size: 11px;
     font-weight: 700;
@@ -704,11 +703,11 @@
 
                 <g transform="translate(20,24)">
                   <rect width="52" height="52" rx="10" fill="#1c1c1f" stroke="#2c2c30"/>
-                  <g transform="translate(19,17)" stroke="#4B3FF2" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <g transform="translate(19,17)" stroke="#9b8fff" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M7 0 L2 8 H6 L5.5 13 L11 5 H7 Z"/>
                   </g>
                   <circle cx="45" cy="8" r="6.5" fill="#1c1c1f"/>
-                  <circle cx="45" cy="8" r="5.5" fill="#4fc8ff"/>
+                  <circle cx="45" cy="8" r="5.5" fill="#9b8fff"/>
                   <path d="M42.3 8 L44.2 9.9 L47.7 6.1" stroke="#fff" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
                   <text x="26" y="70" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="600" fill="#e2e2e4">Webhook</text>
                   <text x="26" y="82" text-anchor="middle" font-family="Arial, sans-serif" font-size="8.5" fill="#7d7d84">novo lead</text>
@@ -720,7 +719,7 @@
                     <path d="M6 0 V6 M6 6 L1 14 M6 6 L11 14"/>
                   </g>
                   <circle cx="45" cy="8" r="6.5" fill="#1c1c1f"/>
-                  <circle cx="45" cy="8" r="5.5" fill="#4fc8ff"/>
+                  <circle cx="45" cy="8" r="5.5" fill="#9b8fff"/>
                   <path d="M42.3 8 L44.2 9.9 L47.7 6.1" stroke="#fff" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
                   <text x="26" y="70" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="600" fill="#e2e2e4">IF</text>
                   <text x="26" y="82" text-anchor="middle" font-family="Arial, sans-serif" font-size="8.5" fill="#7d7d84">qualificado?</text>
@@ -728,12 +727,12 @@
 
                 <g transform="translate(358,24)">
                   <rect width="52" height="52" rx="10" fill="#1c1c1f" stroke="#2c2c30"/>
-                  <g transform="translate(19,19)" stroke="#4fc8ff" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <g transform="translate(19,19)" stroke="#9b8fff" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <ellipse cx="6" cy="2.5" rx="6" ry="2.5"/>
                     <path d="M0 2.5 V11 A6 2.5 0 0 0 12 11 V2.5"/>
                   </g>
                   <circle cx="45" cy="8" r="6.5" fill="#1c1c1f"/>
-                  <circle cx="45" cy="8" r="5.5" fill="#4fc8ff"/>
+                  <circle cx="45" cy="8" r="5.5" fill="#9b8fff"/>
                   <path d="M42.3 8 L44.2 9.9 L47.7 6.1" stroke="#fff" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
                   <text x="26" y="70" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="600" fill="#e2e2e4">CRM</text>
                   <text x="26" y="82" text-anchor="middle" font-family="Arial, sans-serif" font-size="8.5" fill="#7d7d84">atualiza dados</text>
@@ -741,12 +740,12 @@
 
                 <g transform="translate(527,24)">
                   <rect width="52" height="52" rx="10" fill="#1c1c1f" stroke="#2c2c30"/>
-                  <g transform="translate(19,20)" stroke="#4fc8ff" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <g transform="translate(19,20)" stroke="#9b8fff" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <rect x="0" y="0" width="14" height="10" rx="2.5"/>
                     <path d="M3.5 10 L2 13 L6 10"/>
                   </g>
                   <circle cx="45" cy="8" r="6.5" fill="#1c1c1f"/>
-                  <circle cx="45" cy="8" r="5.5" fill="#4fc8ff"/>
+                  <circle cx="45" cy="8" r="5.5" fill="#9b8fff"/>
                   <path d="M42.3 8 L44.2 9.9 L47.7 6.1" stroke="#fff" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
                   <text x="26" y="70" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="600" fill="#e2e2e4">Notify</text>
                   <text x="26" y="82" text-anchor="middle" font-family="Arial, sans-serif" font-size="8.5" fill="#7d7d84">envia WhatsApp</text>
