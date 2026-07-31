@@ -424,9 +424,53 @@
   .service p { color: var(--muted-dark); font-size: 16px; margin: 0; max-width: 100%; }
 
   /* FAQ */
-  .faq-list { display: flex; flex-direction: column; gap: 30px; max-width: var(--measure); }
-  .faq-item h3 { font-size: clamp(16.5px, 2vw, 18px); font-weight: 700; margin: 0 0 8px; color: #f5f7fb; letter-spacing: -0.005em; }
-  .faq-item p { font-size: 15px; color: var(--muted-dark); margin: 0; max-width: 100%; }
+  .faq-section { position: relative; overflow: hidden; }
+  .faq-section .wrap { position: relative; z-index: 1; }
+  .aurora-bg {
+    position: absolute;
+    inset: -10%;
+    z-index: 0;
+    pointer-events: none;
+    background-image:
+      repeating-linear-gradient(100deg, var(--navy) 0%, var(--navy) 7%, transparent 10%, transparent 12%, var(--navy) 16%),
+      repeating-linear-gradient(100deg, rgba(75,63,242,0) 0%, var(--indigo) 8%, var(--indigo-on-dark) 16%, var(--indigo) 24%, rgba(75,63,242,0) 32%);
+    background-size: 300% 200%, 200% 100%;
+    background-position: 50% 50%, 50% 50%;
+    filter: blur(40px);
+    opacity: .35;
+    animation: aurora-shift 60s linear infinite;
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 0%, transparent 75%);
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 0%, transparent 75%);
+  }
+  @keyframes aurora-shift {
+    from { background-position: 50% 50%, 50% 50%; }
+    to { background-position: 350% 50%, 350% 50%; }
+  }
+
+  .faq-scroller {
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
+    mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
+  }
+  .faq-scroller + .faq-scroller { margin-top: 20px; }
+  .faq-track { display: flex; width: max-content; }
+  .faq-track-group { display: flex; flex: none; gap: 20px; padding-right: 20px; }
+  .faq-track-left .faq-track { animation: faq-scroll-left 46s linear infinite; }
+  .faq-track-right .faq-track { animation: faq-scroll-right 38s linear infinite; }
+  .faq-scroller:hover .faq-track { animation-play-state: paused; }
+  @keyframes faq-scroll-left { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @keyframes faq-scroll-right { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+
+  .faq-card {
+    flex: none;
+    width: clamp(260px, 80vw, 340px);
+    background: rgba(155, 143, 255, .05);
+    border: 1px solid rgba(155, 143, 255, .22);
+    border-radius: 16px;
+    padding: 24px 26px;
+  }
+  .faq-card h3 { font-size: clamp(16.5px, 2vw, 18px); font-weight: 700; margin: 0 0 8px; color: #f5f7fb; letter-spacing: -0.005em; }
+  .faq-card p { font-size: 15px; color: var(--muted-dark); margin: 0; max-width: 100%; }
 
   /* COMO EU TRABALHO */
   .tracks { display: grid; gap: clamp(36px, 6vw, 60px); }
@@ -658,6 +702,8 @@
   @media (prefers-reduced-motion: reduce) {
     .reveal, .reveal-item { opacity: 1; transform: none; transition: none; }
     .hero-cta::before { animation: none; opacity: .7; transform: none; }
+    .aurora-bg { animation: none; }
+    .faq-track { animation: none !important; }
   }
 
 
@@ -890,29 +936,66 @@
 
 <!-- Quando houver depoimentos reais, uma seção de prova social entra aqui, entre "Como eu trabalho" e "Perguntas frequentes". Não preencher com nada fictício até lá. -->
 
-<section class="on-dark reveal">
+<section class="on-dark reveal faq-section">
+  <div class="aurora-bg" aria-hidden="true"></div>
   <div class="wrap">
     <h2 class="ref"><span class="rule"></span> Perguntas frequentes <span class="rule"></span></h2>
-    <div class="faq-list">
-      <div class="faq-item reveal-item">
-        <h3>Quanto custa?</h3>
-        <p>Cada automação é diferente, então não dá pra cravar um valor fixo aqui. Você sabe exatamente quanto custa logo depois do diagnóstico gratuito — antes de qualquer compromisso.</p>
+
+    <div class="faq-scroller faq-track-left">
+      <div class="faq-track">
+        <div class="faq-track-group">
+          <div class="faq-card">
+            <h3>Quanto custa?</h3>
+            <p>Cada automação é diferente, então não dá pra cravar um valor fixo aqui. Você sabe exatamente quanto custa logo depois do diagnóstico gratuito — antes de qualquer compromisso.</p>
+          </div>
+          <div class="faq-card">
+            <h3>Funciona com as ferramentas que eu já uso?</h3>
+            <p>Trabalho com n8n, que se conecta nativamente com centenas de ferramentas — WhatsApp, e-mail, CRMs, planilhas, formulários. Se a sua ferramenta tiver algum tipo de API, geralmente dá pra integrar mesmo sem uma conexão pronta.</p>
+          </div>
+          <div class="faq-card">
+            <h3>Preciso entender de tecnologia ou ter alguém de TI pra contratar isso?</h3>
+            <p>Não. Você só precisa saber como o seu processo funciona hoje — eu cuido de toda a parte técnica: n8n, IA, integrações, tudo. Não precisa ter ninguém de TI no seu time.</p>
+          </div>
+        </div>
+        <div class="faq-track-group" aria-hidden="true">
+          <div class="faq-card">
+            <h3>Quanto custa?</h3>
+            <p>Cada automação é diferente, então não dá pra cravar um valor fixo aqui. Você sabe exatamente quanto custa logo depois do diagnóstico gratuito — antes de qualquer compromisso.</p>
+          </div>
+          <div class="faq-card">
+            <h3>Funciona com as ferramentas que eu já uso?</h3>
+            <p>Trabalho com n8n, que se conecta nativamente com centenas de ferramentas — WhatsApp, e-mail, CRMs, planilhas, formulários. Se a sua ferramenta tiver algum tipo de API, geralmente dá pra integrar mesmo sem uma conexão pronta.</p>
+          </div>
+          <div class="faq-card">
+            <h3>Preciso entender de tecnologia ou ter alguém de TI pra contratar isso?</h3>
+            <p>Não. Você só precisa saber como o seu processo funciona hoje — eu cuido de toda a parte técnica: n8n, IA, integrações, tudo. Não precisa ter ninguém de TI no seu time.</p>
+          </div>
+        </div>
       </div>
-      <div class="faq-item reveal-item">
-        <h3>Funciona com as ferramentas que eu já uso?</h3>
-        <p>Trabalho com n8n, que se conecta nativamente com centenas de ferramentas — WhatsApp, e-mail, CRMs, planilhas, formulários. Se a sua ferramenta tiver algum tipo de API, geralmente dá pra integrar mesmo sem uma conexão pronta.</p>
-      </div>
-      <div class="faq-item reveal-item">
-        <h3>Preciso entender de tecnologia ou ter alguém de TI pra contratar isso?</h3>
-        <p>Não. Você só precisa saber como o seu processo funciona hoje — eu cuido de toda a parte técnica: n8n, IA, integrações, tudo. Não precisa ter ninguém de TI no seu time.</p>
-      </div>
-      <div class="faq-item reveal-item">
-        <h3>O que acontece depois dos 15 dias de garantia?</h3>
-        <p>O sistema é 100% seu, sem contrato preso. Se quiser suporte contínuo ou novos ajustes depois disso, existe um plano de manutenção opcional.</p>
-      </div>
-      <div class="faq-item reveal-item">
-        <h3>Meus dados ficam seguros? De quem é o sistema no final?</h3>
-        <p>O sistema roda nas suas próprias contas e ferramentas. Eu não fico com acesso nem com seus dados depois da entrega — as credenciais e o sistema são repassados pra você no final.</p>
+    </div>
+
+    <div class="faq-scroller faq-track-right">
+      <div class="faq-track">
+        <div class="faq-track-group">
+          <div class="faq-card">
+            <h3>O que acontece depois dos 15 dias de garantia?</h3>
+            <p>O sistema é 100% seu, sem contrato preso. Se quiser suporte contínuo ou novos ajustes depois disso, existe um plano de manutenção opcional.</p>
+          </div>
+          <div class="faq-card">
+            <h3>Meus dados ficam seguros? De quem é o sistema no final?</h3>
+            <p>O sistema roda nas suas próprias contas e ferramentas. Eu não fico com acesso nem com seus dados depois da entrega — as credenciais e o sistema são repassados pra você no final.</p>
+          </div>
+        </div>
+        <div class="faq-track-group" aria-hidden="true">
+          <div class="faq-card">
+            <h3>O que acontece depois dos 15 dias de garantia?</h3>
+            <p>O sistema é 100% seu, sem contrato preso. Se quiser suporte contínuo ou novos ajustes depois disso, existe um plano de manutenção opcional.</p>
+          </div>
+          <div class="faq-card">
+            <h3>Meus dados ficam seguros? De quem é o sistema no final?</h3>
+            <p>O sistema roda nas suas próprias contas e ferramentas. Eu não fico com acesso nem com seus dados depois da entrega — as credenciais e o sistema são repassados pra você no final.</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -1015,7 +1098,7 @@
 
 <script>
   (function () {
-    document.querySelectorAll('.services, .steps, .contact-list, .tools-row, .faq-list').forEach(function (container) {
+    document.querySelectorAll('.services, .steps, .contact-list, .tools-row').forEach(function (container) {
       var items = container.querySelectorAll('.reveal-item');
       items.forEach(function (item, i) { item.style.transitionDelay = (i * 90) + 'ms'; });
     });
