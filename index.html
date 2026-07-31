@@ -19,6 +19,7 @@
 <meta name="twitter:description" content="Eu construo os bastidores que fazem seu negócio rodar sozinho.">
 <meta name="twitter:image" content="https://aladigiacomo-cyber.github.io/images/og-cover.png">
 <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+<noscript><style>.reveal, .reveal-item { opacity: 1 !important; transform: none !important; }</style></noscript>
 <style>
   :root {
     --navy: #0a1730;
@@ -27,6 +28,7 @@
     --blue: #2f5ce0;
     --blue-bright: #4fc8ff;
     --indigo: #4B3FF2;
+    --indigo-on-dark: #9b8fff;
     --muted-light: #5b6478;
     --muted-dark: #93a2c2;
     --line-light: rgba(14, 24, 48, 0.1);
@@ -93,7 +95,7 @@
     font-weight: 600;
     letter-spacing: .16em;
     text-transform: uppercase;
-    color: var(--indigo);
+    color: var(--indigo-on-dark);
     margin: 0 0 24px;
   }
 
@@ -102,7 +104,7 @@
   .hero-logo .logo-a-paper { stroke: #F5F4F0; }
   .hero-logo .logo-a-indigo { stroke: #4B3FF2; stroke-opacity: .88; }
   .hero-logo .logo-word-a { font-family: var(--font-sans); font-weight: 500; fill: #F5F4F0; }
-  .hero-logo .logo-word-nocode { font-family: var(--font-mono); font-weight: 500; fill: #4B3FF2; }
+  .hero-logo .logo-word-nocode { font-family: var(--font-mono); font-weight: 500; fill: var(--indigo-on-dark); }
   .name {
     font-weight: 900;
     font-size: clamp(24px, 7.4vw, 92px);
@@ -129,7 +131,7 @@
       font-size: clamp(24px, 2.4vw, 29px);
     }
   }
-  .headline em { font-style: normal; color: var(--indigo); }
+  .headline em { font-style: normal; color: var(--indigo-on-dark); }
   .sub {
     font-size: clamp(16.5px, 2.2vw, 18.5px);
     line-height: 1.65;
@@ -385,12 +387,12 @@
 
   /* FAQ */
   .faq-list { display: flex; flex-direction: column; gap: 30px; max-width: var(--measure); }
-  .faq-item h4 { font-size: clamp(16.5px, 2vw, 18px); font-weight: 700; margin: 0 0 8px; color: #f5f7fb; letter-spacing: -0.005em; }
+  .faq-item h3 { font-size: clamp(16.5px, 2vw, 18px); font-weight: 700; margin: 0 0 8px; color: #f5f7fb; letter-spacing: -0.005em; }
   .faq-item p { font-size: 15px; color: var(--muted-dark); margin: 0; max-width: 100%; }
 
   /* COMO EU TRABALHO */
   .tracks { display: grid; gap: clamp(36px, 6vw, 60px); }
-  @media (min-width: 780px) { .tracks { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 760px) { .tracks { grid-template-columns: 1fr 1fr; } }
   .track-title { font-size: clamp(17px, 2.4vw, 20px); font-weight: 800; letter-spacing: .04em; text-transform: uppercase; color: var(--blue); margin: 0 0 28px; }
   .steps { list-style: none; margin: 0; padding: 0; }
   .step {
@@ -427,7 +429,7 @@
     color: #fff;
     flex: none;
   }
-  .step h4 { font-size: 15.5px; font-weight: 700; margin: 8px 0 4px; color: var(--ink); letter-spacing: -0.005em; }
+  .step h3 { font-size: 15.5px; font-weight: 700; margin: 8px 0 4px; color: var(--ink); letter-spacing: -0.005em; }
   .step p { font-size: 14.5px; color: var(--muted-light); margin: 0; }
 
   .guarantee-badge {
@@ -450,7 +452,7 @@
     align-items: center;
     justify-content: center;
   }
-  .guarantee-badge h4 { margin: 0 0 4px; font-size: 16px; font-weight: 800; color: var(--ink); }
+  .guarantee-badge h3 { margin: 0 0 4px; font-size: 16px; font-weight: 800; color: var(--ink); }
   .guarantee-badge p { margin: 0; font-size: 14.5px; color: var(--muted-light); }
 
   /* FERRAMENTAS strip */
@@ -464,9 +466,10 @@
 
   /* CONTATO */
   .contact-cta { font-weight: 900; font-size: clamp(30px, 6vw, 52px); letter-spacing: -0.02em; margin: 0 0 14px; text-wrap: balance; color: #fff; }
-  .contact-cta em { font-style: normal; color: var(--indigo); }
+  .contact-cta em { font-style: normal; color: var(--indigo-on-dark); }
   .contact-sub { font-size: 15.5px; color: var(--muted-dark); max-width: 520px; margin: 0 0 40px; }
-  .contact-list { display: flex; flex-direction: column; gap: 2px; margin-bottom: 8px; }
+  .contact-columns { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 40px 28px; }
+  .contact-list { display: flex; flex-direction: column; gap: 2px; margin-bottom: 8px; max-width: 460px; flex: 2 1 400px; }
   .contact-row {
     display: flex; align-items: baseline; justify-content: space-between; gap: 16px;
     padding: 18px 0; border-bottom: 1px solid var(--line-dark);
@@ -475,7 +478,7 @@
   .contact-row .label { font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted-dark); }
   .contact-row .value { font-size: clamp(17px, 2.6vw, 21px); font-weight: 700; transition: color .18s ease; }
   .contact-row:hover .value { color: var(--blue-bright); }
-  .contact-row.primary .value { color: var(--indigo); }
+  .contact-row.primary .value { color: var(--indigo-on-dark); }
 
   .contact-form-card {
     scroll-margin-top: 24px;
@@ -517,15 +520,8 @@
   .form-status.error { color: #ff8f8f; }
   .contact-list-label { font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted-dark); margin: 0 0 4px; }
 
-  footer {
-    padding: 40px var(--pad) clamp(48px, 8vw, 72px);
-    max-width: 900px; margin: 0 auto;
-    display: flex; flex-direction: column; align-items: center; gap: 24px;
-    font-size: 13px; color: var(--muted-dark);
-    border-top: 1px solid var(--line-dark);
-  }
-
-  .social-row { display: flex; align-items: center; gap: 16px; }
+  .other-contact { display: flex; flex-direction: column; gap: 16px; max-width: 300px; flex: 0 0 auto; margin-left: auto; }
+  .social-row { display: flex; align-items: center; justify-content: flex-end; gap: 16px; }
   .social-link {
     position: relative;
     display: inline-flex;
@@ -543,14 +539,15 @@
     border-color: var(--blue-bright);
     transform: translateY(-2px);
   }
-  button.social-link {
-    background: none;
-    font: inherit;
-    cursor: pointer;
-    -webkit-appearance: none;
-    appearance: none;
-    padding: 0;
+
+  footer {
+    padding: 40px var(--pad) clamp(48px, 8vw, 72px);
+    max-width: 900px; margin: 0 auto;
+    display: flex; flex-direction: column; align-items: center; gap: 24px;
+    font-size: 13px; color: var(--muted-dark);
+    border-top: 1px solid var(--line-dark);
   }
+
   button.contact-row {
     border: none;
     border-bottom: 1px solid var(--line-dark);
@@ -598,7 +595,7 @@
   .footer-tagline svg { flex: none; opacity: .8; }
   .footer-wordmark { height: 17px; width: auto; opacity: 1; text-transform: none; }
   .footer-wordmark .logo-word-a { font-family: var(--font-sans); font-weight: 500; fill: var(--muted-dark); }
-  .footer-wordmark .logo-word-nocode { font-family: var(--font-mono); font-weight: 500; fill: #4B3FF2; }
+  .footer-wordmark .logo-word-nocode { font-family: var(--font-mono); font-weight: 500; fill: var(--indigo-on-dark); }
 
   .contact-section {
     background-image:
@@ -646,7 +643,7 @@
 
 <section class="on-light reveal">
   <div class="wrap">
-    <div class="ref"><span class="rule"></span> Sobre <span class="rule"></span></div>
+    <h2 class="ref"><span class="rule"></span> Sobre <span class="rule"></span></h2>
     <div class="col">
       <p class="lede">Eu sou a Ana. Trabalho na fronteira entre <em>automação</em> e <em>inteligência artificial</em>.</p>
       <p>Pego processos que hoje dependem de alguém copiar, colar, checar e lembrar — e transformo em sistemas que rodam sozinhos, usando n8n, IA e integrações sob medida.</p>
@@ -675,7 +672,7 @@
 
 <section class="on-dark reveal">
   <div class="wrap">
-    <div class="ref"><span class="rule"></span> O que eu faço <span class="rule"></span></div>
+    <h2 class="ref"><span class="rule"></span> O que eu faço <span class="rule"></span></h2>
     <div class="services">
       <div class="service reveal-item">
         <div class="service-icon">
@@ -809,24 +806,24 @@
 
 <section class="on-light reveal">
   <div class="wrap">
-    <div class="ref"><span class="rule"></span> Como eu trabalho <span class="rule"></span></div>
+    <h2 class="ref"><span class="rule"></span> Como eu trabalho <span class="rule"></span></h2>
     <div class="tracks">
       <div>
         <p class="track-title">Processo — Consultoria</p>
         <ol class="steps">
-          <li class="step reveal-item"><span class="step-num">01</span><div><h4>Nivelamento</h4><p>Conversa inicial pra entender onde você está com IA hoje.</p></div></li>
-          <li class="step reveal-item"><span class="step-num">02</span><div><h4>Trilha sob medida</h4><p>Monto aula por aula, sempre perguntando o que você quer e precisa aprender.</p></div></li>
-          <li class="step reveal-item"><span class="step-num">03</span><div><h4>Acompanhamento</h4><p>Ajusto o conteúdo conforme seu interesse e seu ritmo.</p></div></li>
-          <li class="step reveal-item"><span class="step-num">04</span><div><h4>Cobrança por sessão</h4><p>Você paga por sessão, não um pacote fechado — sem surpresa no meio do caminho.</p></div></li>
+          <li class="step reveal-item"><span class="step-num">01</span><div><h3>Nivelamento</h3><p>Conversa inicial pra entender onde você está com IA hoje.</p></div></li>
+          <li class="step reveal-item"><span class="step-num">02</span><div><h3>Trilha sob medida</h3><p>Monto aula por aula, sempre perguntando o que você quer e precisa aprender.</p></div></li>
+          <li class="step reveal-item"><span class="step-num">03</span><div><h3>Acompanhamento</h3><p>Ajusto o conteúdo conforme seu interesse e seu ritmo.</p></div></li>
+          <li class="step reveal-item"><span class="step-num">04</span><div><h3>Cobrança por sessão</h3><p>Você paga por sessão, não um pacote fechado — sem surpresa no meio do caminho.</p></div></li>
         </ol>
       </div>
       <div>
         <p class="track-title">Processo — Automação</p>
         <ol class="steps">
-          <li class="step reveal-item"><span class="step-num">01</span><div><h4>Diagnóstico (sem custo)</h4><p>Conversa pra entender o problema de verdade, sem compromisso de fechar nada.</p></div></li>
-          <li class="step reveal-item"><span class="step-num">02</span><div><h4>Desenho da automação</h4><p>Mostro exatamente como o sistema vai funcionar, com valor e prazo fechados. Nada é construído antes de você aprovar esse desenho.</p></div></li>
-          <li class="step reveal-item"><span class="step-num">03</span><div><h4>Implementação</h4><p>Eu construo o sistema.</p></div></li>
-          <li class="step reveal-item"><span class="step-num">04</span><div><h4>Entrega + garantia</h4><p>Repasso credenciais e dados — o sistema é seu. E você tem 15 dias de ajuste incluído, sem custo extra.</p></div></li>
+          <li class="step reveal-item"><span class="step-num">01</span><div><h3>Diagnóstico (sem custo)</h3><p>Conversa pra entender o problema de verdade, sem compromisso de fechar nada.</p></div></li>
+          <li class="step reveal-item"><span class="step-num">02</span><div><h3>Desenho da automação</h3><p>Mostro exatamente como o sistema vai funcionar, com valor e prazo fechados. Nada é construído antes de você aprovar esse desenho.</p></div></li>
+          <li class="step reveal-item"><span class="step-num">03</span><div><h3>Implementação</h3><p>Eu construo o sistema.</p></div></li>
+          <li class="step reveal-item"><span class="step-num">04</span><div><h3>Entrega + garantia</h3><p>Repasso credenciais e dados — o sistema é seu. E você tem 15 dias de ajuste incluído, sem custo extra.</p></div></li>
         </ol>
       </div>
     </div>
@@ -836,7 +833,7 @@
         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 L19 6 V11 C19 16 16 19.5 12 21 C8 19.5 5 16 5 11 V6 Z"/><path d="M9 12 L11 14 L15 9.5"/></svg>
       </span>
       <div>
-        <h4>15 dias de ajuste incluídos</h4>
+        <h3>15 dias de ajuste incluídos</h3>
         <p>Depois da entrega, qualquer ajuste no que foi combinado no desenho é por minha conta, sem custo extra, por 15 dias. Depois disso, se quiser suporte contínuo, tem um plano de manutenção opcional.</p>
       </div>
     </div>
@@ -847,26 +844,26 @@
 
 <section class="on-dark reveal">
   <div class="wrap">
-    <div class="ref"><span class="rule"></span> Perguntas frequentes <span class="rule"></span></div>
+    <h2 class="ref"><span class="rule"></span> Perguntas frequentes <span class="rule"></span></h2>
     <div class="faq-list">
       <div class="faq-item reveal-item">
-        <h4>Quanto custa?</h4>
+        <h3>Quanto custa?</h3>
         <p>Cada automação é diferente, então não dá pra cravar um valor fixo aqui. Você sabe exatamente quanto custa logo depois do diagnóstico gratuito — antes de qualquer compromisso.</p>
       </div>
       <div class="faq-item reveal-item">
-        <h4>Funciona com as ferramentas que eu já uso?</h4>
+        <h3>Funciona com as ferramentas que eu já uso?</h3>
         <p>Trabalho com n8n, que se conecta nativamente com centenas de ferramentas — WhatsApp, e-mail, CRMs, planilhas, formulários. Se a sua ferramenta tiver algum tipo de API, geralmente dá pra integrar mesmo sem uma conexão pronta.</p>
       </div>
       <div class="faq-item reveal-item">
-        <h4>Preciso entender de tecnologia ou ter alguém de TI pra contratar isso?</h4>
+        <h3>Preciso entender de tecnologia ou ter alguém de TI pra contratar isso?</h3>
         <p>Não. Você só precisa saber como o seu processo funciona hoje — eu cuido de toda a parte técnica: n8n, IA, integrações, tudo. Não precisa ter ninguém de TI no seu time.</p>
       </div>
       <div class="faq-item reveal-item">
-        <h4>O que acontece depois dos 15 dias de garantia?</h4>
+        <h3>O que acontece depois dos 15 dias de garantia?</h3>
         <p>O sistema é 100% seu, sem contrato preso. Se quiser suporte contínuo ou novos ajustes depois disso, existe um plano de manutenção opcional.</p>
       </div>
       <div class="faq-item reveal-item">
-        <h4>Meus dados ficam seguros? De quem é o sistema no final?</h4>
+        <h3>Meus dados ficam seguros? De quem é o sistema no final?</h3>
         <p>O sistema roda nas suas próprias contas e ferramentas. Eu não fico com acesso nem com seus dados depois da entrega — as credenciais e o sistema são repassados pra você no final.</p>
       </div>
     </div>
@@ -886,14 +883,15 @@
 
 <section class="on-dark reveal contact-section">
   <div class="wrap">
-    <div class="ref"><span class="rule"></span> Contato <span class="rule"></span></div>
+    <h2 class="ref"><span class="rule"></span> Contato <span class="rule"></span></h2>
     <div class="col">
       <p class="contact-cta">Bora <em>automatizar</em>? Me chama.</p>
       <p class="contact-sub">É o primeiro passo pro seu diagnóstico gratuito. Sem custo, sem compromisso — e com 15 dias de ajuste incluído quando o projeto sair do papel.</p>
 
-      <form class="contact-form-card" id="contact-form" action="https://formsubmit.co/ajax/aladigiacomo@gmail.com" method="POST">
+      <form class="contact-form-card" id="contact-form" action="https://formsubmit.co/aladigiacomo@gmail.com" method="POST">
         <input type="hidden" name="_subject" value="Novo contato — site Ana Luiza Adinolfi">
         <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="https://aladigiacomo-cyber.github.io/#contact-form">
         <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
         <div class="form-row two">
           <div class="form-field">
@@ -924,50 +922,40 @@
         <p class="form-status" id="cf-status" role="status" aria-live="polite"></p>
       </form>
 
-      <div class="contact-list">
-        <p class="contact-list-label">Me acompanhe nas redes sociais</p>
-        <a class="contact-row primary reveal-item" href="https://instagram.com/ana.nocode" target="_blank" rel="noopener">
-          <span class="label">Instagram</span><span class="value">@ana.nocode</span>
-        </a>
-        <a class="contact-row reveal-item" href="https://www.linkedin.com/in/analuizadigiacomo" target="_blank" rel="noopener">
-          <span class="label">LinkedIn</span><span class="value">/in/analuizadigiacomo</span>
-        </a>
+      <div class="contact-columns">
+        <div class="contact-list">
+          <p class="contact-list-label">Me acompanhe nas redes sociais</p>
+          <a class="contact-row primary reveal-item" href="https://instagram.com/ana.nocode" target="_blank" rel="noopener">
+            <span class="label">Instagram</span><span class="value">@ana.nocode</span>
+          </a>
+          <a class="contact-row reveal-item" href="https://www.linkedin.com/in/analuizadigiacomo" target="_blank" rel="noopener">
+            <span class="label">LinkedIn</span><span class="value">/in/analuizadigiacomo</span>
+          </a>
+        </div>
+
+        <div class="other-contact">
+          <p class="contact-list-label">Outras formas de contato</p>
+          <div class="social-row">
+            <a class="social-link" href="https://wa.me/5513997001013?text=Oi%20Ana%2C%20vim%20pelo%20site%20e%20quero%20entender%20mais%20sobre%20automa%C3%A7%C3%A3o%20pro%20meu%20neg%C3%B3cio" target="_blank" rel="noopener" aria-label="WhatsApp">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6">
+                <rect x="3" y="3" width="18" height="18" rx="5"/>
+                <g transform="translate(5.3,5.3) scale(0.64)" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+                </g>
+              </svg>
+            </a>
+            <a class="social-link" href="mailto:aladigiacomo@gmail.com" aria-label="Email">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6">
+                <rect x="3" y="5" width="18" height="14" rx="3"/>
+                <path d="M4 7 L12 13 L20 7" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
   <footer>
-    <p class="contact-list-label">Outras formas de contato</p>
-    <div class="social-row">
-      <a class="social-link" href="https://instagram.com/ana.nocode" target="_blank" rel="noopener" aria-label="Instagram">
-        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6">
-          <rect x="3" y="3" width="18" height="18" rx="5"/>
-          <circle cx="12" cy="12" r="4.2"/>
-          <circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/>
-        </svg>
-      </a>
-      <a class="social-link" href="https://www.linkedin.com/in/analuizadigiacomo" target="_blank" rel="noopener" aria-label="LinkedIn">
-        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6">
-          <rect x="3" y="3" width="18" height="18" rx="5"/>
-          <line x1="7.5" y1="10" x2="7.5" y2="17"/>
-          <circle cx="7.5" cy="6.8" r="0.9" fill="currentColor" stroke="none"/>
-          <path d="M11.5 17 V10 M11.5 13 C11.5 11 14.5 10.8 14.5 13 V17" stroke-linecap="round"/>
-        </svg>
-      </a>
-      <a class="social-link" href="https://wa.me/5513997001013?text=Oi%20Ana%2C%20vim%20pelo%20site%20e%20quero%20entender%20mais%20sobre%20automa%C3%A7%C3%A3o%20pro%20meu%20neg%C3%B3cio" target="_blank" rel="noopener" aria-label="WhatsApp">
-        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6">
-          <rect x="3" y="3" width="18" height="18" rx="5"/>
-          <g transform="translate(5.3,5.3) scale(0.64)" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
-          </g>
-        </svg>
-      </a>
-      <a class="social-link" href="#contact-form" aria-label="Ir para o formulário de contato">
-        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6">
-          <rect x="3" y="5" width="18" height="14" rx="3"/>
-          <path d="M4 7 L12 13 L20 7" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </a>
-    </div>
     <p class="footer-tagline">
       <svg class="footer-wordmark" viewBox="0 0 200 40" role="img" aria-label="ana.nocode">
         <text x="4" y="30" font-size="30"><tspan class="logo-word-a">ana.</tspan><tspan class="logo-word-nocode">nocode</tspan></text>
@@ -998,6 +986,12 @@
       });
     }, { threshold: 0.12 });
     els.forEach(function (el) { io.observe(el); });
+
+    // Safety net: if an element somehow never intersects (e.g. unusual
+    // viewport/layout edge case), don't leave it invisible forever.
+    setTimeout(function () {
+      els.forEach(function (el) { el.classList.add('in'); });
+    }, 4000);
   })();
 
   (function () {
@@ -1064,7 +1058,13 @@
       status.className = 'form-status';
       status.textContent = 'Enviando...';
 
-      fetch(form.action, {
+      // form.action points at FormSubmit's plain endpoint so a native
+      // (no-JS) submit lands on FormSubmit's own confirmation page instead
+      // of raw JSON. When JS runs, submit to the /ajax/ variant instead so
+      // we can show the inline status below.
+      var ajaxAction = form.action.replace('formsubmit.co/', 'formsubmit.co/ajax/');
+
+      fetch(ajaxAction, {
         method: 'POST',
         headers: { 'Accept': 'application/json' },
         body: new FormData(form)
