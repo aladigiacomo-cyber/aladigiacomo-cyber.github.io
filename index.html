@@ -189,16 +189,16 @@
   .hero-cta::before {
     content: "";
     position: absolute;
-    inset: -30px;
+    inset: -22px;
     z-index: -1;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(155, 143, 255, .35) 0%, rgba(155, 143, 255, 0) 70%);
+    background: radial-gradient(circle, rgba(155, 143, 255, .2) 0%, rgba(155, 143, 255, 0) 70%);
     animation: cta-glow-pulse 3.6s ease-in-out infinite;
     pointer-events: none;
   }
   @keyframes cta-glow-pulse {
-    0%, 100% { opacity: .55; transform: scale(.92); }
-    50% { opacity: .9; transform: scale(1.05); }
+    0%, 100% { opacity: .4; transform: scale(.95); }
+    50% { opacity: .65; transform: scale(1.02); }
   }
   @keyframes cursor-blink {
     0%, 100% { opacity: 1; }
