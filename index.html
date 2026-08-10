@@ -104,14 +104,31 @@
   .hero-terminal .terminal { margin-top: 0; max-width: 480px; }
   @media (min-width: 960px) { .hero-terminal .terminal { margin-left: auto; } }
   .hero-photo {
-    max-width: 420px;
-    border-radius: 20px;
-    overflow: hidden;
-    border: 1px solid rgba(75, 63, 242, .25);
-    box-shadow: 0 20px 50px -20px rgba(10, 23, 48, .5);
+    max-width: 460px;
+    position: relative;
   }
   @media (min-width: 960px) { .hero-photo { margin-left: auto; } }
-  .hero-photo img { display: block; width: 100%; height: auto; }
+  .hero-photo::before {
+    content: "";
+    position: absolute;
+    inset: -10%;
+    z-index: -1;
+    background: radial-gradient(ellipse 55% 55% at 50% 42%, rgba(75, 63, 242, .3) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-photo img {
+    display: block;
+    width: 100%;
+    height: auto;
+    filter: saturate(.92) contrast(1.04) brightness(.97);
+  }
+  .hero-photo::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 68% 76% at 50% 36%, transparent 38%, var(--navy) 94%);
+    pointer-events: none;
+  }
   .eyebrow {
     font-family: var(--font-mono);
     font-size: clamp(11.5px, 2vw, 13px);
@@ -206,13 +223,14 @@
   /* SOBRE */
   .sobre-section .wrap { max-width: 1080px; }
   .sobre-grid { display: grid; gap: clamp(32px, 5vw, 64px); align-items: center; }
-  @media (min-width: 760px) { .sobre-grid { grid-template-columns: 1.2fr 1fr; } }
-  .sobre-photo {
+  @media (min-width: 760px) { .sobre-grid { grid-template-columns: 1fr 1.2fr; } }
+  .sobre-video {
     border-radius: 20px;
     overflow: hidden;
+    background: #000;
     box-shadow: 0 20px 50px -20px rgba(14, 24, 48, .28);
   }
-  .sobre-photo img { display: block; width: 100%; height: auto; }
+  .sobre-video video { display: block; width: 100%; height: auto; }
   p { margin: 0 0 20px; line-height: 1.7; font-size: 17px; }
   p:last-child { margin-bottom: 0; }
   .lede { font-size: clamp(21px, 3vw, 27px); font-weight: 700; line-height: 1.45; letter-spacing: -0.01em; }
@@ -754,7 +772,7 @@
       <p class="eyebrow">n8n · IA · Claude Code — sistemas sob medida</p>
       <h1 class="name">Ana Luiza Adinolfi</h1>
       <p class="headline">Eu construo os bastidores que fazem seu negócio <em>rodar sozinho</em>.</p>
-      <p class="sub">As tarefas repetitivas do seu negócio passam a acontecer sozinhas — eu desenho e construo o sistema (com n8n, IA e Claude&nbsp;Code), você só acompanha.</p>
+      <p class="sub">As tarefas repetitivas do seu negócio passam a acontecer sozinhas — eu desenho e construo o sistema, você só acompanha.</p>
       <a class="btn hero-cta" href="#contact-form">Fale comigo</a>
     </div>
     <div class="hero-terminal">
@@ -769,13 +787,13 @@
   <div class="wrap">
     <h2 class="ref"><span class="rule"></span> Sobre <span class="rule"></span></h2>
     <div class="sobre-grid">
+      <div class="sobre-video reveal-item">
+        <video src="images/sobre-video.mp4" poster="images/sobre-video-poster.jpg" width="640" height="1138" autoplay muted loop playsinline preload="metadata"></video>
+      </div>
       <div class="col sobre-col">
         <p class="lede reveal-item">Eu sou a Ana. Trabalho na fronteira entre <em>automação</em> e <em>inteligência artificial</em>.</p>
         <p class="reveal-item">Pego processos que hoje dependem de alguém copiar, colar, checar e lembrar — e transformo em sistemas que rodam sozinhos, usando n8n, IA e integrações sob medida.</p>
         <p class="reveal-item">Não vendo automação de prateleira. Cada sistema é desenhado a partir do jeito real como o seu negócio funciona hoje, não de um template pronto.</p>
-      </div>
-      <div class="sobre-photo reveal-item">
-        <img src="images/sobre-ana.jpg" alt="Ana Luiza Adinolfi" width="787" height="1400" loading="lazy" decoding="async">
       </div>
     </div>
   </div>
