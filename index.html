@@ -103,6 +103,15 @@
   .hero-terminal { min-width: 0; }
   .hero-terminal .terminal { margin-top: 0; max-width: 480px; }
   @media (min-width: 960px) { .hero-terminal .terminal { margin-left: auto; } }
+  .hero-photo {
+    max-width: 420px;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(75, 63, 242, .25);
+    box-shadow: 0 20px 50px -20px rgba(10, 23, 48, .5);
+  }
+  @media (min-width: 960px) { .hero-photo { margin-left: auto; } }
+  .hero-photo img { display: block; width: 100%; height: auto; }
   .eyebrow {
     font-family: var(--font-mono);
     font-size: clamp(11.5px, 2vw, 13px);
@@ -195,6 +204,15 @@
   }
 
   /* SOBRE */
+  .sobre-section .wrap { max-width: 1080px; }
+  .sobre-grid { display: grid; gap: clamp(32px, 5vw, 64px); align-items: center; }
+  @media (min-width: 760px) { .sobre-grid { grid-template-columns: 1.2fr 1fr; } }
+  .sobre-photo {
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px -20px rgba(14, 24, 48, .28);
+  }
+  .sobre-photo img { display: block; width: 100%; height: auto; }
   p { margin: 0 0 20px; line-height: 1.7; font-size: 17px; }
   p:last-child { margin-bottom: 0; }
   .lede { font-size: clamp(21px, 3vw, 27px); font-weight: 700; line-height: 1.45; letter-spacing: -0.01em; }
@@ -740,34 +758,25 @@
       <a class="btn hero-cta" href="#contact-form">Fale comigo</a>
     </div>
     <div class="hero-terminal">
-      <div class="terminal reveal-item">
-        <div class="terminal-bar">
-          <span class="terminal-dot terminal-dot-red"></span>
-          <span class="terminal-dot terminal-dot-yellow"></span>
-          <span class="terminal-dot terminal-dot-green"></span>
-          <span class="terminal-title">automação · n8n</span>
-        </div>
-        <div class="terminal-body">
-          <p class="reveal-item"><span class="t-muted">$</span> workflow <span class="t-accent">novo-lead-instagram</span></p>
-          <p class="reveal-item"><span class="t-arrow">▸</span> gatilho: nova mensagem recebida no Instagram</p>
-          <p class="reveal-item"><span class="t-arrow">▸</span> classificando a intenção do lead com IA</p>
-          <p class="reveal-item"><span class="t-arrow">▸</span> registrando os dados no CRM</p>
-          <p class="reveal-item"><span class="t-ok">✓</span> resposta automática enviada <span class="t-muted">(3.8s)</span></p>
-          <p class="reveal-item"><span class="t-ok">✓</span> lead qualificado e notificado no WhatsApp</p>
-          <p class="t-status reveal-item"><span class="t-muted">status:</span> concluído · 0 intervenção manual<span class="terminal-cursor" aria-hidden="true"></span></p>
-        </div>
+      <div class="hero-photo reveal-item">
+        <img src="images/hero-ana.jpg" alt="Ana Luiza Adinolfi" width="999" height="1400" loading="eager" decoding="async">
       </div>
     </div>
   </div>
 </section>
 
-<section class="on-light reveal">
+<section class="on-light reveal sobre-section">
   <div class="wrap">
     <h2 class="ref"><span class="rule"></span> Sobre <span class="rule"></span></h2>
-    <div class="col sobre-col">
-      <p class="lede reveal-item">Eu sou a Ana. Trabalho na fronteira entre <em>automação</em> e <em>inteligência artificial</em>.</p>
-      <p class="reveal-item">Pego processos que hoje dependem de alguém copiar, colar, checar e lembrar — e transformo em sistemas que rodam sozinhos, usando n8n, IA e integrações sob medida.</p>
-      <p class="reveal-item">Não vendo automação de prateleira. Cada sistema é desenhado a partir do jeito real como o seu negócio funciona hoje, não de um template pronto.</p>
+    <div class="sobre-grid">
+      <div class="col sobre-col">
+        <p class="lede reveal-item">Eu sou a Ana. Trabalho na fronteira entre <em>automação</em> e <em>inteligência artificial</em>.</p>
+        <p class="reveal-item">Pego processos que hoje dependem de alguém copiar, colar, checar e lembrar — e transformo em sistemas que rodam sozinhos, usando n8n, IA e integrações sob medida.</p>
+        <p class="reveal-item">Não vendo automação de prateleira. Cada sistema é desenhado a partir do jeito real como o seu negócio funciona hoje, não de um template pronto.</p>
+      </div>
+      <div class="sobre-photo reveal-item">
+        <img src="images/sobre-ana.jpg" alt="Ana Luiza Adinolfi" width="787" height="1400" loading="lazy" decoding="async">
+      </div>
     </div>
   </div>
 </section>
