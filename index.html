@@ -518,7 +518,6 @@
     right: 50%;
     margin-left: -50vw;
     margin-right: -50vw;
-    padding-left: var(--pad);
   }
   .faq-desktop-row { display: none; }
   @media (min-width: 960px) {
@@ -531,7 +530,6 @@
       right: 50%;
       margin-left: -50vw;
       margin-right: -50vw;
-      padding-left: var(--pad);
     }
     .faq-desktop-row .faq-track-group { gap: 20px; padding-right: 20px; }
     .faq-desktop-row .faq-card { width: 300px; border-radius: 16px; padding: 22px 24px; }
@@ -621,9 +619,10 @@
 
   /* FERRAMENTAS strip */
   .strip { background: var(--indigo); color: #fff; }
-  .strip .wrap { padding: clamp(30px, 5vw, 44px) var(--pad); display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 18px 28px; }
+  .strip .wrap { padding: clamp(30px, 5vw, 44px) var(--pad); display: flex; flex-direction: column; align-items: center; text-align: center; gap: 12px; }
+  @media (min-width: 960px) { .strip .wrap { flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 18px 28px; } }
   .strip-label { font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; opacity: .85; }
-  .tools-row { display: flex; flex-wrap: wrap; gap: 10px 22px; }
+  .tools-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 22px; }
   .tool-tag { font-size: 15px; font-weight: 700; }
   .tool-tag::before { content: "•"; margin-right: 10px; opacity: .6; }
   .tool-tag:first-child::before { content: ""; margin: 0; }
