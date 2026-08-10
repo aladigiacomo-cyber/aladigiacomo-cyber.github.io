@@ -164,7 +164,7 @@
   }
   @media (max-width: 959px) {
     .hero .wrap {
-      grid-template-columns: 1fr clamp(100px, 32vw, 140px);
+      grid-template-columns: 1fr clamp(135px, 42vw, 180px);
       grid-template-areas:
         "logo   logo"
         "eyebrow eyebrow"
@@ -181,7 +181,7 @@
     .name { grid-area: name; font-size: clamp(20px, 7.5vw, 30px); margin-bottom: 8px; white-space: normal; }
     .headline { grid-area: headline; margin-bottom: 14px; }
     .sub { grid-area: sub; margin-bottom: 0; }
-    .hero-cta { grid-area: cta; align-self: end; justify-self: start; margin-top: 4px; }
+    .hero-cta { grid-area: cta; align-self: end; justify-self: start; margin-top: 4px; padding: 14px 20px; font-size: 15px; }
     .hero-photo { grid-area: photo; align-self: end; max-width: 100%; }
   }
 
@@ -511,10 +511,28 @@
   .faq-card h3 { font-size: 14.5px; font-weight: 700; margin: 0 0 6px; color: #f5f7fb; letter-spacing: -0.005em; }
   .faq-card p { font-size: 12.5px; line-height: 1.55; color: var(--muted-dark); margin: 0; max-width: 100%; }
 
+  .faq-mobile-rows {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    padding-left: var(--pad);
+  }
   .faq-desktop-row { display: none; }
   @media (min-width: 960px) {
     .faq-mobile-rows { display: none; }
-    .faq-desktop-row { display: block; }
+    .faq-desktop-row {
+      display: block;
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+      padding-left: var(--pad);
+    }
     .faq-desktop-row .faq-track-group { gap: 20px; padding-right: 20px; }
     .faq-desktop-row .faq-card { width: 300px; border-radius: 16px; padding: 22px 24px; }
     .faq-desktop-row .faq-card h3 { font-size: 17px; margin-bottom: 8px; }
@@ -603,7 +621,7 @@
 
   /* FERRAMENTAS strip */
   .strip { background: var(--indigo); color: #fff; }
-  .strip .wrap { padding: clamp(30px, 5vw, 44px) var(--pad); display: flex; flex-wrap: wrap; align-items: center; gap: 18px 28px; }
+  .strip .wrap { padding: clamp(30px, 5vw, 44px) var(--pad); display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 18px 28px; }
   .strip-label { font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; opacity: .85; }
   .tools-row { display: flex; flex-wrap: wrap; gap: 10px 22px; }
   .tool-tag { font-size: 15px; font-weight: 700; }
@@ -746,6 +764,7 @@
   .contact-section {
     background-image: radial-gradient(ellipse 70% 60% at 80% 20%, rgba(75, 63, 242, .18) 0%, transparent 65%);
   }
+  @media (min-width: 960px) { .contact-section .col { margin: 0 auto; } }
 
   .reveal {
     opacity: 0;
