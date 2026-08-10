@@ -121,19 +121,13 @@
     width: 100%;
     height: auto;
     filter: saturate(.92) contrast(1.04) brightness(.97);
-  }
-  .hero-photo::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse 68% 76% at 50% 36%, transparent 38%, var(--navy) 94%);
-    pointer-events: none;
+    -webkit-mask-image: radial-gradient(ellipse 60% 66% at 50% 40%, #000 5%, transparent 76%);
+    mask-image: radial-gradient(ellipse 60% 66% at 50% 40%, #000 5%, transparent 76%);
   }
   @media (min-width: 960px) {
-    .hero-photo::after {
-      background:
-        linear-gradient(90deg, var(--navy) 0%, transparent 38%),
-        radial-gradient(ellipse 68% 76% at 50% 36%, transparent 38%, var(--navy) 94%);
+    .hero-photo img {
+      -webkit-mask-image: radial-gradient(ellipse 52% 68% at 62% 42%, #000 4%, transparent 74%);
+      mask-image: radial-gradient(ellipse 52% 68% at 62% 42%, #000 4%, transparent 74%);
     }
   }
   .eyebrow {
