@@ -105,13 +105,15 @@
   @media (min-width: 960px) { .hero-terminal .terminal { margin-left: auto; } }
   .hero-photo {
     max-width: 420px;
-    border-radius: 20px;
-    overflow: hidden;
-    border: 1px solid rgba(75, 63, 242, .25);
-    box-shadow: 0 20px 50px -20px rgba(10, 23, 48, .5);
   }
   @media (min-width: 960px) { .hero-photo { margin-left: auto; } }
-  .hero-photo img { display: block; width: 100%; height: auto; }
+  .hero-photo img {
+    display: block;
+    width: 100%;
+    height: auto;
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 32%);
+    mask-image: linear-gradient(to right, transparent 0%, #000 32%);
+  }
   .eyebrow {
     font-family: var(--font-mono);
     font-size: clamp(11.5px, 2vw, 13px);
@@ -207,13 +209,14 @@
   .sobre-section .wrap { max-width: 1080px; }
   .sobre-grid { display: grid; gap: clamp(32px, 5vw, 64px); align-items: center; }
   @media (min-width: 760px) { .sobre-grid { grid-template-columns: 1fr 1.2fr; } }
-  .sobre-video {
-    border-radius: 20px;
-    overflow: hidden;
-    background: #000;
-    box-shadow: 0 20px 50px -20px rgba(14, 24, 48, .28);
+  .sobre-video video {
+    display: block;
+    width: 100%;
+    height: auto;
+    filter: brightness(.82);
+    -webkit-mask-image: linear-gradient(to left, transparent 0%, #000 32%);
+    mask-image: linear-gradient(to left, transparent 0%, #000 32%);
   }
-  .sobre-video video { display: block; width: 100%; height: auto; filter: brightness(.82); }
   p { margin: 0 0 20px; line-height: 1.7; font-size: 17px; }
   p:last-child { margin-bottom: 0; }
   .lede { font-size: clamp(21px, 3vw, 27px); font-weight: 700; line-height: 1.45; letter-spacing: -0.01em; }
