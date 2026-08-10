@@ -104,32 +104,14 @@
   .hero-terminal .terminal { margin-top: 0; max-width: 480px; }
   @media (min-width: 960px) { .hero-terminal .terminal { margin-left: auto; } }
   .hero-photo {
-    max-width: 460px;
-    position: relative;
+    max-width: 420px;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(75, 63, 242, .25);
+    box-shadow: 0 20px 50px -20px rgba(10, 23, 48, .5);
   }
   @media (min-width: 960px) { .hero-photo { margin-left: auto; } }
-  .hero-photo::before {
-    content: "";
-    position: absolute;
-    inset: -10%;
-    z-index: -1;
-    background: radial-gradient(ellipse 55% 55% at 50% 42%, rgba(75, 63, 242, .3) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .hero-photo img {
-    display: block;
-    width: 100%;
-    height: auto;
-    filter: saturate(.92) contrast(1.04) brightness(.97);
-    -webkit-mask-image: radial-gradient(ellipse 60% 66% at 50% 40%, #000 5%, transparent 76%);
-    mask-image: radial-gradient(ellipse 60% 66% at 50% 40%, #000 5%, transparent 76%);
-  }
-  @media (min-width: 960px) {
-    .hero-photo img {
-      -webkit-mask-image: radial-gradient(ellipse 52% 68% at 62% 42%, #000 4%, transparent 74%);
-      mask-image: radial-gradient(ellipse 52% 68% at 62% 42%, #000 4%, transparent 74%);
-    }
-  }
+  .hero-photo img { display: block; width: 100%; height: auto; }
   .eyebrow {
     font-family: var(--font-mono);
     font-size: clamp(11.5px, 2vw, 13px);
