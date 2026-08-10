@@ -115,26 +115,6 @@
     mask-image: linear-gradient(to right, transparent 0%, #000 32%);
   }
   .hero-photo-mobile { display: none; }
-  @media (max-width: 959px) {
-    .hero-photo-mobile {
-      display: block;
-      width: min(42%, 165px);
-      margin: 24px auto 24px;
-      aspect-ratio: 4 / 5;
-      border-radius: 20px;
-      overflow: hidden;
-      border: 1px solid rgba(75, 63, 242, .25);
-      box-shadow: 0 20px 50px -20px rgba(10, 23, 48, .5);
-    }
-    .hero-photo-mobile img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center 20%;
-    }
-    .hero-terminal { display: none; }
-  }
   .eyebrow {
     font-family: var(--font-mono);
     font-size: clamp(11.5px, 2vw, 13px);
@@ -185,15 +165,44 @@
   }
   @media (max-width: 959px) {
     .hero .wrap {
-      grid-template-columns: 1fr;
+      grid-template-columns: 1fr clamp(110px, 34vw, 150px);
+      grid-template-areas:
+        "logo     photo"
+        "eyebrow  photo"
+        "name     photo"
+        "headline photo"
+        "sub      sub"
+        "cta      cta";
+      gap: 8px 16px;
       padding-top: clamp(24px, 6vw, 40px);
     }
-    .hero-logo { margin-bottom: 16px; }
-    .hero-logo svg { height: 38px; }
-    .eyebrow { margin-bottom: 14px; }
-    .name { font-size: clamp(22px, 8vw, 32px); margin-bottom: 10px; white-space: normal; }
-    .headline { margin-bottom: 14px; }
-    .sub { margin-bottom: 28px; }
+    .hero-text { display: contents; }
+    .hero-terminal { display: none; }
+    .hero-photo-mobile {
+      display: block;
+      grid-area: photo;
+      align-self: start;
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(75, 63, 242, .25);
+      box-shadow: 0 20px 50px -20px rgba(10, 23, 48, .5);
+    }
+    .hero-photo-mobile img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 20%;
+    }
+    .hero-logo { grid-area: logo; margin-bottom: 12px; }
+    .hero-logo svg { height: 32px; }
+    .eyebrow { grid-area: eyebrow; margin-bottom: 10px; }
+    .name { grid-area: name; font-size: clamp(19px, 7vw, 24px); margin-bottom: 8px; white-space: normal; }
+    .headline { grid-area: headline; margin-bottom: 0; }
+    .sub { grid-area: sub; margin: 18px 0 20px; }
+    .hero-cta { grid-area: cta; justify-self: center; }
   }
 
   .btn {
@@ -802,10 +811,10 @@
 <body>
 
 <section class="hero on-dark">
-  <div class="hero-photo-mobile">
-    <img src="images/hero-ana.jpg" alt="Ana Luiza Adinolfi, especialista em automação e IA" width="999" height="1400" loading="eager" decoding="async">
-  </div>
   <div class="wrap">
+    <div class="hero-photo-mobile">
+      <img src="images/hero-ana.jpg" alt="Ana Luiza Adinolfi, especialista em automação e IA" width="999" height="1400" loading="eager" decoding="async">
+    </div>
     <div class="hero-text">
       <div class="hero-logo">
         <svg viewBox="20 6 308 118" role="img" aria-label="ana.nocode">
