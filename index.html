@@ -129,6 +129,13 @@
     background: radial-gradient(ellipse 68% 76% at 50% 36%, transparent 38%, var(--navy) 94%);
     pointer-events: none;
   }
+  @media (min-width: 960px) {
+    .hero-photo::after {
+      background:
+        linear-gradient(90deg, var(--navy) 0%, transparent 38%),
+        radial-gradient(ellipse 68% 76% at 50% 36%, transparent 38%, var(--navy) 94%);
+    }
+  }
   .eyebrow {
     font-family: var(--font-mono);
     font-size: clamp(11.5px, 2vw, 13px);
@@ -230,7 +237,7 @@
     background: #000;
     box-shadow: 0 20px 50px -20px rgba(14, 24, 48, .28);
   }
-  .sobre-video video { display: block; width: 100%; height: auto; }
+  .sobre-video video { display: block; width: 100%; height: auto; filter: brightness(.82); }
   p { margin: 0 0 20px; line-height: 1.7; font-size: 17px; }
   p:last-child { margin-bottom: 0; }
   .lede { font-size: clamp(21px, 3vw, 27px); font-weight: 700; line-height: 1.45; letter-spacing: -0.01em; }
