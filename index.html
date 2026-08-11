@@ -105,14 +105,20 @@
   @media (min-width: 960px) { .hero-terminal .terminal { margin-left: auto; } }
   .hero-photo {
     max-width: 420px;
+    position: relative;
   }
   @media (min-width: 960px) { .hero-photo { margin-left: auto; } }
   .hero-photo img {
     display: block;
     width: 100%;
     height: auto;
-    -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 32%);
-    mask-image: linear-gradient(to right, transparent 0%, #000 32%);
+  }
+  .hero-photo::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 100% 100% at 50% 40%, transparent 72%, rgba(10, 23, 48, .22) 100%);
+    pointer-events: none;
   }
   .hero-photo-mobile { display: none; }
   .eyebrow {
