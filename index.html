@@ -188,16 +188,18 @@
     margin: 0 0 36px;
   }
   @media (max-width: 959px) {
-    /* Poster hero: photo runs full-bleed behind the name/headline, overlaid
-       on its top edge over a scrim; sub + CTA continue on solid navy below
-       so the copy that closes the sale isn't fighting the photo. Sized via
-       aspect-ratio, not vh — vh jumps as mobile browser chrome collapses on
-       scroll, which was causing the whole grid (sub included) to reflow/jank. */
+    /* Poster hero: photo runs full-bleed at the top with just the logo mark
+       overlaid in its corner (a stacked name/headline block never fit the
+       headroom above her head without landing on her face). Name, headline,
+       sub and CTA all sit below on solid navy, so they're legible no matter
+       how the photo is cropped. Sized via aspect-ratio, not vh — vh jumps as
+       mobile browser chrome collapses on scroll, which reflowed/janked the
+       whole grid, sub text included. */
     .hero .wrap {
       display: grid;
       grid-template-columns: 1fr;
-      grid-template-areas: "photo" "sub" "cta";
-      grid-template-rows: auto auto auto;
+      grid-template-areas: "photo" "eyebrow" "name" "headline" "sub" "cta";
+      grid-template-rows: auto auto auto auto auto auto;
       gap: 0;
       padding-top: 0;
     }
@@ -222,29 +224,28 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center 18%;
+      object-position: center 0%;
     }
     .hero-photo-mobile::after {
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(to bottom, rgba(10, 23, 48, .95) 0%, rgba(10, 23, 48, .55) 30%, rgba(10, 23, 48, 0) 58%);
+      background: linear-gradient(to bottom, rgba(10, 23, 48, .5) 0%, rgba(10, 23, 48, 0) 24%);
       pointer-events: none;
     }
-    .hero-intro {
+    .hero-logo {
       grid-area: photo;
       align-self: start;
-      justify-self: stretch;
+      justify-self: start;
       position: relative;
       z-index: 1;
-      padding-top: 22px;
-      text-shadow: 0 2px 16px rgba(10, 23, 48, .85);
+      margin: 18px 0 0;
+      filter: drop-shadow(0 2px 8px rgba(10, 23, 48, .85));
     }
-    .hero-logo { margin-bottom: 12px; }
-    .hero-logo svg { height: 46px; }
-    .eyebrow { margin-bottom: 10px; }
-    .name { font-size: clamp(19px, 7vw, 24px); margin-bottom: 8px; white-space: normal; }
-    .headline { margin: 4px 0 0; font-size: 17px; }
+    .hero-logo svg { height: 40px; }
+    .eyebrow { grid-area: eyebrow; margin: 24px 0 10px; }
+    .name { grid-area: name; font-size: clamp(19px, 7vw, 24px); margin-bottom: 8px; white-space: normal; }
+    .headline { grid-area: headline; margin: 4px 0 0; font-size: 17px; }
     .sub { grid-area: sub; margin: 22px 0 20px; }
     .hero-cta { grid-area: cta; justify-self: center; }
   }
@@ -577,8 +578,13 @@
   .faq-track-group { display: flex; flex: none; gap: 14px; padding-right: 14px; }
   .faq-track-left .faq-track { animation: faq-scroll-left 46s linear infinite; }
   .faq-track-right .faq-track { animation: faq-scroll-right 38s linear infinite; }
-  .faq-scroller:hover .faq-track,
   .faq-scroller.paused .faq-track { animation-play-state: paused; }
+  @media (hover: hover) and (pointer: fine) {
+    /* Scoped to real mouse/trackpad devices only — on touch, :hover can get
+       "stuck" active after a tap (a known mobile Safari/Chrome quirk), which
+       paused the marquee forever regardless of the .paused class logic below. */
+    .faq-scroller:hover .faq-track { animation-play-state: paused; }
+  }
   @keyframes faq-scroll-left { from { transform: translateX(0); } to { transform: translateX(-50%); } }
   @keyframes faq-scroll-right { from { transform: translateX(-50%); } to { transform: translateX(0); } }
 
@@ -878,24 +884,22 @@
       <img src="images/hero-ana.jpg" alt="Ana Luiza Adinolfi, especialista em automação e IA" width="999" height="1400" loading="eager" decoding="async">
     </div>
     <div class="hero-text">
-      <div class="hero-intro">
-        <div class="hero-logo">
-          <svg viewBox="20 6 308 118" role="img" aria-label="ana.nocode">
-            <g transform="translate(10,5)">
-              <g transform="translate(0,-1)" class="logo-a-paper" fill="none" stroke-width="5" stroke-linecap="round">
-                <path d="M50 12 L20 100"/><path d="M50 12 L80 100"/><path d="M32 64 L68 64"/>
-              </g>
-              <g transform="translate(16,9)" class="logo-a-indigo" fill="none" stroke-width="5" stroke-linecap="round">
-                <path d="M50 12 L20 100"/><path d="M50 12 L80 100"/><path d="M32 64 L68 64"/>
-              </g>
+      <div class="hero-logo">
+        <svg viewBox="20 6 308 118" role="img" aria-label="ana.nocode">
+          <g transform="translate(10,5)">
+            <g transform="translate(0,-1)" class="logo-a-paper" fill="none" stroke-width="5" stroke-linecap="round">
+              <path d="M50 12 L20 100"/><path d="M50 12 L80 100"/><path d="M32 64 L68 64"/>
             </g>
-            <text x="132" y="78" font-size="34"><tspan class="logo-word-a">ana.</tspan><tspan class="logo-word-nocode">nocode</tspan></text>
-          </svg>
-        </div>
-        <p class="eyebrow">n8n · IA · Claude Code — sistemas sob medida</p>
-        <h1 class="name">Ana Luiza Adinolfi</h1>
-        <p class="headline">Eu construo os bastidores que fazem seu negócio <em>rodar sozinho</em>.</p>
+            <g transform="translate(16,9)" class="logo-a-indigo" fill="none" stroke-width="5" stroke-linecap="round">
+              <path d="M50 12 L20 100"/><path d="M50 12 L80 100"/><path d="M32 64 L68 64"/>
+            </g>
+          </g>
+          <text x="132" y="78" font-size="34"><tspan class="logo-word-a">ana.</tspan><tspan class="logo-word-nocode">nocode</tspan></text>
+        </svg>
       </div>
+      <p class="eyebrow">n8n · IA · Claude Code — sistemas sob medida</p>
+      <h1 class="name">Ana Luiza Adinolfi</h1>
+      <p class="headline">Eu construo os bastidores que fazem seu negócio <em>rodar sozinho</em>.</p>
       <p class="sub">As tarefas repetitivas do seu negócio passam a acontecer sozinhas — eu desenho e construo o sistema, você só acompanha.</p>
       <a class="btn hero-cta" href="#contact-form">Fale comigo</a>
     </div>
