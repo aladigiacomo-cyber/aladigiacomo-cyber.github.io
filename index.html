@@ -188,14 +188,16 @@
     margin: 0 0 36px;
   }
   @media (max-width: 959px) {
-    /* Poster hero: photo runs full-bleed behind the name/headline, which sit
-       overlaid on its lower edge over a scrim; sub + CTA continue on solid
-       navy below so the copy that closes the sale isn't fighting the photo. */
+    /* Poster hero: photo runs full-bleed behind the name/headline, overlaid
+       on its top edge over a scrim; sub + CTA continue on solid navy below
+       so the copy that closes the sale isn't fighting the photo. Sized via
+       aspect-ratio, not vh — vh jumps as mobile browser chrome collapses on
+       scroll, which was causing the whole grid (sub included) to reflow/jank. */
     .hero .wrap {
       display: grid;
       grid-template-columns: 1fr;
       grid-template-areas: "photo" "sub" "cta";
-      grid-template-rows: min(64vh, 560px) auto auto;
+      grid-template-rows: auto auto auto;
       gap: 0;
       padding-top: 0;
     }
@@ -209,6 +211,7 @@
       left: 50%;
       margin-left: -50vw;
       margin-right: -50vw;
+      aspect-ratio: 4 / 5;
       border-radius: 0;
       overflow: hidden;
       border: none;
@@ -225,16 +228,17 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(10, 23, 48, .97) 0%, rgba(10, 23, 48, .62) 32%, rgba(10, 23, 48, 0) 62%);
+      background: linear-gradient(to bottom, rgba(10, 23, 48, .95) 0%, rgba(10, 23, 48, .55) 30%, rgba(10, 23, 48, 0) 58%);
       pointer-events: none;
     }
     .hero-intro {
       grid-area: photo;
-      align-self: end;
+      align-self: start;
       justify-self: stretch;
       position: relative;
       z-index: 1;
-      padding-bottom: 22px;
+      padding-top: 22px;
+      text-shadow: 0 2px 16px rgba(10, 23, 48, .85);
     }
     .hero-logo { margin-bottom: 12px; }
     .hero-logo svg { height: 46px; }
@@ -1513,12 +1517,14 @@
     // mobile. Instead, a tap pauses it just long enough to read, then it
     // resumes on its own.
     document.querySelectorAll('.faq-scroller').forEach(function (scroller) {
+      // Scheduling the resume off touchstart alone (rather than touchend/
+      // touchcancel) is deliberate: the scroller itself doesn't scroll, so a
+      // touch here usually turns into the page's own scroll gesture, and the
+      // browser fires touchcancel instead of touchend in that case — which
+      // left it paused forever.
       var resumeTimer;
       scroller.addEventListener('touchstart', function () {
-        clearTimeout(resumeTimer);
         scroller.classList.add('paused');
-      }, { passive: true });
-      scroller.addEventListener('touchend', function () {
         clearTimeout(resumeTimer);
         resumeTimer = setTimeout(function () { scroller.classList.remove('paused'); }, 6000);
       }, { passive: true });
