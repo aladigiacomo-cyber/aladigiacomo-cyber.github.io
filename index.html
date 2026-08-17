@@ -188,18 +188,18 @@
     margin: 0 0 36px;
   }
   @media (max-width: 959px) {
-    /* Poster hero: photo runs full-bleed at the top with just the logo mark
-       overlaid in its corner (a stacked name/headline block never fit the
-       headroom above her head without landing on her face). Name, headline,
-       sub and CTA all sit below on solid navy, so they're legible no matter
-       how the photo is cropped. Sized via aspect-ratio, not vh — vh jumps as
-       mobile browser chrome collapses on scroll, which reflowed/janked the
-       whole grid, sub text included. */
+    /* Poster hero: photo runs full-bleed at the top with a single compact
+       row — logo, name, short eyebrow — overlaid in its corner (a taller
+       stacked block never fit the headroom above her head without landing
+       on her face). Headline, sub and CTA stay below on solid navy, so the
+       copy is legible no matter how the photo is cropped. Sized via
+       aspect-ratio, not vh — vh jumps as mobile browser chrome
+       collapses/expands on scroll, which reflowed/janked the whole grid. */
     .hero .wrap {
       display: grid;
       grid-template-columns: 1fr;
-      grid-template-areas: "photo" "eyebrow" "name" "headline" "sub" "cta";
-      grid-template-rows: auto auto auto auto auto auto;
+      grid-template-areas: "photo" "headline" "sub" "cta";
+      grid-template-rows: auto auto auto auto;
       gap: 0;
       padding-top: 0;
     }
@@ -233,19 +233,25 @@
       background: linear-gradient(to bottom, rgba(10, 23, 48, .5) 0%, rgba(10, 23, 48, 0) 24%);
       pointer-events: none;
     }
-    .hero-logo {
+    .hero-brand {
       grid-area: photo;
       align-self: start;
-      justify-self: start;
+      justify-self: stretch;
       position: relative;
       z-index: 1;
       margin: 18px 0 0;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 7px 10px;
       filter: drop-shadow(0 2px 8px rgba(10, 23, 48, .85));
     }
-    .hero-logo svg { height: 40px; }
-    .eyebrow { grid-area: eyebrow; margin: 24px 0 10px; }
-    .name { grid-area: name; font-size: clamp(19px, 7vw, 24px); margin-bottom: 8px; white-space: normal; }
-    .headline { grid-area: headline; margin: 4px 0 0; font-size: 17px; }
+    .hero-brand .hero-logo { margin: 0; }
+    .hero-brand .hero-logo svg { height: 24px; }
+    .hero-brand .name { font-size: 14px; margin: 0; white-space: nowrap; }
+    .hero-brand .eyebrow { margin: 0; font-size: 10.5px; }
+    .hero-brand .eyebrow-rest { display: none; }
+    .headline { grid-area: headline; margin: 22px 0 0; font-size: 17px; }
     .sub { grid-area: sub; margin: 22px 0 20px; }
     .hero-cta { grid-area: cta; justify-self: center; }
   }
@@ -881,21 +887,23 @@
       <img src="images/hero-ana.jpg" alt="Ana Luiza Adinolfi, especialista em automação e IA" width="999" height="1400" loading="eager" decoding="async">
     </div>
     <div class="hero-text">
-      <div class="hero-logo">
-        <svg viewBox="20 6 308 118" role="img" aria-label="ana.nocode">
-          <g transform="translate(10,5)">
-            <g transform="translate(0,-1)" class="logo-a-paper" fill="none" stroke-width="5" stroke-linecap="round">
-              <path d="M50 12 L20 100"/><path d="M50 12 L80 100"/><path d="M32 64 L68 64"/>
+      <div class="hero-brand">
+        <div class="hero-logo">
+          <svg viewBox="20 6 308 118" role="img" aria-label="ana.nocode">
+            <g transform="translate(10,5)">
+              <g transform="translate(0,-1)" class="logo-a-paper" fill="none" stroke-width="5" stroke-linecap="round">
+                <path d="M50 12 L20 100"/><path d="M50 12 L80 100"/><path d="M32 64 L68 64"/>
+              </g>
+              <g transform="translate(16,9)" class="logo-a-indigo" fill="none" stroke-width="5" stroke-linecap="round">
+                <path d="M50 12 L20 100"/><path d="M50 12 L80 100"/><path d="M32 64 L68 64"/>
+              </g>
             </g>
-            <g transform="translate(16,9)" class="logo-a-indigo" fill="none" stroke-width="5" stroke-linecap="round">
-              <path d="M50 12 L20 100"/><path d="M50 12 L80 100"/><path d="M32 64 L68 64"/>
-            </g>
-          </g>
-          <text x="132" y="78" font-size="34"><tspan class="logo-word-a">ana.</tspan><tspan class="logo-word-nocode">nocode</tspan></text>
-        </svg>
+            <text x="132" y="78" font-size="34"><tspan class="logo-word-a">ana.</tspan><tspan class="logo-word-nocode">nocode</tspan></text>
+          </svg>
+        </div>
+        <p class="eyebrow"><span class="eyebrow-short">n8n · IA</span><span class="eyebrow-rest"> · Claude Code — sistemas sob medida</span></p>
+        <h1 class="name">Ana Luiza Adinolfi</h1>
       </div>
-      <p class="eyebrow">n8n · IA · Claude Code — sistemas sob medida</p>
-      <h1 class="name">Ana Luiza Adinolfi</h1>
       <p class="headline">Eu construo os bastidores que fazem seu negócio <em>rodar sozinho</em>.</p>
       <p class="sub">As tarefas repetitivas do seu negócio passam a acontecer sozinhas — eu desenho e construo o sistema, você só acompanha.</p>
       <a class="btn hero-cta" href="#contact-form">Fale comigo</a>
