@@ -576,15 +576,12 @@
   .faq-scroller + .faq-scroller { margin-top: 20px; }
   .faq-track { display: flex; width: max-content; }
   .faq-track-group { display: flex; flex: none; gap: 14px; padding-right: 14px; }
+  /* Fallback only, for no-JS environments — the script below takes over with
+     a hand-driven rAF loop (inline animation:none) so pause/resume on touch
+     doesn't depend on :hover or animation-play-state, which kept getting
+     stuck active on real mobile browsers. */
   .faq-track-left .faq-track { animation: faq-scroll-left 46s linear infinite; }
   .faq-track-right .faq-track { animation: faq-scroll-right 38s linear infinite; }
-  .faq-scroller.paused .faq-track { animation-play-state: paused; }
-  @media (hover: hover) and (pointer: fine) {
-    /* Scoped to real mouse/trackpad devices only — on touch, :hover can get
-       "stuck" active after a tap (a known mobile Safari/Chrome quirk), which
-       paused the marquee forever regardless of the .paused class logic below. */
-    .faq-scroller:hover .faq-track { animation-play-state: paused; }
-  }
   @keyframes faq-scroll-left { from { transform: translateX(0); } to { transform: translateX(-50%); } }
   @keyframes faq-scroll-right { from { transform: translateX(-50%); } to { transform: translateX(0); } }
 
@@ -1516,22 +1513,53 @@
   })();
 
   (function () {
-    // Touch devices have no :hover, so the marquee kept rolling forever with
-    // no way to pause — but stopping it outright made the FAQ feel dead on
-    // mobile. Instead, a tap pauses it just long enough to read, then it
-    // resumes on its own.
+    // Driving the marquee by hand with rAF instead of a CSS animation +
+    // :hover/class toggling: several rounds of the CSS-only approach still
+    // got stuck paused on real phones (likely mobile Safari/Chrome's known
+    // "sticky :hover after tap" quirk, and/or touchend never firing once a
+    // touch turns into the page's own scroll gesture). A plain JS position +
+    // boolean "paused" flag has no pseudo-class involved at all, so there's
+    // nothing left for a mobile browser to get stuck in.
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
     document.querySelectorAll('.faq-scroller').forEach(function (scroller) {
-      // Scheduling the resume off touchstart alone (rather than touchend/
-      // touchcancel) is deliberate: the scroller itself doesn't scroll, so a
-      // touch here usually turns into the page's own scroll gesture, and the
-      // browser fires touchcancel instead of touchend in that case — which
-      // left it paused forever.
+      var track = scroller.querySelector('.faq-track');
+      if (!track) return;
+      var reverse = scroller.classList.contains('faq-track-right');
+      var durationMs = reverse ? 38000 : (scroller.closest('.faq-desktop-row') ? 58000 : 46000);
+
+      track.style.animation = 'none';
+      track.style.willChange = 'transform';
+
+      var loopWidth = track.scrollWidth / 2;
+      var speed = loopWidth / durationMs; // px per ms
+      var offset = reverse ? -loopWidth : 0;
+      var paused = false;
       var resumeTimer;
-      scroller.addEventListener('touchstart', function () {
-        scroller.classList.add('paused');
+      var lastTs = null;
+
+      function frame(ts) {
+        if (lastTs === null) lastTs = ts;
+        var dt = ts - lastTs;
+        lastTs = ts;
+        if (!paused && loopWidth > 0) {
+          offset += reverse ? speed * dt : -speed * dt;
+          if (offset <= -loopWidth) offset += loopWidth;
+          if (offset >= 0) offset -= loopWidth;
+          track.style.transform = 'translateX(' + offset + 'px)';
+        }
+        requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
+
+      function pauseFor(ms) {
+        paused = true;
         clearTimeout(resumeTimer);
-        resumeTimer = setTimeout(function () { scroller.classList.remove('paused'); }, 6000);
-      }, { passive: true });
+        resumeTimer = setTimeout(function () { paused = false; }, ms);
+      }
+      scroller.addEventListener('touchstart', function () { pauseFor(6000); }, { passive: true });
+      scroller.addEventListener('mouseenter', function () { paused = true; clearTimeout(resumeTimer); });
+      scroller.addEventListener('mouseleave', function () { paused = false; });
     });
   })();
 
