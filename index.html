@@ -1537,7 +1537,6 @@
       var speed = loopWidth / durationMs; // px per ms
       var offset = reverse ? -loopWidth : 0;
       var paused = false;
-      var resumeTimer;
       var lastTs = null;
 
       function frame(ts) {
@@ -1554,20 +1553,19 @@
       }
       requestAnimationFrame(frame);
 
-      function pauseFor(ms) {
-        paused = true;
-        clearTimeout(resumeTimer);
-        resumeTimer = setTimeout(function () { paused = false; }, ms);
-      }
-      scroller.addEventListener('touchstart', function () { pauseFor(6000); }, { passive: true });
+      // Tap toggles pause/resume directly — no timer. A tap while running
+      // pauses it so it can be read; a tap while paused sends it running
+      // again. (An earlier "auto-resume after 6s" version meant a second
+      // tap — the natural thing to do when checking if it "came back" —
+      // just re-armed the same 6s pause instead of resuming anything.)
+      scroller.addEventListener('touchstart', function () { paused = !paused; }, { passive: true });
 
       // Only real mouse/trackpad devices get hover-to-pause. iOS Safari
       // fires a synthetic mouseenter after a tap on a plain (non-link,
-      // non-button) element like this one — with no real pointer, the
-      // matching mouseleave never follows, so `paused` got stuck true
-      // forever with its resume timer cleared and nothing to restart it.
+      // non-button) element like this one, with no real pointer to send a
+      // matching mouseleave — so this must stay out of touch devices' way.
       if (window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-        scroller.addEventListener('mouseenter', function () { paused = true; clearTimeout(resumeTimer); });
+        scroller.addEventListener('mouseenter', function () { paused = true; });
         scroller.addEventListener('mouseleave', function () { paused = false; });
       }
     });
