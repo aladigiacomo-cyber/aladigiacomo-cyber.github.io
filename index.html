@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0a1730">
 <title>Ana Luiza Adinolfi — Automação &amp; IA</title>
 <meta name="description" content="Automação de processos com n8n, soluções com inteligência artificial e consultoria em Claude / Claude Code — para quem quer escalar sem contratar um time inteiro.">
 <link rel="canonical" href="https://aladigiacomo-cyber.github.io/">
@@ -11,14 +12,31 @@
 <meta property="og:url" content="https://aladigiacomo-cyber.github.io/">
 <meta property="og:title" content="Ana Luiza Adinolfi — Automação & IA">
 <meta property="og:description" content="Eu construo os bastidores que fazem seu negócio rodar sozinho.">
-<meta property="og:image" content="https://aladigiacomo-cyber.github.io/images/og-cover.png">
+<meta property="og:image" content="https://aladigiacomo-cyber.github.io/images/og-cover.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Ana Luiza Adinolfi — Automação & IA">
 <meta name="twitter:description" content="Eu construo os bastidores que fazem seu negócio rodar sozinho.">
-<meta name="twitter:image" content="https://aladigiacomo-cyber.github.io/images/og-cover.png">
+<meta name="twitter:image" content="https://aladigiacomo-cyber.github.io/images/og-cover.jpg">
 <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Ana Luiza Adinolfi",
+  "url": "https://aladigiacomo-cyber.github.io/",
+  "image": "https://aladigiacomo-cyber.github.io/images/hero-ana.jpg",
+  "jobTitle": "Consultora de automação e IA",
+  "description": "Consultora independente especializada em automação de processos com n8n e soluções de IA customizadas.",
+  "knowsAbout": ["n8n", "Automação de processos", "Inteligência artificial", "Claude", "Claude Code"],
+  "sameAs": [
+    "https://instagram.com/ana.nocode",
+    "https://www.linkedin.com/in/analuizadigiacomo"
+  ]
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600;700;800&display=swap">
@@ -101,8 +119,6 @@
   }
   .hero-text { min-width: 0; }
   .hero-terminal { min-width: 0; }
-  .hero-terminal .terminal { margin-top: 0; max-width: 480px; }
-  @media (min-width: 960px) { .hero-terminal .terminal { margin-left: auto; } }
   .hero-photo {
     max-width: 420px;
     position: relative;
@@ -215,7 +231,7 @@
     .eyebrow { grid-area: eyebrow; margin-bottom: 10px; }
     .name { grid-area: name; font-size: clamp(19px, 7vw, 24px); margin-bottom: 8px; white-space: normal; }
     .headline { grid-area: headline; margin: 4px 0 0; font-size: 17px; }
-    .sub { grid-area: sub; margin: 18px 0 20px; text-align: justify; }
+    .sub { grid-area: sub; margin: 18px 0 20px; }
     .hero-cta { grid-area: cta; justify-self: center; }
   }
 
@@ -260,6 +276,23 @@
     0%, 100% { opacity: 1; }
     50% { opacity: 0; }
   }
+
+  /* Persistent CTA — the page is long on mobile with no fixed nav, so this
+     stays reachable once the hero's own CTA has scrolled out of view. It
+     hides again once the real contact form is on screen to avoid redundancy. */
+  .floating-cta {
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    z-index: 40;
+    padding: 13px 22px;
+    font-size: 14.5px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .25s ease, box-shadow .18s ease, transform .2s cubic-bezier(.2,.8,.2,1);
+  }
+  .floating-cta.show { opacity: 1; pointer-events: auto; }
+  @media (max-width: 480px) { .floating-cta { right: 14px; bottom: 14px; padding: 14px 18px; font-size: 14px; } }
 
   /* SOBRE */
   .sobre-grid { display: grid; gap: clamp(32px, 5vw, 64px); align-items: center; }
@@ -533,6 +566,22 @@
   .faq-scroller:hover .faq-track { animation-play-state: paused; }
   @keyframes faq-scroll-left { from { transform: translateX(0); } to { transform: translateX(-50%); } }
   @keyframes faq-scroll-right { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+  /* Touch devices have no :hover, so the marquee would never stop rolling —
+     the exact content that resolves price/security objections would be
+     unreadable. Swap it for a manually swipeable strip instead. */
+  @media (hover: none), (pointer: coarse) {
+    .faq-track { animation: none !important; }
+    .faq-scroller {
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      scroll-snap-type: x proximity;
+      scrollbar-width: none;
+    }
+    .faq-scroller::-webkit-scrollbar { display: none; }
+    .faq-card { scroll-snap-align: start; }
+    .faq-track-group[aria-hidden="true"] { display: none; }
+  }
 
   .faq-card {
     flex: none;
@@ -862,7 +911,7 @@
     <h2 class="ref"><span class="rule"></span> Sobre <span class="rule"></span></h2>
     <div class="sobre-grid">
       <div class="sobre-video reveal-item">
-        <video src="images/sobre-video.mp4" poster="images/sobre-video-poster.jpg" width="640" height="1138" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <video id="sobre-video" src="images/sobre-video.mp4" poster="images/sobre-video-poster.jpg" width="640" height="1138" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
       </div>
       <div class="col sobre-col">
         <p class="lede reveal-item">Eu sou a Ana. Trabalho na fronteira entre <em>automação</em> e <em>inteligência artificial</em>.</p>
@@ -1001,6 +1050,20 @@
         <div>
           <h3>Claude / Claude Code</h3>
           <p>Apoio para usar Claude e Claude Code de verdade no seu dia a dia — da configuração inicial a fluxos avançados de IA aplicada ao seu trabalho.</p>
+          <div class="terminal terminal-compact reveal-item">
+            <div class="terminal-bar">
+              <span class="terminal-dot terminal-dot-red"></span>
+              <span class="terminal-dot terminal-dot-yellow"></span>
+              <span class="terminal-dot terminal-dot-green"></span>
+              <span class="terminal-title">zsh — claude</span>
+            </div>
+            <div class="terminal-body">
+              <p><span class="t-arrow">❯</span> automatiza a aprovação de orçamento acima de R$5k<span class="terminal-cursor"></span></p>
+              <p class="t-muted">Lendo CLAUDE.md do projeto…</p>
+              <p><span class="t-ok">✓</span> Fluxo de aprovação criado e testado</p>
+              <p class="t-status">Pronto para revisão — <span class="t-accent">2 arquivos alterados</span></p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -1257,6 +1320,8 @@
   </footer>
 </section>
 
+<a href="#contact-form" class="btn floating-cta" id="floating-cta">Fale comigo</a>
+
 <script>
   (function () {
     document.querySelectorAll('.services, .steps, .contact-list, .tools-row, .terminal-body, .sobre-col').forEach(function (container) {
@@ -1415,6 +1480,45 @@
         });
       });
     } catch (e) {}
+  })();
+
+  (function () {
+    var cta = document.getElementById('floating-cta');
+    var hero = document.querySelector('.hero');
+    var form = document.getElementById('contact-form');
+    var faq = document.querySelector('.faq-section');
+    if (!cta || !hero || !form || !('IntersectionObserver' in window)) return;
+
+    var heroVisible = true, formVisible = false, faqVisible = false;
+    function sync() { cta.classList.toggle('show', !heroVisible && !formVisible && !faqVisible); }
+
+    new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { heroVisible = e.isIntersecting; });
+      sync();
+    }).observe(hero);
+
+    if (faq) {
+      new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { faqVisible = e.isIntersecting; });
+        sync();
+      }).observe(faq);
+    }
+
+    new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { formVisible = e.isIntersecting; });
+      sync();
+    }).observe(form);
+  })();
+
+  (function () {
+    var video = document.getElementById('sobre-video');
+    if (!video || !('IntersectionObserver' in window)) return;
+    new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { video.play().catch(function () {}); }
+        else { video.pause(); }
+      });
+    }, { threshold: 0 }).observe(video);
   })();
 
   (function () {

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://aladigiacomo-cyber.github.io/sitemap.xml
