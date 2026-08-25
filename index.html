@@ -4,19 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0a1730">
-<title>Ana Luiza Adinolfi — Automação &amp; IA</title>
+<title>Ana Luiza Di Giacomo — Automação &amp; IA</title>
 <meta name="description" content="Automação de processos com n8n, soluções com inteligência artificial e consultoria em Claude / Claude Code — para quem quer escalar sem contratar um time inteiro.">
 <link rel="canonical" href="https://aladigiacomo-cyber.github.io/">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:url" content="https://aladigiacomo-cyber.github.io/">
-<meta property="og:title" content="Ana Luiza Adinolfi — Automação & IA">
+<meta property="og:title" content="Ana Luiza Di Giacomo — Automação & IA">
 <meta property="og:description" content="Eu construo os bastidores que fazem seu negócio rodar sozinho.">
 <meta property="og:image" content="https://aladigiacomo-cyber.github.io/images/og-cover.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Ana Luiza Adinolfi — Automação & IA">
+<meta name="twitter:title" content="Ana Luiza Di Giacomo — Automação & IA">
 <meta name="twitter:description" content="Eu construo os bastidores que fazem seu negócio rodar sozinho.">
 <meta name="twitter:image" content="https://aladigiacomo-cyber.github.io/images/og-cover.jpg">
 <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
@@ -25,7 +25,7 @@
 {
   "@context": "https://schema.org",
   "@type": "Person",
-  "name": "Ana Luiza Adinolfi",
+  "name": "Ana Luiza Di Giacomo",
   "url": "https://aladigiacomo-cyber.github.io/",
   "image": "https://aladigiacomo-cyber.github.io/images/hero-ana.jpg",
   "jobTitle": "Consultora de automação e IA",
@@ -101,7 +101,6 @@
   .hero {
     overflow: hidden;
     position: relative;
-    background-image: radial-gradient(ellipse 70% 60% at 20% 15%, rgba(75, 63, 242, .22) 0%, transparent 65%);
   }
   .hero .wrap {
     padding-top: clamp(36px, 9vw, 108px);
@@ -287,11 +286,6 @@
     0%, 100% { opacity: .4; transform: scale(.95); }
     50% { opacity: .65; transform: scale(1.02); }
   }
-  @keyframes cursor-blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
-  }
-
   /* Persistent CTA — the page is long on mobile with no fixed nav, so this
      stays reachable once the hero's own CTA has scrolled out of view. It
      hides again once the real contact form is on screen to avoid redundancy. */
@@ -328,215 +322,17 @@
   }
   p { margin: 0 0 20px; line-height: 1.7; font-size: 17px; }
   p:last-child { margin-bottom: 0; }
-  .lede { font-size: clamp(21px, 3vw, 27px); font-weight: 700; line-height: 1.45; letter-spacing: -0.01em; }
+  .lede { font-size: clamp(24px, 3.8vw, 36px); font-weight: 700; line-height: 1.4; letter-spacing: -0.015em; }
   .lede em { font-style: normal; color: var(--indigo); }
   .on-light p { color: var(--muted-light); }
   .on-light .lede { color: var(--ink); }
-
-  .terminal {
-    margin-top: clamp(28px, 5vw, 40px);
-    background: #0c1424;
-    border: 1px solid rgba(75, 63, 242, .25);
-    border-radius: 12px;
-    box-shadow: 0 20px 50px -20px rgba(10, 23, 48, .35);
-    overflow: hidden;
-  }
-  .terminal-bar {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 16px;
-    background: rgba(255, 255, 255, .03);
-    border-bottom: 1px solid rgba(255, 255, 255, .06);
-  }
-  .terminal-dot { width: 10px; height: 10px; border-radius: 50%; flex: none; }
-  .terminal-dot-red { background: #ff5f57; }
-  .terminal-dot-yellow { background: #febc2e; }
-  .terminal-dot-green { background: #28c840; }
-  .terminal-title {
-    margin-left: 6px;
-    font-family: var(--font-mono);
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: .04em;
-    color: var(--muted-dark);
-  }
-  .terminal-body { padding: clamp(18px, 3vw, 26px); }
-  .terminal .terminal-body p {
-    margin: 0 0 10px;
-    font-family: var(--font-mono);
-    font-size: clamp(12.5px, 1.8vw, 14.5px);
-    line-height: 1.7;
-    color: #dbe4f5;
-    max-width: 100%;
-  }
-  .terminal .terminal-body p:last-child { margin-bottom: 0; }
-  .terminal-compact { margin-top: 20px; }
-  .terminal-compact .terminal-body { padding: 16px; }
-  .terminal-compact .terminal-body p { font-size: 12.5px; }
-
-  /* n8n workflow mockup (dark theme, matches the real editor) */
-  .n8n-mock {
-    margin-top: 20px;
-    border-radius: 10px;
-    overflow: hidden;
-    border: 1px solid #2a2a2e;
-    box-shadow: 0 20px 50px -20px rgba(10, 23, 48, .45);
-    background: #121214;
-  }
-  .n8n-topbar {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 14px 0;
-    color: #9797a0;
-  }
-  .n8n-breadcrumb-icon { flex: none; color: #9797a0; }
-  .n8n-crumb { font-family: var(--font-sans); font-size: 11.5px; color: #9797a0; white-space: nowrap; }
-  .n8n-slash { color: #55555c; margin: 0 2px; }
-  .n8n-wf-name {
-    font-family: var(--font-sans);
-    font-size: 12px;
-    font-weight: 600;
-    color: #e8e8ea;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    min-width: 0;
-  }
-  .n8n-spacer { flex: 1; min-width: 8px; }
-  .n8n-publish {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    font-family: var(--font-sans);
-    font-size: 10.5px;
-    font-weight: 600;
-    color: #d6d6da;
-    background: #232327;
-    border: 1px solid #333338;
-    padding: 4px 9px;
-    border-radius: 6px;
-    white-space: nowrap;
-    flex: none;
-  }
-  .n8n-publish-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--indigo-on-dark); flex: none; }
-  .n8n-tabs { display: flex; gap: 4px; padding: 8px 14px 10px; }
-  .n8n-tab {
-    font-family: var(--font-sans);
-    font-size: 11px;
-    font-weight: 600;
-    padding: 4px 10px;
-    border-radius: 6px;
-    color: #86868f;
-  }
-  .n8n-tab-active { background: #e8e8ea; color: #17171a; }
-  .flow-body { padding: 10px; background: #0b0b0d; }
-  .flow-body svg { display: block; width: 100%; height: auto; }
-  .n8n-execbar { display: flex; justify-content: center; padding: 12px 14px 16px; background: #0b0b0d; }
-  .n8n-exec-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    font-family: var(--font-sans);
-    font-size: 11.5px;
-    font-weight: 700;
-    color: #fff;
-    background: var(--indigo);
-    padding: 7px 14px;
-    border-radius: 8px;
-    white-space: nowrap;
-  }
-
-  /* Claude conversation mockup (recolored to the site's cool navy/indigo palette) */
-  .claude-mock {
-    margin-top: 20px;
-    border-radius: 10px;
-    overflow: hidden;
-    border: 1px solid rgba(75, 63, 242, .25);
-    box-shadow: 0 20px 50px -20px rgba(10, 23, 48, .45);
-    background: #0c1424;
-  }
-  .claude-topbar {
-    display: flex;
-    align-items: center;
-    padding: 12px 16px;
-    font-family: var(--font-sans);
-    font-size: 12.5px;
-    font-weight: 600;
-    color: #f5f7fb;
-  }
-  .claude-topbar svg { margin-left: 6px; color: var(--muted-dark); }
-  .claude-body { padding: 4px 16px 16px; display: flex; flex-direction: column; gap: 12px; }
-  .claude-msg-user {
-    align-self: flex-end;
-    max-width: 86%;
-    background: rgba(255, 255, 255, .05);
-    padding: 9px 13px;
-    border-radius: 12px;
-    font-family: var(--font-sans);
-    font-size: 12.5px;
-    line-height: 1.5;
-    color: #f5f7fb;
-  }
-  .claude-status {
-    font-family: var(--font-sans);
-    font-size: 11.5px;
-    font-style: italic;
-    color: var(--muted-dark);
-  }
-  .claude-status b { font-style: normal; font-weight: 600; color: var(--indigo-on-dark); }
-  .claude-response {
-    font-family: Georgia, 'Times New Roman', serif;
-    font-size: 14px;
-    line-height: 1.6;
-    color: #dbe4f5;
-  }
-  .claude-icon-row { display: flex; align-items: center; gap: 12px; color: var(--muted-dark); }
-  .claude-icon-row svg { flex: none; }
-  .claude-inputbar {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin: 4px 16px 16px;
-    padding: 10px 12px;
-    background: rgba(255, 255, 255, .04);
-    border-radius: 12px;
-  }
-  .claude-input-plus { color: var(--muted-dark); font-size: 15px; line-height: 1; flex: none; }
-  .claude-input-placeholder { font-family: var(--font-sans); font-size: 12px; color: var(--muted-dark); flex: 1; }
-  .claude-input-model {
-    display: inline-flex;
-    align-items: center;
-    gap: 3px;
-    font-family: var(--font-sans);
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--muted-dark);
-    white-space: nowrap;
-    flex: none;
-  }
-  .terminal-body .t-muted { color: var(--muted-dark); }
-  .terminal-body .t-arrow { color: var(--muted-dark); margin-right: 2px; }
-  .terminal-body .t-accent { color: var(--indigo-on-dark); }
-  .terminal-body .t-ok { color: #4fe08d; margin-right: 2px; }
-  .terminal-body .t-status { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,.08); color: var(--muted-dark); }
-  .terminal-cursor {
-    display: inline-block;
-    width: 7px;
-    height: 1em;
-    margin-left: 5px;
-    background: var(--indigo-on-dark);
-    vertical-align: text-bottom;
-    animation: cursor-blink 1s step-end infinite;
-  }
 
   /* O QUE EU FAÇO */
   .services { border-top: 1px solid var(--line-dark); }
   .service {
     padding: clamp(28px, 5vw, 44px) 0;
     border-bottom: 1px solid var(--line-dark);
-    border-radius: 14px;
+    border-radius: 12px;
     transition: background-color .3s ease, border-color .3s ease;
   }
   .service:hover {
@@ -544,30 +340,38 @@
     background-color: rgba(155, 143, 255, .045);
     border-color: rgba(155, 143, 255, .3);
   }
-  .service:hover .service-icon img { transform: scale(1.08); }
-  .service:hover h3 { color: var(--indigo-on-dark); }
-  .service-icon {
-    display: flex;
+  /* Each service's category name is the section's signature move: a huge
+     underlined display word (echoing a reference site's "Comprar / Investir
+     / Alugar" treatment) standing in for a conventional small eyebrow +
+     icon combo — it's still a real link to the contact form, not just
+     decoration. */
+  .service-giant {
+    display: inline-flex;
     align-items: center;
-    gap: 12px;
-    margin-bottom: 16px;
+    gap: clamp(10px, 1.6vw, 18px);
+    margin: 0 0 18px;
+    text-decoration: none;
   }
-  .service-icon img {
-    width: 36px;
-    height: 36px;
-    border-radius: 9px;
+  .service-giant-icon {
+    width: clamp(28px, 4vw, 40px);
+    height: clamp(28px, 4vw, 40px);
+    border-radius: 8px;
     flex: none;
-    transition: transform .3s cubic-bezier(.34,1.56,.64,1);
+    transition: transform .3s cubic-bezier(.34, 1.56, .64, 1);
   }
-  .service-kw {
+  .service-giant-word {
+    font-family: var(--font-sans);
     font-weight: 800;
-    font-size: 13px;
-    letter-spacing: .08em;
-    text-transform: uppercase;
-    color: var(--indigo-on-dark);
-    line-height: 1.3;
+    font-size: clamp(21px, 3.2vw, 40px);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: #f5f7fb;
+    transition: color .25s ease;
   }
-  .service h3 { font-size: clamp(19px, 2.4vw, 22px); font-weight: 700; margin: 0 0 10px; color: #f5f7fb; letter-spacing: -0.01em; }
+  .service:hover .service-giant-icon { transform: scale(1.08); }
+  .service:hover .service-giant-word { color: var(--indigo-on-dark); }
+  .service:hover h3 { color: var(--indigo-on-dark); }
+  .service h3 { font-size: clamp(15px, 1.8vw, 18px); font-weight: 700; margin: 0 0 10px; color: #f5f7fb; letter-spacing: -0.01em; }
   .service p { color: var(--muted-dark); font-size: 16px; margin: 0; max-width: 100%; }
 
   /* FAQ */
@@ -590,7 +394,7 @@
     width: clamp(196px, 60vw, 246px);
     background: rgba(155, 143, 255, .05);
     border: 1px solid rgba(155, 143, 255, .22);
-    border-radius: 14px;
+    border-radius: 12px;
     padding: 16px 18px;
   }
   .faq-card h3 { font-size: 14.5px; font-weight: 700; margin: 0 0 6px; color: #f5f7fb; letter-spacing: -0.005em; }
@@ -626,23 +430,28 @@
   /* COMO EU TRABALHO */
   .tracks { display: grid; gap: clamp(36px, 6vw, 60px); }
   @media (min-width: 760px) { .tracks { grid-template-columns: 1fr 1fr; } }
-  .track-title { font-size: clamp(17px, 2.4vw, 20px); font-weight: 800; letter-spacing: .04em; text-transform: uppercase; color: var(--indigo); margin: 0 0 28px; }
+  .track-title { font-size: clamp(17px, 2.4vw, 20px); font-weight: 800; letter-spacing: .04em; text-transform: uppercase; color: var(--muted-light); margin: 0 0 28px; }
+  .track-title-accent { color: var(--indigo); }
   .steps { list-style: none; margin: 0; padding: 0; }
+  /* Quiet, editorial step list — no numbered circle badge. A muted mono
+     numeral sits beside a single flowing paragraph whose lead-in phrase is
+     bold, matching a reference site's process copy ("Fale com a
+     EliteHousing. A gente escuta...") instead of a separate heading. */
   .step {
     position: relative;
     display: grid;
-    grid-template-columns: 40px 1fr;
-    gap: 16px;
-    padding: 0 0 28px;
+    grid-template-columns: 26px 1fr;
+    gap: 14px;
+    padding: 0 0 22px;
   }
   .step:last-child { padding-bottom: 0; }
   .step::after {
     content: "";
     position: absolute;
-    left: 19px;
-    top: 40px;
+    left: 12px;
+    top: 24px;
     bottom: -2px;
-    width: 2px;
+    width: 1px;
     background: var(--line-light);
     transform: scaleY(0);
     transform-origin: top;
@@ -653,25 +462,19 @@
   .step-num {
     position: relative;
     z-index: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: var(--indigo);
+    padding-top: 2px;
     font-family: var(--font-mono);
-    font-size: 15px;
-    font-weight: 800;
-    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--muted-light);
     flex: none;
-    transition: transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s ease;
+    transition: color .2s ease;
   }
-  .step h3 { font-size: 15.5px; font-weight: 700; margin: 8px 0 4px; color: var(--ink); letter-spacing: -0.005em; transition: color .2s ease; }
-  .step p { font-size: 14.5px; color: var(--muted-light); margin: 0; }
+  .step p { font-size: 15.5px; line-height: 1.7; color: var(--muted-light); margin: 0; }
+  .step p strong { color: var(--ink); font-weight: 800; transition: color .2s ease; }
   .step:hover { --hx: 6px; }
-  .step:hover .step-num { transform: scale(1.12); box-shadow: 0 0 0 6px rgba(75,63,242,.14); }
-  .step:hover h3 { color: var(--indigo); }
+  .step:hover .step-num { color: var(--indigo); }
+  .step:hover p strong { color: var(--indigo); }
 
   .guarantee-badge {
     margin-top: clamp(36px, 6vw, 60px);
@@ -680,7 +483,7 @@
     gap: 16px;
     background: rgba(75, 63, 242, .06);
     border: 1px solid rgba(75, 63, 242, .22);
-    border-radius: 14px;
+    border-radius: 12px;
     padding: 22px 26px;
     transition: border-color .3s ease, background-color .3s ease;
   }
@@ -744,7 +547,7 @@
     width: 100%;
     background: rgba(255, 255, 255, .025);
     border: 1px solid var(--line-dark);
-    border-radius: 10px;
+    border-radius: 12px;
     padding: 14px 16px;
     color: #f5f7fb;
     font-family: var(--font-sans);
@@ -845,10 +648,138 @@
   .footer-wordmark .logo-word-a { font-family: var(--font-sans); font-weight: 500; fill: var(--muted-dark); }
   .footer-wordmark .logo-word-nocode { font-family: var(--font-mono); font-weight: 500; fill: var(--indigo-on-dark); }
 
-  .contact-section {
+  .contact-section { overflow: hidden; }
+  .contact-section .wrap { position: relative; z-index: 1; }
+  .contact-section footer { position: relative; z-index: 1; }
+  @media (min-width: 960px) { .contact-section .col { margin: 0 auto; } }
+
+  /* PARALLAX — ambient glow layers drift at a slower rate than scroll,
+     giving the two book-end sections a sense of depth behind the content. */
+  .hero::before, .contact-section::before {
+    content: "";
+    position: absolute;
+    inset: -30% -10%;
+    z-index: 0;
+    pointer-events: none;
+    transform: translate3d(0, var(--orb-y, 0px), 0);
+    will-change: transform;
+  }
+  .hero::before {
+    background-image: radial-gradient(ellipse 70% 60% at 20% 15%, rgba(75, 63, 242, .22) 0%, transparent 65%);
+  }
+  .contact-section::before {
     background-image: radial-gradient(ellipse 70% 60% at 80% 20%, rgba(75, 63, 242, .18) 0%, transparent 65%);
   }
-  @media (min-width: 960px) { .contact-section .col { margin: 0 auto; } }
+  /* Targets the <video> itself, not the .sobre-video wrapper div — the
+     wrapper also carries .reveal-item, whose own transform would otherwise
+     win the cascade (same specificity, later rule) and silently swallow
+     this one. */
+  #sobre-video {
+    transform: translate3d(0, var(--orb-y, 0px), 0);
+    will-change: transform;
+  }
+
+  /* 3D TILT — mockup "screens" and the hero portrait tilt toward the
+     cursor like a physical surface, reinforcing the software/device motif. */
+  [data-tilt] {
+    transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
+    transition: transform .3s cubic-bezier(.2, .8, .2, 1), box-shadow .3s ease;
+    will-change: transform;
+  }
+  /* Plain hover, no transform: any tilt/lift here got clipped by the
+     scroller's overflow:hidden depending on where on the card you
+     hovered, so this is glow-only — guaranteed not to overflow the box. */
+  .faq-card:hover {
+    box-shadow: 0 30px 60px -18px rgba(10, 23, 48, .5);
+    border-color: rgba(155, 143, 255, .45);
+    transition: box-shadow .3s ease, border-color .3s ease;
+  }
+  .guarantee-badge[data-tilt]:hover {
+    box-shadow: 0 30px 60px -18px rgba(75, 63, 242, .3);
+  }
+
+  /* SEAMS — each section bleeds the previous section's color in from its
+     top edge instead of cutting hard from navy to paper, so the page reads
+     as one continuous surface. contact-section already owns ::before for
+     its parallax orb, so it gets a dedicated ::after instead. */
+  .seam-top { position: relative; }
+  .seam-top::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: clamp(70px, 14vw, 180px);
+    background: linear-gradient(to bottom, var(--seam-from, transparent) 0%, transparent 100%);
+    opacity: .32;
+    pointer-events: none;
+    z-index: 0;
+  }
+  /* A light seam bleeding onto a dark section reads as a harsh white smear
+     rather than a soft blend, so dark sections get a much fainter wash. */
+  .on-dark.seam-top::before { opacity: .1; }
+  .seam-top > .wrap { position: relative; z-index: 1; }
+  .contact-section::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: clamp(70px, 14vw, 180px);
+    background: linear-gradient(to bottom, var(--indigo) 0%, transparent 100%);
+    opacity: .3;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* CONNECTOR — a thread running down the left gutter through Sobre → O
+     que eu faço → Como eu trabalho → Ferramentas → Contato, echoing the
+     n8n "connected nodes" motif already used in the workflow mockup. Each
+     section owns its own full-height segment (position:relative on
+     <section> already), so segments never need cross-section height math
+     and still read as one unbroken line since sections abut with no gap.
+     Skipped in the FAQ section: its full-bleed auto-scrolling cards would
+     make the line flicker in and out from behind them. */
+  .connector-seg {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: clamp(14px, 4vw, 40px);
+    width: 2px;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .connector-track {
+    position: absolute;
+    inset: 0;
+    background: rgba(75, 63, 242, .18);
+  }
+  .on-dark .connector-track { background: rgba(155, 143, 255, .18); }
+  .connector-fill {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: calc(var(--fill, 0) * 100%);
+    background: var(--indigo);
+  }
+  .on-dark .connector-fill {
+    background: var(--indigo-on-dark);
+    box-shadow: 0 0 12px rgba(155, 143, 255, .5);
+  }
+  .connector-dot {
+    position: absolute;
+    top: calc(clamp(56px, 11vw, 108px) + 8px);
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--indigo);
+    box-shadow: 0 0 0 4px rgba(75, 63, 242, .15);
+  }
+  .on-dark .connector-dot {
+    background: var(--indigo-on-dark);
+    box-shadow: 0 0 0 4px rgba(155, 143, 255, .18);
+  }
+  /* .strip's own background is solid indigo, so the default indigo track
+     and fill would render invisible against it — needs its own contrast. */
+  .strip .connector-track { background: rgba(255, 255, 255, .25); }
+  .strip .connector-fill { background: #fff; box-shadow: 0 0 12px rgba(255, 255, 255, .5); }
 
   .reveal {
     opacity: 0;
@@ -858,16 +789,24 @@
   .reveal.in { opacity: 1; transform: translateY(0); }
   .reveal-item {
     opacity: 0;
-    transform: translateY(16px) scale(.96) translateX(var(--hx, 0px));
+    transform: perspective(800px) translateY(16px) rotateX(8deg) scale(.96) translateX(var(--hx, 0px));
     transition: opacity .6s ease-out, transform .62s cubic-bezier(.34, 1.56, .64, 1);
   }
-  .reveal-item.in { opacity: 1; transform: translateY(var(--hy, 0px)) scale(1) translateX(var(--hx, 0px)); }
+  .reveal-item.in { opacity: 1; transform: perspective(800px) translateY(var(--hy, 0px)) rotateX(0deg) scale(1) translateX(var(--hx, 0px)); }
+  /* Once revealed, elements that are also tilt targets need the snappier
+     tilt transition (not .reveal-item's bouncy entrance easing) to govern
+     transform/box-shadow, or the cursor-tracking tilt would lag and
+     overshoot. Extra specificity (two classes + attribute) wins outright,
+     no source-order dependency. */
+  .reveal-item.in[data-tilt] {
+    transition: opacity .6s ease-out, transform .3s cubic-bezier(.2, .8, .2, 1), box-shadow .3s ease;
+  }
   @media (prefers-reduced-motion: reduce) {
     .reveal, .reveal-item { opacity: 1; transform: none; transition: none; }
     .hero-cta::before { animation: none; opacity: .7; transform: none; }
     .faq-track { animation: none !important; }
-    .terminal-cursor { animation: none; opacity: .6; }
     .step::after { transition: none; transform: scaleY(1); }
+    .hero::before, .contact-section::before, #sobre-video, [data-tilt] { transform: none !important; transition: none; }
   }
 
 
@@ -875,10 +814,10 @@
 </head>
 <body>
 
-<section class="hero on-dark">
+<section class="hero on-dark" data-parallax="0.32" data-parallax-max="130">
   <div class="wrap">
     <div class="hero-photo-mobile">
-      <img src="images/hero-ana.jpg" alt="Ana Luiza Adinolfi, especialista em automação e IA" width="999" height="1400" loading="eager" decoding="async">
+      <img src="images/hero-ana.jpg" alt="Ana Luiza Di Giacomo, especialista em automação e IA" width="999" height="1400" loading="eager" fetchpriority="high" decoding="async">
     </div>
     <div class="hero-text">
       <div class="hero-intro">
@@ -896,26 +835,27 @@
           </svg>
         </div>
         <p class="eyebrow">n8n · IA · Claude Code — sistemas sob medida</p>
-        <h1 class="name">Ana Luiza Adinolfi</h1>
+        <h1 class="name">Ana Luiza Di Giacomo</h1>
       </div>
       <p class="headline">Eu construo os bastidores que fazem seu negócio <em>rodar sozinho</em>.</p>
       <p class="sub">As tarefas repetitivas do seu negócio passam a acontecer sozinhas — eu desenho e construo o sistema, você só acompanha.</p>
       <a class="btn hero-cta" href="#contact-form">Fale comigo</a>
     </div>
     <div class="hero-terminal">
-      <div class="hero-photo reveal-item">
-        <img src="images/hero-ana.jpg" alt="Ana Luiza Adinolfi, especialista em automação e IA" width="999" height="1400" loading="eager" decoding="async">
+      <div class="hero-photo reveal-item" data-tilt="6">
+        <img src="images/hero-ana.jpg" alt="Ana Luiza Di Giacomo, especialista em automação e IA" width="999" height="1400" loading="eager" fetchpriority="high" decoding="async">
       </div>
     </div>
   </div>
 </section>
 
-<section class="on-light reveal sobre-section">
+<section class="on-light reveal sobre-section seam-top" style="--seam-from:var(--navy)">
+  <div class="connector-seg" aria-hidden="true"><span class="connector-track"></span><span class="connector-fill"></span><span class="connector-dot"></span></div>
   <div class="wrap">
     <h2 class="ref"><span class="rule"></span> Sobre <span class="rule"></span></h2>
     <div class="sobre-grid">
       <div class="sobre-video reveal-item">
-        <video id="sobre-video" src="images/sobre-video.mp4" poster="images/sobre-video-poster.jpg" width="640" height="1138" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <video id="sobre-video" data-parallax="0.2" data-parallax-max="70" src="images/sobre-video.mp4" poster="images/sobre-video-poster.jpg" width="640" height="1138" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
       </div>
       <div class="col sobre-col">
         <p class="lede reveal-item">Eu sou a Ana. Trabalho na fronteira entre <em>automação</em> e <em>inteligência artificial</em>.</p>
@@ -926,179 +866,71 @@
   </div>
 </section>
 
-<section class="on-dark reveal">
+<section class="on-dark reveal section-services seam-top" style="--seam-from:var(--paper)">
+  <div class="connector-seg" aria-hidden="true"><span class="connector-track"></span><span class="connector-fill"></span><span class="connector-dot"></span></div>
   <div class="wrap">
     <h2 class="ref"><span class="rule"></span> O que eu faço <span class="rule"></span></h2>
     <div class="services">
       <div class="service reveal-item">
-        <div class="service-icon">
-          <img src="images/img2.png" alt="" width="52" height="52" loading="lazy" decoding="async">
-          <span class="service-kw">Automação</span>
-        </div>
+        <a class="service-giant" href="#contact-form" data-tilt="8">
+          <img class="service-giant-icon" src="images/img2.png" alt="" width="40" height="40" loading="lazy" decoding="async">
+          <span class="service-giant-word">Automação</span>
+        </a>
         <div>
-          <h3>Processos com n8n</h3>
-          <p>Fluxos que conectam suas ferramentas e eliminam tarefa repetitiva: e-mail, planilha, CRM, WhatsApp, formulário — tudo conversando entre si, sem ninguém copiando e colando nada.</p>
-          <div class="n8n-mock reveal-item">
-            <div class="n8n-topbar">
-              <svg class="n8n-breadcrumb-icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.4"/><path d="M5 20c0-3.6 3.1-6.4 7-6.4s7 2.8 7 6.4"/></svg>
-              <span class="n8n-crumb">Personal</span>
-              <span class="n8n-slash">/</span>
-              <span class="n8n-wf-name">novo-lead-instagram</span>
-              <span class="n8n-spacer"></span>
-              <span class="n8n-publish"><span class="n8n-publish-dot"></span>Publish</span>
-            </div>
-            <div class="n8n-tabs">
-              <span class="n8n-tab n8n-tab-active">Editor</span>
-              <span class="n8n-tab">Executions</span>
-            </div>
-            <div class="flow-body">
-              <svg viewBox="0 0 600 150" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Workflow no n8n: Webhook, IF, CRM e Notify conectados em sequência">
-                <g fill="none" stroke="#3a3a40" stroke-width="1.5">
-                  <path d="M72 50 C 130 50 130 50 189 50"/>
-                  <path d="M241 50 C 300 50 300 50 358 50"/>
-                  <path d="M410 50 C 468 50 468 50 527 50"/>
-                </g>
-
-                <g transform="translate(20,24)">
-                  <rect width="52" height="52" rx="10" fill="#1c1c1f" stroke="#2c2c30"/>
-                  <g transform="translate(19,17)" stroke="#9b8fff" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M7 0 L2 8 H6 L5.5 13 L11 5 H7 Z"/>
-                  </g>
-                  <circle cx="45" cy="8" r="6.5" fill="#1c1c1f"/>
-                  <circle cx="45" cy="8" r="5.5" fill="#9b8fff"/>
-                  <path d="M42.3 8 L44.2 9.9 L47.7 6.1" stroke="#fff" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                  <text x="26" y="70" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="600" fill="#e2e2e4">Webhook</text>
-                  <text x="26" y="82" text-anchor="middle" font-family="Arial, sans-serif" font-size="8.5" fill="#7d7d84">novo lead</text>
-                </g>
-
-                <g transform="translate(189,24)">
-                  <rect width="52" height="52" rx="10" fill="#1c1c1f" stroke="#2c2c30"/>
-                  <g transform="translate(20,18)" stroke="#c9cad0" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M6 0 V6 M6 6 L1 14 M6 6 L11 14"/>
-                  </g>
-                  <circle cx="45" cy="8" r="6.5" fill="#1c1c1f"/>
-                  <circle cx="45" cy="8" r="5.5" fill="#9b8fff"/>
-                  <path d="M42.3 8 L44.2 9.9 L47.7 6.1" stroke="#fff" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                  <text x="26" y="70" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="600" fill="#e2e2e4">IF</text>
-                  <text x="26" y="82" text-anchor="middle" font-family="Arial, sans-serif" font-size="8.5" fill="#7d7d84">qualificado?</text>
-                </g>
-
-                <g transform="translate(358,24)">
-                  <rect width="52" height="52" rx="10" fill="#1c1c1f" stroke="#2c2c30"/>
-                  <g transform="translate(19,19)" stroke="#9b8fff" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <ellipse cx="6" cy="2.5" rx="6" ry="2.5"/>
-                    <path d="M0 2.5 V11 A6 2.5 0 0 0 12 11 V2.5"/>
-                  </g>
-                  <circle cx="45" cy="8" r="6.5" fill="#1c1c1f"/>
-                  <circle cx="45" cy="8" r="5.5" fill="#9b8fff"/>
-                  <path d="M42.3 8 L44.2 9.9 L47.7 6.1" stroke="#fff" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                  <text x="26" y="70" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="600" fill="#e2e2e4">CRM</text>
-                  <text x="26" y="82" text-anchor="middle" font-family="Arial, sans-serif" font-size="8.5" fill="#7d7d84">atualiza dados</text>
-                </g>
-
-                <g transform="translate(527,24)">
-                  <rect width="52" height="52" rx="10" fill="#1c1c1f" stroke="#2c2c30"/>
-                  <g transform="translate(19,20)" stroke="#9b8fff" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="0" y="0" width="14" height="10" rx="2.5"/>
-                    <path d="M3.5 10 L2 13 L6 10"/>
-                  </g>
-                  <circle cx="45" cy="8" r="6.5" fill="#1c1c1f"/>
-                  <circle cx="45" cy="8" r="5.5" fill="#9b8fff"/>
-                  <path d="M42.3 8 L44.2 9.9 L47.7 6.1" stroke="#fff" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                  <text x="26" y="70" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="600" fill="#e2e2e4">Notify</text>
-                  <text x="26" y="82" text-anchor="middle" font-family="Arial, sans-serif" font-size="8.5" fill="#7d7d84">envia WhatsApp</text>
-                </g>
-              </svg>
-            </div>
-            <div class="n8n-execbar">
-              <span class="n8n-exec-btn">▶ Execute workflow</span>
-            </div>
-          </div>
+          <h3>Chega de copiar e colar a mesma informação</h3>
+          <p>Hoje alguém abre o e-mail, cola no CRM, manda a mensagem, atualiza a planilha — sempre na mão, sempre do mesmo jeito. Isso passa a acontecer sozinho: suas ferramentas conversam entre si e ninguém mais perde tempo repetindo a mesma tarefa.</p>
         </div>
       </div>
       <div class="service reveal-item">
-        <div class="service-icon">
-          <img src="images/img3.png" alt="" width="52" height="52" loading="lazy" decoding="async">
-          <span class="service-kw">IA</span>
-        </div>
+        <a class="service-giant" href="#contact-form" data-tilt="8">
+          <img class="service-giant-icon" src="images/img3.png" alt="" width="40" height="40" loading="lazy" decoding="async">
+          <span class="service-giant-word">IA</span>
+        </a>
         <div>
-          <h3>Soluções com inteligência artificial</h3>
-          <p>Agentes e integrações de IA aplicados a um problema real do seu negócio: triagem de atendimento, geração de conteúdo, análise de dados. IA que resolve gargalo, não IA por IA.</p>
-          <div class="claude-mock reveal-item">
-            <div class="claude-topbar">
-              Legendas da semana
-              <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9 L12 15 L18 9"/></svg>
-            </div>
-            <div class="claude-body">
-              <div class="claude-msg-user">cria as legendas dessa semana a partir do calendário de conteúdo</div>
-              <div class="claude-status">Lendo as instruções da skill <b>social-media</b></div>
-              <div class="claude-response">Prontas as 5 legendas da semana, já no seu tom de voz.</div>
-              <div class="claude-icon-row">
-                <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8 V5 A2 2 0 0 0 14 3 H5 A2 2 0 0 0 3 5 V14 A2 2 0 0 0 5 16 H8"/></svg>
-                <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 9 A7.5 7.5 0 1 1 6 15"/><path d="M4 4 V9 H9"/></svg>
-              </div>
-            </div>
-            <div class="claude-inputbar">
-              <span class="claude-input-plus">+</span>
-              <span class="claude-input-placeholder">Escreva uma mensagem...</span>
-              <span class="claude-input-model">Sonnet 5 <svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9 L12 15 L18 9"/></svg></span>
-            </div>
-          </div>
+          <h3>O gargalo que trava seu time todo dia</h3>
+          <p>Atendimento que demora a responder, conteúdo que não sai do papel, decisão tomada no achismo porque falta tempo de olhar os números. Uma IA bem aplicada resolve exatamente esse ponto — não é IA por IA, é IA que tira um peso real das suas costas.</p>
         </div>
       </div>
       <div class="service reveal-item">
-        <div class="service-icon">
-          <img src="images/img4.png" alt="" width="52" height="52" loading="lazy" decoding="async">
-          <span class="service-kw">Consultoria</span>
-        </div>
+        <a class="service-giant" href="#contact-form" data-tilt="8">
+          <img class="service-giant-icon" src="images/img4.png" alt="" width="40" height="40" loading="lazy" decoding="async">
+          <span class="service-giant-word">Consultoria</span>
+        </a>
         <div>
-          <h3>Claude / Claude Code</h3>
-          <p>Apoio para usar Claude e Claude Code de verdade no seu dia a dia — da configuração inicial a fluxos avançados de IA aplicada ao seu trabalho.</p>
-          <div class="terminal terminal-compact reveal-item">
-            <div class="terminal-bar">
-              <span class="terminal-dot terminal-dot-red"></span>
-              <span class="terminal-dot terminal-dot-yellow"></span>
-              <span class="terminal-dot terminal-dot-green"></span>
-              <span class="terminal-title">zsh — claude</span>
-            </div>
-            <div class="terminal-body">
-              <p><span class="t-arrow">❯</span> automatiza a aprovação de orçamento acima de R$5k<span class="terminal-cursor"></span></p>
-              <p class="t-muted">Lendo CLAUDE.md do projeto…</p>
-              <p><span class="t-ok">✓</span> Fluxo de aprovação criado e testado</p>
-              <p class="t-status">Pronto para revisão — <span class="t-accent">2 arquivos alterados</span></p>
-            </div>
-          </div>
+          <h3>Pare de usar IA sem saber se está certo</h3>
+          <p>Você já mexeu no Claude, testou um prompt ou outro, mas não sabe se está aproveitando de verdade. Eu sento com você — do zero ou do fluxo mais avançado — até virar parte real do seu dia a dia, não só mais uma aba aberta.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="on-light reveal">
+<section class="on-light reveal section-process seam-top" style="--seam-from:var(--navy)">
+  <div class="connector-seg" aria-hidden="true"><span class="connector-track"></span><span class="connector-fill"></span><span class="connector-dot"></span></div>
   <div class="wrap">
     <h2 class="ref"><span class="rule"></span> Como eu trabalho <span class="rule"></span></h2>
     <div class="tracks">
       <div>
-        <p class="track-title">Processo — Consultoria</p>
+        <p class="track-title">Processo — <span class="track-title-accent">Consultoria</span></p>
         <ol class="steps">
-          <li class="step reveal-item"><span class="step-num">01</span><div><h3>Nivelamento</h3><p>Conversa inicial pra entender onde você está com IA hoje.</p></div></li>
-          <li class="step reveal-item"><span class="step-num">02</span><div><h3>Trilha sob medida</h3><p>Monto aula por aula, sempre perguntando o que você quer e precisa aprender.</p></div></li>
-          <li class="step reveal-item"><span class="step-num">03</span><div><h3>Acompanhamento</h3><p>Ajusto o conteúdo conforme seu interesse e seu ritmo.</p></div></li>
-          <li class="step reveal-item"><span class="step-num">04</span><div><h3>Cobrança por sessão</h3><p>Você paga por sessão, não um pacote fechado — sem surpresa no meio do caminho.</p></div></li>
+          <li class="step reveal-item"><span class="step-num">01</span><p><strong>Nivelamento.</strong> Conversa inicial pra entender onde você está com IA hoje.</p></li>
+          <li class="step reveal-item"><span class="step-num">02</span><p><strong>Trilha sob medida.</strong> Monto aula por aula, sempre perguntando o que você quer e precisa aprender.</p></li>
+          <li class="step reveal-item"><span class="step-num">03</span><p><strong>Acompanhamento.</strong> Ajusto o conteúdo conforme seu interesse e seu ritmo.</p></li>
+          <li class="step reveal-item"><span class="step-num">04</span><p><strong>Cobrança por sessão.</strong> Você paga por sessão, não um pacote fechado — sem surpresa no meio do caminho.</p></li>
         </ol>
       </div>
       <div>
-        <p class="track-title">Processo — Automação</p>
+        <p class="track-title">Processo — <span class="track-title-accent">Automação</span></p>
         <ol class="steps">
-          <li class="step reveal-item"><span class="step-num">01</span><div><h3>Diagnóstico (sem custo)</h3><p>Conversa pra entender o problema de verdade, sem compromisso de fechar nada.</p></div></li>
-          <li class="step reveal-item"><span class="step-num">02</span><div><h3>Desenho da automação</h3><p>Mostro exatamente como o sistema vai funcionar, com valor e prazo fechados. Nada é construído antes de você aprovar esse desenho.</p></div></li>
-          <li class="step reveal-item"><span class="step-num">03</span><div><h3>Implementação</h3><p>Eu construo o sistema.</p></div></li>
-          <li class="step reveal-item"><span class="step-num">04</span><div><h3>Entrega + garantia</h3><p>Repasso credenciais e dados — o sistema é seu. E você tem 15 dias de ajuste incluído, sem custo extra.</p></div></li>
+          <li class="step reveal-item"><span class="step-num">01</span><p><strong>Diagnóstico (sem custo).</strong> Conversa pra entender o problema de verdade, sem compromisso de fechar nada.</p></li>
+          <li class="step reveal-item"><span class="step-num">02</span><p><strong>Desenho da automação.</strong> Mostro exatamente como o sistema vai funcionar, com valor e prazo fechados. Nada é construído antes de você aprovar esse desenho.</p></li>
+          <li class="step reveal-item"><span class="step-num">03</span><p><strong>Implementação.</strong> Eu construo o sistema.</p></li>
+          <li class="step reveal-item"><span class="step-num">04</span><p><strong>Entrega + garantia.</strong> Repasso credenciais e dados — o sistema é seu. E você tem 15 dias de ajuste incluído, sem custo extra.</p></li>
         </ol>
       </div>
     </div>
 
-    <div class="guarantee-badge reveal-item">
+    <div class="guarantee-badge reveal-item" data-tilt="5">
       <span class="shield">
         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 L19 6 V11 C19 16 16 19.5 12 21 C8 19.5 5 16 5 11 V6 Z"/><path d="M9 12 L11 14 L15 9.5"/></svg>
       </span>
@@ -1112,7 +944,7 @@
 
 <!-- Quando houver depoimentos reais, uma seção de prova social entra aqui, entre "Como eu trabalho" e "Perguntas frequentes". Não preencher com nada fictício até lá. -->
 
-<section class="on-dark reveal faq-section">
+<section class="on-dark reveal faq-section seam-top" style="--seam-from:var(--paper)">
   <div class="wrap">
     <h2 class="ref"><span class="rule"></span> Perguntas frequentes <span class="rule"></span></h2>
 
@@ -1229,7 +1061,8 @@
   </div>
 </section>
 
-<section class="strip">
+<section class="strip seam-top" style="--seam-from:var(--navy)">
+  <div class="connector-seg connector-seg-nodot" aria-hidden="true"><span class="connector-track"></span><span class="connector-fill"></span></div>
   <div class="wrap">
     <span class="strip-label">Ferramentas</span>
     <div class="tools-row">
@@ -1240,7 +1073,8 @@
   </div>
 </section>
 
-<section class="on-dark reveal contact-section">
+<section class="on-dark reveal contact-section" data-parallax="0.32" data-parallax-max="130">
+  <div class="connector-seg" aria-hidden="true"><span class="connector-track"></span><span class="connector-fill"></span><span class="connector-dot"></span></div>
   <div class="wrap">
     <h2 class="ref"><span class="rule"></span> Contato <span class="rule"></span></h2>
     <div class="col">
@@ -1248,7 +1082,7 @@
       <p class="contact-sub">É o primeiro passo pro seu diagnóstico gratuito. Sem custo, sem compromisso — e com 15 dias de ajuste incluído quando o projeto sair do papel.</p>
 
       <form class="contact-form-card" id="contact-form" action="https://formsubmit.co/aladigiacomo@gmail.com" method="POST">
-        <input type="hidden" name="_subject" value="Novo contato — site Ana Luiza Adinolfi">
+        <input type="hidden" name="_subject" value="Novo contato — site Ana Luiza Di Giacomo">
         <input type="hidden" name="_captcha" value="false">
         <input type="hidden" name="_next" value="https://aladigiacomo-cyber.github.io/#contact-form">
         <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
@@ -1487,6 +1321,93 @@
   })();
 
   (function () {
+    // Ambient glow layers behind the hero and contact sections drift at a
+    // fraction of scroll speed (classic parallax), and the "sobre" video
+    // rides along too — reused via the same --orb-y custom property so one
+    // rAF loop drives all three. Intensity is per-element (data-parallax)
+    // so the background glows can travel further than the video without
+    // it looking like it's escaping its section.
+    if (!window.matchMedia || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    var orbEls = document.querySelectorAll('[data-parallax]');
+    if (!orbEls.length) return;
+    var ticking = false;
+    function update() {
+      var vh = window.innerHeight;
+      orbEls.forEach(function (el) {
+        var factor = parseFloat(el.getAttribute('data-parallax')) || 0.2;
+        var max = parseFloat(el.getAttribute('data-parallax-max')) || 120;
+        var r = el.getBoundingClientRect();
+        var center = r.top + r.height / 2;
+        var offset = Math.max(-max, Math.min(max, (center - vh / 2) * factor));
+        el.style.setProperty('--orb-y', offset.toFixed(1) + 'px');
+      });
+      ticking = false;
+    }
+    window.addEventListener('scroll', function () {
+      if (!ticking) { requestAnimationFrame(update); ticking = true; }
+    }, { passive: true });
+    update();
+  })();
+
+  (function () {
+    // Lights up each connector segment in step with how far the user has
+    // scrolled through its own section — the thread "fills in" as you move
+    // through the page instead of just sitting there static.
+    if (!window.matchMedia || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    var segs = document.querySelectorAll('.connector-seg');
+    if (!segs.length) return;
+    var ticking = false;
+    function update() {
+      var vh = window.innerHeight;
+      segs.forEach(function (seg) {
+        var r = seg.getBoundingClientRect();
+        var progress = r.height > 0 ? (vh * 0.55 - r.top) / r.height : 0;
+        progress = Math.max(0, Math.min(1, progress));
+        seg.style.setProperty('--fill', progress.toFixed(3));
+      });
+      ticking = false;
+    }
+    function requestUpdate() {
+      if (!ticking) { requestAnimationFrame(update); ticking = true; }
+    }
+    window.addEventListener('scroll', requestUpdate, { passive: true });
+    window.addEventListener('resize', requestUpdate, { passive: true });
+    update();
+  })();
+
+  (function () {
+    // 3D tilt on the hero portrait, the software mockups and the guarantee
+    // badge: rotate + lift toward the cursor, like a physical surface
+    // catching light. Desktop-with-a-mouse only, matching the
+    // magnetic-button guard. (FAQ cards used to carry this too, but they
+    // sit inside an overflow:hidden marquee track and kept getting clipped
+    // depending on where on the card you hovered, so they were dropped to
+    // a plain glow-only hover instead — see .faq-card:hover.)
+    try {
+      if (!window.matchMedia) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+      document.querySelectorAll('[data-tilt]').forEach(function (card) {
+        var max = parseFloat(card.getAttribute('data-tilt')) || 8;
+        card.addEventListener('mousemove', function (e) {
+          var r = card.getBoundingClientRect();
+          var px = (e.clientX - r.left) / r.width;
+          var py = (e.clientY - r.top) / r.height;
+          var ry = (px - 0.5) * max * 2;
+          var rx = (0.5 - py) * max * 2;
+          card.style.transform = 'perspective(1000px) rotateX(' + rx.toFixed(2) + 'deg) rotateY(' + ry.toFixed(2) + 'deg) translateY(-6px) scale3d(1.025,1.025,1.025)';
+        });
+        card.addEventListener('mouseleave', function () {
+          card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px) scale3d(1,1,1)';
+        });
+      });
+    } catch (e) {}
+  })();
+
+  (function () {
     var cta = document.getElementById('floating-cta');
     var hero = document.querySelector('.hero');
     var form = document.getElementById('contact-form');
@@ -1539,33 +1460,61 @@
       var paused = false;
       var lastTs = null;
 
+      // A marquee that spins forever from page load — even while off
+      // screen — reads as restless rather than alive. It only starts once
+      // scrolled into view, and settles into a static, readable position
+      // after ~1.5 loops unless the visitor has actually engaged with it
+      // (touched or hovered), in which case it keeps running for them.
+      var userInteracted = false;
+      var distanceTraveled = 0;
+      var MAX_AUTO_LOOPS = 1.5;
+
       function frame(ts) {
         if (lastTs === null) lastTs = ts;
         var dt = ts - lastTs;
         lastTs = ts;
         if (!paused && loopWidth > 0) {
-          offset += reverse ? speed * dt : -speed * dt;
-          if (offset <= -loopWidth) offset += loopWidth;
-          if (offset >= 0) offset -= loopWidth;
-          track.style.transform = 'translateX(' + offset + 'px)';
+          var delta = speed * dt;
+          distanceTraveled += delta;
+          if (!userInteracted && distanceTraveled >= loopWidth * MAX_AUTO_LOOPS) {
+            paused = true;
+          } else {
+            offset += reverse ? delta : -delta;
+            if (offset <= -loopWidth) offset += loopWidth;
+            if (offset >= 0) offset -= loopWidth;
+            track.style.transform = 'translateX(' + offset + 'px)';
+          }
         }
         requestAnimationFrame(frame);
       }
-      requestAnimationFrame(frame);
+
+      if ('IntersectionObserver' in window) {
+        var startIo = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              requestAnimationFrame(frame);
+              startIo.disconnect();
+            }
+          });
+        }, { threshold: 0.15 });
+        startIo.observe(scroller);
+      } else {
+        requestAnimationFrame(frame);
+      }
 
       // Tap toggles pause/resume directly — no timer. A tap while running
       // pauses it so it can be read; a tap while paused sends it running
       // again. (An earlier "auto-resume after 6s" version meant a second
       // tap — the natural thing to do when checking if it "came back" —
       // just re-armed the same 6s pause instead of resuming anything.)
-      scroller.addEventListener('touchstart', function () { paused = !paused; }, { passive: true });
+      scroller.addEventListener('touchstart', function () { userInteracted = true; paused = !paused; }, { passive: true });
 
       // Only real mouse/trackpad devices get hover-to-pause. iOS Safari
       // fires a synthetic mouseenter after a tap on a plain (non-link,
       // non-button) element like this one, with no real pointer to send a
       // matching mouseleave — so this must stay out of touch devices' way.
       if (window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-        scroller.addEventListener('mouseenter', function () { paused = true; });
+        scroller.addEventListener('mouseenter', function () { userInteracted = true; paused = true; });
         scroller.addEventListener('mouseleave', function () { paused = false; });
       }
     });
@@ -1590,19 +1539,25 @@
       if (!hero || !heroText || !heroTerm) return;
       if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
+      // No mouse parallax and no 3D depth here anymore — a plain, very
+      // visible scroll transition instead: the text and the portrait slide
+      // toward each other's side of the screen and cross paths as you
+      // scroll past the hero.
       var ticking = false;
       function update() {
         var y = window.scrollY || window.pageYOffset;
         var progress = Math.min(Math.max(y / hero.offsetHeight, 0), 1);
-        heroText.style.transform = 'translate3d(0,' + (progress * 34).toFixed(1) + 'px,0)';
-        heroText.style.opacity = String(1 - progress * 0.95);
-        heroTerm.style.transform = 'translate3d(0,' + (progress * -20).toFixed(1) + 'px,0)';
-        heroTerm.style.opacity = String(1 - progress * 0.75);
+        var travel = Math.min(window.innerWidth * 0.7, 820);
+        heroText.style.transform = 'translate3d(' + (progress * travel).toFixed(1) + 'px,0,0)';
+        heroText.style.opacity = String(1 - progress);
+        heroTerm.style.transform = 'translate3d(' + (progress * -travel).toFixed(1) + 'px,0,0)';
+        heroTerm.style.opacity = String(1 - progress);
         ticking = false;
       }
-      window.addEventListener('scroll', function () {
+      function requestUpdate() {
         if (!ticking) { requestAnimationFrame(update); ticking = true; }
-      }, { passive: true });
+      }
+      window.addEventListener('scroll', requestUpdate, { passive: true });
       update();
     } catch (e) {}
   })();
