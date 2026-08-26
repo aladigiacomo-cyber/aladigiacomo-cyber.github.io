@@ -647,6 +647,18 @@
   .footer-wordmark { height: 17px; width: auto; opacity: 1; text-transform: none; }
   .footer-wordmark .logo-word-a { font-family: var(--font-sans); font-weight: 500; fill: var(--muted-dark); }
   .footer-wordmark .logo-word-nocode { font-family: var(--font-mono); font-weight: 500; fill: var(--indigo-on-dark); }
+  .footer-link {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--muted-dark);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color .18s ease;
+  }
+  .footer-link:hover { color: var(--indigo-on-dark); }
 
   .contact-section { overflow: hidden; }
   .contact-section .wrap { position: relative; z-index: 1; }
@@ -1066,9 +1078,9 @@
   <div class="wrap">
     <span class="strip-label">Ferramentas</span>
     <div class="tools-row">
-      <span class="tool-tag reveal-item">n8n</span>
-      <span class="tool-tag reveal-item">Claude / Claude Code</span>
-      <span class="tool-tag reveal-item">APIs &amp; integrações customizadas</span>
+      <span class="tool-tag">n8n</span>
+      <span class="tool-tag">Claude / Claude Code</span>
+      <span class="tool-tag">APIs &amp; integrações customizadas</span>
     </div>
   </div>
 </section>
@@ -1083,7 +1095,7 @@
 
       <form class="contact-form-card" id="contact-form" action="https://formsubmit.co/aladigiacomo@gmail.com" method="POST">
         <input type="hidden" name="_subject" value="Novo contato — site Ana Luiza Di Giacomo">
-        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_captcha" value="true">
         <input type="hidden" name="_next" value="https://aladigiacomo-cyber.github.io/#contact-form">
         <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
         <div class="form-row two">
@@ -1155,6 +1167,7 @@
       </svg>
       &middot; 2026 &middot; Automação &amp; IA
     </p>
+    <a class="footer-link" href="privacidade.html">Política de Privacidade</a>
   </footer>
 </section>
 
