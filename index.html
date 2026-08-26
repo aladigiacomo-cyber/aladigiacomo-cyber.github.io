@@ -506,6 +506,95 @@
   .guarantee-badge p { margin: 0; font-size: 14.5px; color: var(--muted-light); }
 
   /* FERRAMENTAS strip */
+  /* DEPOIMENTO — full-bleed indigo, sitting between "Como eu trabalho" and
+     the FAQ. Deliberately neither .on-light nor .on-dark: the page
+     alternates paper/navy, so a paper section here would abut the light
+     process section and a navy one would melt into the FAQ. A third
+     surface makes the one piece of social proof its own beat. The cost is
+     that the ground is now the same indigo the connector and .ref paint
+     themselves in, so both need white-on-indigo overrides (same problem
+     .strip already had). */
+  .testimonial-section { background: var(--indigo); color: #fff; }
+  .testimonial-section .ref { color: rgba(255, 255, 255, .78); }
+  /* Paper bleeding onto saturated indigo at the default .32 washes the top
+     of the section out, the same smear .on-dark guards against. */
+  .testimonial-section.seam-top::before { opacity: .12; }
+
+  .testimonial { margin: 0; display: grid; gap: clamp(24px, 4vw, 40px); align-content: start; }
+  /* Desktop puts the pulled sentence and the attribution in one column and
+     the full quote in the other. The attribution has to sit right under the
+     pulled sentence, not float at the bottom of the taller column — hence
+     the empty 1fr third row: the full text spans all three, so the slack it
+     brings is absorbed there instead of being shared out across the rows
+     the attribution lives in. */
+  @media (min-width: 900px) {
+    .testimonial {
+      grid-template-columns: 1.05fr 1fr;
+      grid-template-rows: auto auto 1fr;
+      column-gap: clamp(40px, 6vw, 80px);
+      row-gap: clamp(26px, 3.5vw, 38px);
+      align-items: start;
+    }
+    .testimonial-quote { grid-column: 1; grid-row: 1; }
+    .testimonial-cite  { grid-column: 1; grid-row: 2; }
+    .testimonial-body  { grid-column: 2; grid-row: 1 / span 3; }
+    .testimonial-body p { max-width: 46ch; }
+  }
+
+  .testimonial-quote { margin: 0; }
+  .testimonial-mark {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: clamp(46px, 7.5vw, 72px);
+    font-weight: 700;
+    line-height: .75;
+    color: rgba(255, 255, 255, .38);
+  }
+  .testimonial-pull {
+    margin: clamp(10px, 1.6vw, 16px) 0 0;
+    font-size: clamp(24px, 3.6vw, 36px);
+    font-weight: 700;
+    line-height: 1.32;
+    letter-spacing: -0.015em;
+  }
+
+  .testimonial-body p {
+    margin: 0 0 14px;
+    /* Stacked, the quote has the full column to itself, so it only needs a
+       readable measure; the tighter 46ch below is for when it is sharing
+       the row with the pulled sentence. */
+    max-width: 64ch;
+    font-size: clamp(15px, 1.4vw, 16.5px);
+    line-height: 1.72;
+    color: rgba(255, 255, 255, .82);
+  }
+  .testimonial-body p:last-child { margin-bottom: 0; }
+  /* The pulled sentence still sits in its original place in the full text;
+     lifting it to solid white makes the repeat read as deliberate. */
+  .testimonial-body em { font-style: normal; font-weight: 600; color: #fff; }
+
+  .testimonial-cite {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .04em;
+  }
+  .testimonial-cite cite { font-style: normal; }
+  .testimonial-cite::before {
+    content: "";
+    flex: none;
+    width: clamp(24px, 4vw, 40px);
+    height: 1px;
+    background: rgba(255, 255, 255, .5);
+  }
+  .testimonial-section .connector-dot {
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, .22);
+  }
+
   .strip { background: var(--indigo); color: #fff; }
   .strip .wrap { padding: clamp(30px, 5vw, 44px) var(--pad); display: flex; flex-direction: column; align-items: center; text-align: center; gap: 12px; }
   @media (min-width: 960px) { .strip .wrap { flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 18px 28px; } }
@@ -741,7 +830,8 @@
   }
 
   /* CONNECTOR — a thread running down the left gutter through Sobre → O
-     que eu faço → Como eu trabalho → Ferramentas → Contato, echoing the
+     que eu faço → Como eu trabalho → Depoimento → Ferramentas → Contato,
+     echoing the
      n8n "connected nodes" motif already used in the workflow mockup. Each
      section owns its own full-height segment (position:relative on
      <section> already), so segments never need cross-section height math
@@ -788,10 +878,13 @@
     background: var(--indigo-on-dark);
     box-shadow: 0 0 0 4px rgba(155, 143, 255, .18);
   }
-  /* .strip's own background is solid indigo, so the default indigo track
-     and fill would render invisible against it — needs its own contrast. */
-  .strip .connector-track { background: rgba(255, 255, 255, .25); }
-  .strip .connector-fill { background: #fff; box-shadow: 0 0 12px rgba(255, 255, 255, .5); }
+  /* .strip and .testimonial-section are both solid indigo, so the default
+     indigo track and fill render invisible against them — they need their
+     own contrast. */
+  .strip .connector-track,
+  .testimonial-section .connector-track { background: rgba(255, 255, 255, .25); }
+  .strip .connector-fill,
+  .testimonial-section .connector-fill { background: #fff; box-shadow: 0 0 12px rgba(255, 255, 255, .5); }
 
   .reveal {
     opacity: 0;
@@ -954,9 +1047,26 @@
   </div>
 </section>
 
-<!-- Quando houver depoimentos reais, uma seção de prova social entra aqui, entre "Como eu trabalho" e "Perguntas frequentes". Não preencher com nada fictício até lá. -->
+<section class="testimonial-section reveal seam-top" style="--seam-from:var(--paper)">
+  <div class="connector-seg" aria-hidden="true"><span class="connector-track"></span><span class="connector-fill"></span><span class="connector-dot"></span></div>
+  <div class="wrap">
+    <h2 class="ref"><span class="rule"></span> Depoimento <span class="rule"></span></h2>
+    <figure class="testimonial">
+      <blockquote class="testimonial-quote reveal-item">
+        <span class="testimonial-mark" aria-hidden="true">&ldquo;</span>
+        <p class="testimonial-pull">Hoje uso essas ferramentas diariamente, com naturalidade e confiança.</p>
+      </blockquote>
+      <div class="testimonial-body reveal-item">
+        <p>Tive a sorte de contar com o apoio da Ana Luiza em minha jornada com IA e esse suporte foi fundamental para eu dar os primeiros passos nesse universo. Antes de nossas sessões, IA parecia um tema complexo que me deixava muito inseguro. A forma didática e paciente com que a Ana Luiza conduziu as sessões me ajudou a romper essa barreira do desconhecido e a enxergar, na prática, como essas ferramentas podem agregar valor real ao trabalho.</p>
+        <p>Mais do que ensinar comandos e funcionalidades, ela se preocupou em mostrar como incorporar IA de forma consistente na rotina de forma responsável e segura — e isso fez toda diferença: <em>hoje uso essas ferramentas diariamente, com naturalidade e confiança.</em></p>
+        <p>Recomendo a Ana Luiza sem hesitar para qualquer iniciativa de capacitação em IA. Ela combina domínio técnico, didática e uma visão responsável sobre o uso da tecnologia — uma combinação rara e valiosa.</p>
+      </div>
+      <figcaption class="testimonial-cite reveal-item"><cite>Luiz Gustavo Ferreira</cite></figcaption>
+    </figure>
+  </div>
+</section>
 
-<section class="on-dark reveal faq-section seam-top" style="--seam-from:var(--paper)">
+<section class="on-dark reveal faq-section seam-top" style="--seam-from:var(--indigo)">
   <div class="wrap">
     <h2 class="ref"><span class="rule"></span> Perguntas frequentes <span class="rule"></span></h2>
 
