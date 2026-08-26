@@ -506,20 +506,16 @@
   .guarantee-badge p { margin: 0; font-size: 14.5px; color: var(--muted-light); }
 
   /* FERRAMENTAS strip */
-  /* DEPOIMENTO — full-bleed indigo, sitting between "Como eu trabalho" and
-     the FAQ. Deliberately neither .on-light nor .on-dark: the page
-     alternates paper/navy, so a paper section here would abut the light
-     process section and a navy one would melt into the FAQ. A third
-     surface makes the one piece of social proof its own beat. The cost is
-     that the ground is now the same indigo the connector and .ref paint
-     themselves in, so both need white-on-indigo overrides (same problem
-     .strip already had). */
-  .testimonial-section { background: var(--indigo); color: #fff; }
-  .testimonial-section .ref { color: rgba(255, 255, 255, .78); }
-  /* Paper bleeding onto saturated indigo at the default .32 washes the top
-     of the section out, the same smear .on-dark guards against. */
-  .testimonial-section.seam-top::before { opacity: .12; }
-
+  /* DEPOIMENTO — sits between "Como eu trabalho" and the FAQ. This was a
+     full-bleed indigo band at first, to give the one piece of social proof
+     its own surface in a page that otherwise alternates paper/navy; that
+     read as far too much saturated colour across a whole section, so the
+     accent is now confined to a card and the section itself is plain
+     .on-light. The card deliberately reuses .guarantee-badge's tint and
+     border rather than inventing a second card language — that badge sits
+     in the section directly above this one. Consequence: two light
+     sections now run back to back, so there is no colour change to blend
+     and the section carries no .seam-top. */
   .testimonial { margin: 0; display: grid; gap: clamp(24px, 4vw, 40px); align-content: start; }
   /* Desktop puts the pulled sentence and the attribution in one column and
      the full quote in the other. The attribution has to sit right under the
@@ -541,6 +537,22 @@
     .testimonial-body p { max-width: 46ch; }
   }
 
+  /* This section follows another light one, so the pair would otherwise
+     stack two full section paddings and open a gap twice as wide as any
+     other transition on the page. Drop this one's top padding — but zero
+     the heading's UA top margin at the same time, or with no padding left
+     to contain it that margin collapses out through the section and shows
+     the navy body behind it as a stripe. */
+  .testimonial-section > .wrap { padding-top: 0; }
+  .testimonial-section .ref { margin-top: 0; }
+
+  .testimonial-section .testimonial {
+    background: rgba(75, 63, 242, .06);
+    border: 1px solid rgba(75, 63, 242, .22);
+    border-radius: 20px;
+    padding: clamp(24px, 4.2vw, 56px);
+  }
+
   .testimonial-quote { margin: 0; }
   .testimonial-mark {
     display: block;
@@ -548,7 +560,12 @@
     font-size: clamp(46px, 7.5vw, 72px);
     font-weight: 700;
     line-height: .75;
-    color: rgba(255, 255, 255, .38);
+    color: rgba(75, 63, 242, .34);
+  }
+  /* .on-light p greys every paragraph in a light section, and the pulled
+     sentence is a <p>. Scoping by the section outweighs that rule. */
+  .testimonial-section .testimonial-pull {
+    color: var(--ink);
   }
   .testimonial-pull {
     margin: clamp(10px, 1.6vw, 16px) 0 0;
@@ -566,12 +583,12 @@
     max-width: 64ch;
     font-size: clamp(15px, 1.4vw, 16.5px);
     line-height: 1.72;
-    color: rgba(255, 255, 255, .82);
+    color: var(--muted-light);
   }
   .testimonial-body p:last-child { margin-bottom: 0; }
   /* The pulled sentence still sits in its original place in the full text;
-     lifting it to solid white makes the repeat read as deliberate. */
-  .testimonial-body em { font-style: normal; font-weight: 600; color: #fff; }
+     lifting it to full-strength ink makes the repeat read as deliberate. */
+  .testimonial-body em { font-style: normal; font-weight: 600; color: var(--ink); }
 
   .testimonial-cite {
     display: flex;
@@ -588,11 +605,7 @@
     flex: none;
     width: clamp(24px, 4vw, 40px);
     height: 1px;
-    background: rgba(255, 255, 255, .5);
-  }
-  .testimonial-section .connector-dot {
-    background: #fff;
-    box-shadow: 0 0 0 4px rgba(255, 255, 255, .22);
+    background: rgba(14, 24, 48, .3);
   }
 
   .strip { background: var(--indigo); color: #fff; }
@@ -878,13 +891,10 @@
     background: var(--indigo-on-dark);
     box-shadow: 0 0 0 4px rgba(155, 143, 255, .18);
   }
-  /* .strip and .testimonial-section are both solid indigo, so the default
-     indigo track and fill render invisible against them — they need their
-     own contrast. */
-  .strip .connector-track,
-  .testimonial-section .connector-track { background: rgba(255, 255, 255, .25); }
-  .strip .connector-fill,
-  .testimonial-section .connector-fill { background: #fff; box-shadow: 0 0 12px rgba(255, 255, 255, .5); }
+  /* .strip's own background is solid indigo, so the default indigo track
+     and fill would render invisible against it — needs its own contrast. */
+  .strip .connector-track { background: rgba(255, 255, 255, .25); }
+  .strip .connector-fill { background: #fff; box-shadow: 0 0 12px rgba(255, 255, 255, .5); }
 
   .reveal {
     opacity: 0;
@@ -1047,7 +1057,7 @@
   </div>
 </section>
 
-<section class="testimonial-section reveal seam-top" style="--seam-from:var(--paper)">
+<section class="on-light reveal testimonial-section">
   <div class="connector-seg" aria-hidden="true"><span class="connector-track"></span><span class="connector-fill"></span><span class="connector-dot"></span></div>
   <div class="wrap">
     <h2 class="ref"><span class="rule"></span> Depoimento <span class="rule"></span></h2>
@@ -1066,7 +1076,7 @@
   </div>
 </section>
 
-<section class="on-dark reveal faq-section seam-top" style="--seam-from:var(--indigo)">
+<section class="on-dark reveal faq-section seam-top" style="--seam-from:var(--paper)">
   <div class="wrap">
     <h2 class="ref"><span class="rule"></span> Perguntas frequentes <span class="rule"></span></h2>
 
