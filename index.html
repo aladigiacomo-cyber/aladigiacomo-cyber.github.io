@@ -57,6 +57,7 @@
     --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Menlo, Consolas, monospace;
 
     --measure: 800px;
+    --wrap: 1160px;
     --pad: clamp(22px, 6vw, 64px);
   }
 
@@ -76,7 +77,11 @@
   a:focus-visible, button:focus-visible { outline: 2px solid var(--indigo-on-dark); outline-offset: 3px; }
 
   section { position: relative; }
-  .wrap { max-width: 1160px; margin: 0 auto; padding: clamp(56px, 11vw, 108px) var(--pad); }
+  .wrap { max-width: var(--wrap); margin: 0 auto; padding: clamp(56px, 11vw, 108px) var(--pad); }
+  /* Above ~1600px a fixed 1160px column left the page reading as a small
+     island in a large empty field. Widening the token (rather than any one
+     section) keeps every section and the connector thread in step. */
+  @media (min-width: 1600px) { :root { --wrap: 1280px; } }
   .col { max-width: var(--measure); }
 
   .on-dark { background: var(--navy); color: #f5f7fb; }
@@ -114,12 +119,24 @@
     text-align: left;
   }
   @media (min-width: 960px) {
-    .hero .wrap { grid-template-columns: 1.05fr 1fr; gap: clamp(40px, 6vw, 64px); align-items: center; }
+    /* The hero owns the whole first screen. Without this it stopped at its
+       content height (~790px), so on any monitor taller than that the next
+       section's light edge peeked in at the bottom — which reads as a
+       mis-crop, not a decision. */
+    .hero { min-height: 100vh; display: grid; align-content: center; }
+    .hero .wrap { grid-template-columns: 1.05fr 1fr; gap: clamp(40px, 5vw, 72px); align-items: center; }
   }
   .hero-text { min-width: 0; }
   .hero-terminal { min-width: 0; }
   .hero-photo {
-    max-width: 420px;
+    /* Fades on the left AND the bottom, so the portrait dissolves into the
+       navy instead of sitting there as a rectangle with three hard edges.
+       The vignette pseudo-element has to carry the same mask, or it would
+       redraw the very rectangle the image just got rid of. */
+    --photo-mask:
+      linear-gradient(to right, transparent 0%, #000 34%, #000 92%, transparent 100%),
+      linear-gradient(to bottom, transparent 0%, #000 14%, #000 58%, transparent 100%);
+    max-width: clamp(360px, 33vw, 480px);
     position: relative;
   }
   @media (min-width: 960px) { .hero-photo { margin-left: auto; } }
@@ -127,14 +144,21 @@
     display: block;
     width: 100%;
     height: auto;
-    -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 32%);
-    mask-image: linear-gradient(to right, transparent 0%, #000 32%);
+  }
+  .hero-photo img, .hero-photo::after {
+    -webkit-mask-image: var(--photo-mask);
+    mask-image: var(--photo-mask);
+    -webkit-mask-composite: source-in;
+    mask-composite: intersect;
   }
   .hero-photo::after {
     content: "";
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse 100% 100% at 50% 40%, transparent 72%, rgba(10, 23, 48, .22) 100%);
+    /* Knocks the bright brick wall back so it stops out-shouting the copy. */
+    background:
+      radial-gradient(ellipse 100% 100% at 50% 38%, transparent 55%, rgba(10, 23, 48, .42) 100%),
+      linear-gradient(to bottom, rgba(10, 23, 48, .18) 0%, rgba(10, 23, 48, 0) 34%);
     pointer-events: none;
   }
   .hero-photo-mobile { display: none; }
@@ -145,44 +169,46 @@
     letter-spacing: .16em;
     text-transform: uppercase;
     color: var(--indigo-on-dark);
-    margin: 0 0 24px;
+    margin: 30px 0 14px;
   }
 
-  .hero-logo { margin: 0 0 28px; }
+  .hero-logo { margin: 0; }
   .hero-logo svg { height: clamp(46px, 8vw, 62px); width: auto; }
   .hero-logo .logo-a-paper { stroke: #F5F4F0; }
   .hero-logo .logo-a-indigo { stroke: #4B3FF2; stroke-opacity: .88; }
   .hero-logo .logo-word-a { font-family: var(--font-sans); font-weight: 500; fill: #F5F4F0; }
   .hero-logo .logo-word-nocode { font-family: var(--font-mono); font-weight: 500; fill: var(--indigo-on-dark); }
+  /* Signature, not headline. On a services page the promise has to be the
+     biggest thing on screen and the name reads as the byline under the
+     logo — it used to be the other way round, so the first thing a visitor
+     took in was who she is rather than what she does. */
   .name {
     font-family: var(--font-mono);
-    font-weight: 800;
-    font-size: clamp(24px, 4.4vw, 44px);
-    letter-spacing: -0.02em;
-    line-height: 1.05;
-    margin: 0 0 20px;
+    font-weight: 600;
+    font-size: clamp(14px, 1.25vw, 17px);
+    letter-spacing: .05em;
+    line-height: 1.3;
+    margin: 8px 0 0;
     white-space: nowrap;
-  }
-  @media (min-width: 960px) {
-    .name { font-size: clamp(24px, 2.6vw, 36px); }
+    color: rgba(245, 247, 251, .78);
   }
   .name em { font-style: normal; color: var(--indigo-on-dark); }
   .headline {
     font-family: var(--font-mono);
     font-weight: 700;
-    font-size: clamp(19px, 2.6vw, 24px);
-    line-height: 1.45;
-    letter-spacing: -0.01em;
-    margin: 0 0 22px;
+    font-size: clamp(21px, 2.4vw, 34px);
+    line-height: 1.28;
+    letter-spacing: -0.022em;
+    margin: 0 0 26px;
     text-wrap: balance;
     color: #f5f7fb;
   }
   .headline em { font-style: normal; color: var(--indigo-on-dark); }
   .sub {
-    font-size: clamp(16px, 1.6vw, 17.5px);
-    line-height: 1.65;
+    font-size: clamp(16px, 1.5vw, 18px);
+    line-height: 1.7;
     color: var(--muted-dark);
-    max-width: 480px;
+    max-width: 520px;
     text-wrap: balance;
     margin: 0 0 36px;
   }
@@ -227,7 +253,11 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(to bottom, rgba(10, 23, 48, .82) 0%, rgba(10, 23, 48, .45) 26%, rgba(10, 23, 48, 0) 52%);
+      /* Second layer dissolves the bottom edge into the navy below it —
+         without it the full-bleed photo ends on a hard horizontal cut. */
+      background:
+        linear-gradient(to bottom, rgba(10, 23, 48, .84) 0%, rgba(10, 23, 48, .52) 30%, rgba(10, 23, 48, 0) 56%),
+        linear-gradient(to top, var(--navy) 0%, rgba(10, 23, 48, 0) 20%);
       pointer-events: none;
     }
     .hero-intro {
@@ -242,9 +272,9 @@
       filter: drop-shadow(0 2px 8px rgba(10, 23, 48, .85));
     }
     .hero-logo svg { height: 40px; }
-    .eyebrow { margin: 10px 0 0; font-size: 9px; text-shadow: 0 2px 10px rgba(10, 23, 48, .85); }
-    .name { font-size: clamp(19px, 7vw, 24px); margin: 6px 0 0; white-space: normal; text-shadow: 0 2px 10px rgba(10, 23, 48, .85); }
-    .headline { grid-area: headline; margin: 22px 0 0; font-size: 17px; }
+    .eyebrow { margin: 12px 0 0; font-size: 9.5px; text-shadow: 0 2px 10px rgba(10, 23, 48, .85); }
+    .name { font-size: 13px; margin: 6px 0 0; white-space: normal; letter-spacing: .06em; text-shadow: 0 2px 10px rgba(10, 23, 48, .85); }
+    .headline { grid-area: headline; margin: 26px 0 0; font-size: clamp(19px, 5.4vw, 24px); line-height: 1.32; }
     .sub { grid-area: sub; margin: 22px 0 20px; }
     .hero-cta { grid-area: cta; justify-self: center; }
   }
@@ -304,25 +334,49 @@
   @media (max-width: 480px) { .floating-cta { right: 14px; bottom: 14px; padding: 14px 18px; font-size: 14px; } }
 
   /* SOBRE */
-  .sobre-grid { display: grid; gap: clamp(32px, 5vw, 64px); align-items: center; }
+  .sobre-grid { display: grid; gap: clamp(28px, 4vw, 56px); align-items: center; }
   .sobre-grid .sobre-col { order: -1; }
   @media (min-width: 760px) {
-    .sobre-grid { grid-template-columns: 1fr 1.2fr; }
+    .sobre-grid { grid-template-columns: 0.9fr 1.1fr; }
     .sobre-grid .sobre-col { order: 0; }
     .sobre-video video {
-      -webkit-mask-image: linear-gradient(to left, transparent 0%, #000 32%);
-      mask-image: linear-gradient(to left, transparent 0%, #000 32%);
+      -webkit-mask-image: linear-gradient(to left, transparent 0%, #000 26%);
+      mask-image: linear-gradient(to left, transparent 0%, #000 26%);
     }
   }
+  /* The source clip is 9:16, so left to its natural height it rendered
+     ~750px tall against a 365px text column — the least informative element
+     in the section at twice the size of the copy.
+     The crop window is measured, not guessed: in the source frame the
+     monitor runs 0-20% down, the laptop 29-42% and her hands 42-56%. 16/17
+     shows the top 59.8% of the height, which holds both screens and the
+     hands with a little room under them. Anchored to the top, so anything
+     the max-height guard trims comes off the empty chair below, never off
+     the monitor. Keep max-height above the natural height at normal window
+     sizes — it, not the aspect-ratio, is what decides the crop whenever it
+     binds, which is how the monitor's top edge got cut before. */
   .sobre-video video {
     display: block;
     width: 100%;
     height: auto;
+    aspect-ratio: 16 / 17;
+    max-height: clamp(420px, 62vh, 560px);
+    object-fit: cover;
+    object-position: center top;
+    border-radius: 12px;
     filter: brightness(.82);
   }
   p { margin: 0 0 20px; line-height: 1.7; font-size: 17px; }
   p:last-child { margin-bottom: 0; }
-  .lede { font-size: clamp(24px, 3.8vw, 36px); font-weight: 700; line-height: 1.4; letter-spacing: -0.015em; }
+  /* Was the default system sans: the largest text in the section, set in
+     the most generic face on a page that is otherwise all JetBrains Mono. */
+  .lede {
+    font-family: var(--font-mono);
+    font-size: clamp(19px, 2.1vw, 29px);
+    font-weight: 700;
+    line-height: 1.42;
+    letter-spacing: -0.025em;
+  }
   .lede em { font-style: normal; color: var(--indigo); }
   .on-light p { color: var(--muted-light); }
   .on-light .lede { color: var(--ink); }
@@ -792,6 +846,13 @@
     transform: translate3d(0, var(--orb-y, 0px), 0);
     will-change: transform;
   }
+  /* Single-column layout stacks the video directly under the copy, so the
+     same 70px parallax offset that reads as depth beside the text on
+     desktop instead lifts the video over the last paragraph and leaves a
+     dead band under it. Depth is a desktop-only affordance here. */
+  @media (max-width: 759px) {
+    #sobre-video { transform: none; will-change: auto; }
+  }
 
   /* 3D TILT — mockup "screens" and the hero portrait tilt toward the
      cursor like a physical surface, reinforcing the software/device motif. */
@@ -855,7 +916,10 @@
     position: absolute;
     top: 0;
     bottom: 0;
-    left: clamp(14px, 4vw, 40px);
+    /* Anchored to the content grid's left gutter rather than the window
+       edge: at a flat 40px it sat 20px from the text at 1280 and 400px
+       adrift at 1920, reading as a stray rule instead of a thread. */
+    left: max(clamp(8px, 2.4vw, 40px), calc(50% - var(--wrap) / 2 + 20px));
     width: 2px;
     z-index: 0;
     pointer-events: none;
@@ -895,6 +959,11 @@
      and fill would render invisible against it — needs its own contrast. */
   .strip .connector-track { background: rgba(255, 255, 255, .25); }
   .strip .connector-fill { background: #fff; box-shadow: 0 0 12px rgba(255, 255, 255, .5); }
+  /* The thread now starts as a short stub at the foot of the hero. With the
+     hero filling the viewport there was otherwise nothing telling a visitor
+     the page continues below. */
+  .connector-seg-hero { top: auto; bottom: 0; height: clamp(64px, 11vh, 120px); }
+  @media (max-width: 959px) { .connector-seg-hero { display: none; } }
 
   .reveal {
     opacity: 0;
@@ -930,6 +999,7 @@
 <body>
 
 <section class="hero on-dark" data-parallax="0.32" data-parallax-max="130">
+  <div class="connector-seg connector-seg-hero" aria-hidden="true"><span class="connector-track"></span><span class="connector-fill"></span></div>
   <div class="wrap">
     <div class="hero-photo-mobile">
       <img src="images/hero-ana.jpg" alt="Ana Luiza Di Giacomo, especialista em automação e IA" width="999" height="1400" loading="eager" fetchpriority="high" decoding="async">
@@ -949,10 +1019,10 @@
             <text x="132" y="78" font-size="34"><tspan class="logo-word-a">ana.</tspan><tspan class="logo-word-nocode">nocode</tspan></text>
           </svg>
         </div>
+        <p class="name">Ana Luiza Di Giacomo</p>
         <p class="eyebrow">n8n · IA · Claude Code — sistemas sob medida</p>
-        <h1 class="name">Ana Luiza Di Giacomo</h1>
       </div>
-      <p class="headline">Eu construo os bastidores que fazem seu negócio <em>rodar sozinho</em>.</p>
+      <h1 class="headline">Eu construo os bastidores que fazem seu negócio <em>rodar sozinho</em>.</h1>
       <p class="sub">As tarefas repetitivas do seu negócio passam a acontecer sozinhas — eu desenho e construo o sistema, você só acompanha.</p>
       <a class="btn hero-cta" href="#contact-form">Fale comigo</a>
     </div>
