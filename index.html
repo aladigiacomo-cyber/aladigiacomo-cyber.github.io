@@ -428,6 +428,158 @@
   .service h3 { font-size: clamp(15px, 1.8vw, 18px); font-weight: 700; margin: 0 0 10px; color: #f5f7fb; letter-spacing: -0.01em; }
   .service p { color: var(--muted-dark); font-size: 16px; margin: 0; max-width: 100%; }
 
+  /* O QUE EU JÁ ENTREGUEI — the page's first "I have shipped this" section,
+     sitting between what she does and how she works. It follows the dark
+     services section with no colour change, so it carries no .seam-top and
+     its wrap drops its top padding (same pattern as the depoimento under
+     "Como eu trabalho"); the .ref margin has to be zeroed too, or the
+     heading's UA top margin collapses out through the section and exposes
+     the body colour as a stripe. Deliberately text-only: the workflow
+     screenshots can't be published without cleaning client names out of
+     them, and product mockups were already removed from this page once. */
+  .cases-lede {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: clamp(18px, 2.4vw, 26px);
+    line-height: 1.35;
+    letter-spacing: -0.02em;
+    color: #f5f7fb;
+    margin: 0 0 clamp(24px, 4vw, 38px);
+    max-width: 32ch;
+  }
+  .cases {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 18px;
+  }
+  .case {
+    display: flex;
+    flex-direction: column;
+    background: rgba(155, 143, 255, .05);
+    border: 1px solid rgba(155, 143, 255, .22);
+    border-radius: 12px;
+    padding: clamp(22px, 2.6vw, 30px);
+    transition: background-color .3s ease, border-color .3s ease;
+  }
+  .case:hover {
+    --hy: -3px;
+    background-color: rgba(155, 143, 255, .09);
+    border-color: rgba(155, 143, 255, .45);
+  }
+  .case-kicker {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--indigo-on-dark);
+    margin: 0 0 14px;
+  }
+  .case h3 {
+    font-size: clamp(16px, 1.8vw, 18.5px);
+    font-weight: 800;
+    letter-spacing: -0.015em;
+    line-height: 1.3;
+    margin: 0 0 10px;
+    color: #f5f7fb;
+  }
+  .case-desc {
+    font-size: 15px;
+    line-height: 1.62;
+    color: var(--muted-dark);
+    margin: 0 0 18px;
+  }
+  .case-notes {
+    list-style: none;
+    margin: 0 0 18px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+  .case-notes li {
+    position: relative;
+    padding-left: 16px;
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: var(--muted-dark);
+  }
+  .case-notes li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: .58em;
+    width: 7px;
+    height: 1px;
+    background: var(--indigo-on-dark);
+  }
+  /* The number is the one loud thing in the card — it is what someone
+     skimming three cards actually stops on. Pinned to the bottom with an
+     auto top margin so the three cards' rules line up despite different
+     body lengths. */
+  .case-metric {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin: auto 0 0;
+    padding-top: 18px;
+    border-top: 1px solid var(--line-dark);
+    font-size: 13.5px;
+    line-height: 1.4;
+    color: var(--muted-dark);
+  }
+  .case-metric-num {
+    font-family: var(--font-mono);
+    font-size: clamp(26px, 3.4vw, 34px);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--indigo-on-dark);
+    flex: none;
+  }
+  /* Sits above the rule, with the description it belongs to, so that
+     .case-metric is genuinely the last child in every card and the three
+     dividers land on the same line despite different body lengths. */
+  .case-stack {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    letter-spacing: .03em;
+    line-height: 1.5;
+    color: rgba(147, 162, 194, .72);
+    margin: 0 0 4px;
+  }
+
+
+  /* Reordered page (hero → serviços → cases → depoimento → processo → sobre
+     → FAQ): keeping every section's original tone left three navy sections
+     stacked and then three paper ones, which reads as a two-tone page
+     rather than the alternating rhythm the design depends on. "O que eu
+     faço" flips to paper and "Sobre" to navy to restore it. Both sections
+     were built tone-specific, so their hardcoded colours need the mirror
+     image here rather than a class swap alone. */
+  .on-light .services { border-top-color: var(--line-light); }
+  .on-light .service { border-bottom-color: var(--line-light); }
+  .on-light .service:hover {
+    background-color: rgba(75, 63, 242, .045);
+    border-color: rgba(75, 63, 242, .3);
+  }
+  .on-light .service-giant-word { color: var(--ink); }
+  .on-light .service h3 { color: var(--ink); }
+  .on-light .service p { color: var(--muted-light); }
+  .on-light .service:hover .service-giant-word,
+  .on-light .service:hover h3 { color: var(--indigo); }
+
+  .on-dark .lede { color: #f5f7fb; }
+  .on-dark .lede em { color: var(--indigo-on-dark); }
+  /* p:not(.lede) rather than a bare p — a bare .on-dark .sobre-col p would
+     outrank .on-dark .lede and grey the lede too. */
+  .on-dark .sobre-col p:not(.lede) { color: var(--muted-dark); }
+  .on-dark .sobre-video video { filter: brightness(.9); }
+
+  /* Sobre and the FAQ are both navy now, so there is no colour change to
+     blend — a hairline stands in for the seam. */
+  .faq-section.abuts-dark { border-top: 1px solid var(--line-dark); }
+
   /* FAQ */
 
   .faq-scroller { overflow: hidden; }
@@ -597,8 +749,8 @@
      the heading's UA top margin at the same time, or with no padding left
      to contain it that margin collapses out through the section and shows
      the navy body behind it as a stripe. */
-  .testimonial-section > .wrap { padding-top: 0; }
-  .testimonial-section .ref { margin-top: 0; }
+  .section-process > .wrap { padding-top: 0; }
+  .section-process .ref { margin-top: 0; }
 
   .testimonial-section .testimonial {
     background: rgba(75, 63, 242, .06);
@@ -1034,24 +1186,7 @@
   </div>
 </section>
 
-<section class="on-light reveal sobre-section seam-top" style="--seam-from:var(--navy)">
-  <div class="connector-seg" aria-hidden="true"><span class="connector-track"></span><span class="connector-fill"></span><span class="connector-dot"></span></div>
-  <div class="wrap">
-    <h2 class="ref"><span class="rule"></span> Sobre <span class="rule"></span></h2>
-    <div class="sobre-grid">
-      <div class="sobre-video reveal-item">
-        <video id="sobre-video" data-parallax="0.2" data-parallax-max="70" src="images/sobre-video.mp4" poster="images/sobre-video-poster.jpg" width="640" height="1138" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
-      </div>
-      <div class="col sobre-col">
-        <p class="lede reveal-item">Eu sou a Ana. Trabalho na fronteira entre <em>automação</em> e <em>inteligência artificial</em>.</p>
-        <p class="reveal-item">Pego processos que hoje dependem de alguém copiar, colar, checar e lembrar — e transformo em sistemas que rodam sozinhos, usando n8n, IA e integrações sob medida.</p>
-        <p class="reveal-item">Não vendo automação de prateleira. Cada sistema é desenhado a partir do jeito real como o seu negócio funciona hoje, não de um template pronto.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="on-dark reveal section-services seam-top" style="--seam-from:var(--paper)">
+<section class="on-light reveal section-services seam-top" style="--seam-from:var(--navy)">
   <div class="connector-seg" aria-hidden="true"><span class="connector-track"></span><span class="connector-fill"></span><span class="connector-dot"></span></div>
   <div class="wrap">
     <h2 class="ref"><span class="rule"></span> O que eu faço <span class="rule"></span></h2>
@@ -1090,7 +1225,65 @@
   </div>
 </section>
 
-<section class="on-light reveal section-process seam-top" style="--seam-from:var(--navy)">
+<section class="on-dark reveal cases-section seam-top" style="--seam-from:var(--paper)">
+  <div class="connector-seg" aria-hidden="true"><span class="connector-track"></span><span class="connector-fill"></span><span class="connector-dot"></span></div>
+  <div class="wrap">
+    <h2 class="ref"><span class="rule"></span> O que eu já entreguei <span class="rule"></span></h2>
+    <p class="cases-lede">Sistemas que já estão rodando — não exemplos de vitrine.</p>
+    <div class="cases">
+
+      <article class="case reveal-item">
+        <p class="case-kicker">Case 01 &middot; agente + agenda</p>
+        <h3>Atendimento no WhatsApp que marca na agenda sozinho</h3>
+        <p class="case-desc">O cliente manda mensagem a qualquer hora. O agente responde, consulta a agenda de verdade, oferece um horário livre, confirma o convite e cadastra a pessoa — e passa pra um humano quando a conversa sai do roteiro.</p>
+        <ul class="case-notes">
+          <li>Espera a pessoa terminar de escrever antes de responder</li>
+          <li>Confere se o horário ainda está livre antes de confirmar</li>
+        </ul>
+        <p class="case-stack">Google Calendar &middot; WhatsApp &middot; memória de conversa</p>
+        <p class="case-metric"><span class="case-metric-num">4</span> ações que acontecem sem ninguém</p>
+      </article>
+
+      <article class="case reveal-item">
+        <p class="case-kicker">Case 02 &middot; notificações</p>
+        <h3>A plataforma avisa o usuário sozinha, no canal certo</h3>
+        <p class="case-desc">Conquista, prêmio ou sumiço: o sistema percebe e dispara a mensagem por WhatsApp ou e-mail, com texto, áudio, vídeo ou anexo — e guarda o registro de tudo que saiu.</p>
+        <p class="case-stack">WhatsApp &middot; E-mail &middot; banco de dados</p>
+        <p class="case-metric"><span class="case-metric-num">4</span> formatos de mensagem, em 2 canais</p>
+      </article>
+
+      <article class="case reveal-item">
+        <p class="case-kicker">Case 03 &middot; prospecção</p>
+        <h3>Lista de leads que já sai com o decisor e o e-mail</h3>
+        <p class="case-desc">Você diz o perfil de cliente que procura. O fluxo busca as empresas, acha o site, o LinkedIn e a pessoa que decide, valida o e-mail e salva na planilha — inclusive quando falta um pedaço, em vez de jogar o lead fora.</p>
+        <p class="case-stack">Google Maps &middot; planilhas &middot; APIs de enriquecimento</p>
+        <p class="case-metric"><span class="case-metric-num">5</span> dados por lead, sem pesquisa manual</p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section class="on-light reveal testimonial-section seam-top" style="--seam-from:var(--navy)">
+  <div class="connector-seg" aria-hidden="true"><span class="connector-track"></span><span class="connector-fill"></span><span class="connector-dot"></span></div>
+  <div class="wrap">
+    <h2 class="ref"><span class="rule"></span> Depoimento <span class="rule"></span></h2>
+    <figure class="testimonial">
+      <blockquote class="testimonial-quote reveal-item">
+        <span class="testimonial-mark" aria-hidden="true">&ldquo;</span>
+        <p class="testimonial-pull">Hoje uso essas ferramentas diariamente, com naturalidade e confiança.</p>
+      </blockquote>
+      <div class="testimonial-body reveal-item">
+        <p>Tive a sorte de contar com o apoio da Ana Luiza em minha jornada com IA e esse suporte foi fundamental para eu dar os primeiros passos nesse universo. Antes de nossas sessões, IA parecia um tema complexo que me deixava muito inseguro. A forma didática e paciente com que a Ana Luiza conduziu as sessões me ajudou a romper essa barreira do desconhecido e a enxergar, na prática, como essas ferramentas podem agregar valor real ao trabalho.</p>
+        <p>Mais do que ensinar comandos e funcionalidades, ela se preocupou em mostrar como incorporar IA de forma consistente na rotina de forma responsável e segura — e isso fez toda diferença: <em>hoje uso essas ferramentas diariamente, com naturalidade e confiança.</em></p>
+        <p>Recomendo a Ana Luiza sem hesitar para qualquer iniciativa de capacitação em IA. Ela combina domínio técnico, didática e uma visão responsável sobre o uso da tecnologia — uma combinação rara e valiosa.</p>
+      </div>
+      <figcaption class="testimonial-cite reveal-item"><cite>Luiz Gustavo Ferreira</cite></figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="on-light reveal section-process">
   <div class="connector-seg" aria-hidden="true"><span class="connector-track"></span><span class="connector-fill"></span><span class="connector-dot"></span></div>
   <div class="wrap">
     <h2 class="ref"><span class="rule"></span> Como eu trabalho <span class="rule"></span></h2>
@@ -1127,26 +1320,24 @@
   </div>
 </section>
 
-<section class="on-light reveal testimonial-section">
+<section class="on-dark reveal sobre-section seam-top" style="--seam-from:var(--paper)">
   <div class="connector-seg" aria-hidden="true"><span class="connector-track"></span><span class="connector-fill"></span><span class="connector-dot"></span></div>
   <div class="wrap">
-    <h2 class="ref"><span class="rule"></span> Depoimento <span class="rule"></span></h2>
-    <figure class="testimonial">
-      <blockquote class="testimonial-quote reveal-item">
-        <span class="testimonial-mark" aria-hidden="true">&ldquo;</span>
-        <p class="testimonial-pull">Hoje uso essas ferramentas diariamente, com naturalidade e confiança.</p>
-      </blockquote>
-      <div class="testimonial-body reveal-item">
-        <p>Tive a sorte de contar com o apoio da Ana Luiza em minha jornada com IA e esse suporte foi fundamental para eu dar os primeiros passos nesse universo. Antes de nossas sessões, IA parecia um tema complexo que me deixava muito inseguro. A forma didática e paciente com que a Ana Luiza conduziu as sessões me ajudou a romper essa barreira do desconhecido e a enxergar, na prática, como essas ferramentas podem agregar valor real ao trabalho.</p>
-        <p>Mais do que ensinar comandos e funcionalidades, ela se preocupou em mostrar como incorporar IA de forma consistente na rotina de forma responsável e segura — e isso fez toda diferença: <em>hoje uso essas ferramentas diariamente, com naturalidade e confiança.</em></p>
-        <p>Recomendo a Ana Luiza sem hesitar para qualquer iniciativa de capacitação em IA. Ela combina domínio técnico, didática e uma visão responsável sobre o uso da tecnologia — uma combinação rara e valiosa.</p>
+    <h2 class="ref"><span class="rule"></span> Sobre <span class="rule"></span></h2>
+    <div class="sobre-grid">
+      <div class="sobre-video reveal-item">
+        <video id="sobre-video" data-parallax="0.2" data-parallax-max="70" src="images/sobre-video.mp4" poster="images/sobre-video-poster.jpg" width="640" height="1138" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
       </div>
-      <figcaption class="testimonial-cite reveal-item"><cite>Luiz Gustavo Ferreira</cite></figcaption>
-    </figure>
+      <div class="col sobre-col">
+        <p class="lede reveal-item">Eu sou a Ana. Trabalho na fronteira entre <em>automação</em> e <em>inteligência artificial</em>.</p>
+        <p class="reveal-item">Pego processos que hoje dependem de alguém copiar, colar, checar e lembrar — e transformo em sistemas que rodam sozinhos, usando n8n, IA e integrações sob medida.</p>
+        <p class="reveal-item">Não vendo automação de prateleira. Cada sistema é desenhado a partir do jeito real como o seu negócio funciona hoje, não de um template pronto.</p>
+      </div>
+    </div>
   </div>
 </section>
 
-<section class="on-dark reveal faq-section seam-top" style="--seam-from:var(--paper)">
+<section class="on-dark reveal faq-section abuts-dark">
   <div class="wrap">
     <h2 class="ref"><span class="rule"></span> Perguntas frequentes <span class="rule"></span></h2>
 
@@ -1365,7 +1556,7 @@
 
 <script>
   (function () {
-    document.querySelectorAll('.services, .steps, .contact-list, .tools-row, .terminal-body, .sobre-col').forEach(function (container) {
+    document.querySelectorAll('.services, .cases, .steps, .contact-list, .tools-row, .terminal-body, .sobre-col').forEach(function (container) {
       var items = container.querySelectorAll('.reveal-item');
       items.forEach(function (item, i) { item.style.transitionDelay = (i * 90) + 'ms'; });
     });
