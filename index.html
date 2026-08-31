@@ -107,69 +107,12 @@
     overflow: hidden;
     position: relative;
   }
-  .hero .wrap {
-    padding-top: clamp(36px, 9vw, 108px);
-    padding-bottom: clamp(28px, 7vw, 96px);
-    position: relative;
-    z-index: 1;
-    display: grid;
-    grid-template-columns: 1fr clamp(84px, 26vw, 120px);
-    gap: 16px;
-    align-items: start;
-    text-align: left;
-  }
   @media (min-width: 960px) {
     /* The hero owns the whole first screen. Without this it stopped at its
        content height (~790px), so on any monitor taller than that the next
        section's light edge peeked in at the bottom — which reads as a
        mis-crop, not a decision. */
     .hero { min-height: 100vh; display: grid; align-content: center; }
-    .hero .wrap { grid-template-columns: 1.05fr 1fr; gap: clamp(40px, 5vw, 72px); align-items: center; }
-  }
-  .hero-text { min-width: 0; }
-  .hero-terminal { min-width: 0; }
-  .hero-photo {
-    /* Fades on the left AND the bottom, so the portrait dissolves into the
-       navy instead of sitting there as a rectangle with three hard edges.
-       The vignette pseudo-element has to carry the same mask, or it would
-       redraw the very rectangle the image just got rid of. */
-    --photo-mask:
-      linear-gradient(to right, transparent 0%, #000 34%, #000 92%, transparent 100%),
-      linear-gradient(to bottom, transparent 0%, #000 14%, #000 58%, transparent 100%);
-    max-width: clamp(360px, 33vw, 480px);
-    position: relative;
-  }
-  @media (min-width: 960px) { .hero-photo { margin-left: auto; } }
-  .hero-photo img {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
-  .hero-photo img, .hero-photo::after {
-    -webkit-mask-image: var(--photo-mask);
-    mask-image: var(--photo-mask);
-    -webkit-mask-composite: source-in;
-    mask-composite: intersect;
-  }
-  .hero-photo::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    /* Knocks the bright brick wall back so it stops out-shouting the copy. */
-    background:
-      radial-gradient(ellipse 100% 100% at 50% 38%, transparent 55%, rgba(10, 23, 48, .42) 100%),
-      linear-gradient(to bottom, rgba(10, 23, 48, .18) 0%, rgba(10, 23, 48, 0) 34%);
-    pointer-events: none;
-  }
-  .hero-photo-mobile { display: none; }
-  .eyebrow {
-    font-family: var(--font-mono);
-    font-size: clamp(11.5px, 2vw, 13px);
-    font-weight: 600;
-    letter-spacing: .16em;
-    text-transform: uppercase;
-    color: var(--indigo-on-dark);
-    margin: 30px 0 14px;
   }
 
   .hero-logo { margin: 0; }
@@ -178,106 +121,6 @@
   .hero-logo .logo-a-indigo { stroke: #4B3FF2; stroke-opacity: .88; }
   .hero-logo .logo-word-a { font-family: var(--font-sans); font-weight: 500; fill: #F5F4F0; }
   .hero-logo .logo-word-nocode { font-family: var(--font-mono); font-weight: 500; fill: var(--indigo-on-dark); }
-  /* Signature, not headline. On a services page the promise has to be the
-     biggest thing on screen and the name reads as the byline under the
-     logo — it used to be the other way round, so the first thing a visitor
-     took in was who she is rather than what she does. */
-  .name {
-    font-family: var(--font-mono);
-    font-weight: 600;
-    font-size: clamp(14px, 1.25vw, 17px);
-    letter-spacing: .05em;
-    line-height: 1.3;
-    margin: 8px 0 0;
-    white-space: nowrap;
-    color: rgba(245, 247, 251, .78);
-  }
-  .name em { font-style: normal; color: var(--indigo-on-dark); }
-  .headline {
-    font-family: var(--font-mono);
-    font-weight: 700;
-    font-size: clamp(21px, 2.4vw, 34px);
-    line-height: 1.28;
-    letter-spacing: -0.022em;
-    margin: 0 0 26px;
-    text-wrap: balance;
-    color: #f5f7fb;
-  }
-  .headline em { font-style: normal; color: var(--indigo-on-dark); }
-  .sub {
-    font-size: clamp(16px, 1.5vw, 18px);
-    line-height: 1.7;
-    color: var(--muted-dark);
-    max-width: 520px;
-    text-wrap: balance;
-    margin: 0 0 36px;
-  }
-  @media (max-width: 959px) {
-    /* Poster hero: photo runs full-bleed at the top with logo + eyebrow +
-       name stacked and overlaid in its corner, above her head. Headline,
-       sub and CTA stay below on solid navy. Sized via aspect-ratio, not vh —
-       vh jumps as mobile browser chrome collapses/expands on scroll, which
-       reflowed/janked the whole grid. */
-    .hero .wrap {
-      display: grid;
-      grid-template-columns: 1fr;
-      grid-template-areas: "photo" "headline" "sub" "cta";
-      grid-template-rows: auto auto auto auto;
-      gap: 0;
-      padding-top: 0;
-    }
-    .hero-text { display: contents; }
-    .hero-terminal { display: none; }
-    .hero-photo-mobile {
-      display: block;
-      position: relative;
-      grid-area: photo;
-      width: 100vw;
-      left: 50%;
-      margin-left: -50vw;
-      margin-right: -50vw;
-      aspect-ratio: 3 / 4;
-      border-radius: 0;
-      overflow: hidden;
-      border: none;
-      box-shadow: none;
-    }
-    .hero-photo-mobile img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center 0%;
-    }
-    .hero-photo-mobile::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      /* Second layer dissolves the bottom edge into the navy below it —
-         without it the full-bleed photo ends on a hard horizontal cut. */
-      background:
-        linear-gradient(to bottom, rgba(10, 23, 48, .84) 0%, rgba(10, 23, 48, .52) 30%, rgba(10, 23, 48, 0) 56%),
-        linear-gradient(to top, var(--navy) 0%, rgba(10, 23, 48, 0) 20%);
-      pointer-events: none;
-    }
-    .hero-intro {
-      grid-area: photo;
-      align-self: start;
-      justify-self: stretch;
-      position: relative;
-      z-index: 1;
-    }
-    .hero-logo {
-      margin: 18px 0 0;
-      filter: drop-shadow(0 2px 8px rgba(10, 23, 48, .85));
-    }
-    .hero-logo svg { height: 40px; }
-    .eyebrow { margin: 12px 0 0; font-size: 9.5px; text-shadow: 0 2px 10px rgba(10, 23, 48, .85); }
-    .name { font-size: 13px; margin: 6px 0 0; white-space: normal; letter-spacing: .06em; text-shadow: 0 2px 10px rgba(10, 23, 48, .85); }
-    .headline { grid-area: headline; margin: 26px 0 0; font-size: clamp(19px, 5.4vw, 24px); line-height: 1.32; }
-    .sub { grid-area: sub; margin: 22px 0 20px; }
-    .hero-cta { grid-area: cta; justify-self: center; }
-  }
 
   .btn {
     --mx: 0px;
@@ -332,6 +175,182 @@
   }
   .floating-cta.show { opacity: 1; pointer-events: auto; }
   @media (max-width: 480px) { .floating-cta { right: 14px; bottom: 14px; padding: 14px 18px; font-size: 14px; } }
+
+
+  /* HERO ALT — composition ported from a designer-portfolio reference:
+     oversized centred display type, a small mono kicker floating at the
+     top, the name set light and widely tracked, a bordered panel holding
+     the service list with the portrait breaking out above it, then a
+     centred mono paragraph and CTA. Rebuilt in this file's own CSS — the
+     reference was a React/shadcn/Tailwind component and this page has no
+     build step. The reference's bottom row (stacked portfolio thumbnails
+     + "RECENT WORK") is deliberately dropped: the cases section directly
+     below already does that job.
+     Display type is the system sans at 800, not JetBrains Mono — the
+     negative tracking that makes this composition work collides glyphs in
+     a monospace face. That matches .service-giant-word, which already
+     uses the sans for the same reason. */
+  .hero-alt .wrap {
+    display: block;
+    text-align: center;
+    padding-top: clamp(26px, 5vw, 56px);
+    padding-bottom: clamp(40px, 7vw, 84px);
+    position: relative;
+    z-index: 1;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(to right, rgba(155, 143, 255, .17) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(155, 143, 255, .17) 1px, transparent 1px);
+    background-size: 22px 22px;
+    /* Two dashed masks intersected turn the solid rules into a dotted
+       field; the radial keeps it near the top and fades it out before it
+       reaches the copy. */
+    -webkit-mask-image:
+      repeating-linear-gradient(to right, #000 0 3px, transparent 3px 8px),
+      repeating-linear-gradient(to bottom, #000 0 3px, transparent 3px 8px),
+      radial-gradient(ellipse 72% 62% at 50% 0%, #000 52%, transparent 100%);
+    mask-image:
+      repeating-linear-gradient(to right, #000 0 3px, transparent 3px 8px),
+      repeating-linear-gradient(to bottom, #000 0 3px, transparent 3px 8px),
+      radial-gradient(ellipse 72% 62% at 50% 0%, #000 52%, transparent 100%);
+    -webkit-mask-composite: source-in;
+    mask-composite: intersect;
+  }
+  .h4-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    text-align: left;
+  }
+  .h4-top .hero-logo svg { height: clamp(38px, 6vw, 54px); }
+  .h4-label {
+    font-family: var(--font-mono);
+    font-size: clamp(9.5px, 1.1vw, 12px);
+    font-weight: 600;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--indigo-on-dark);
+    margin: 0;
+    text-align: right;
+  }
+  .h4-display {
+    font-family: var(--font-sans);
+    font-weight: 800;
+    font-size: var(--h4-size);
+    line-height: .94;
+    letter-spacing: -0.045em;
+    text-transform: uppercase;
+    color: #f5f7fb;
+    margin: clamp(22px, 4vw, 46px) 0 0;
+    text-wrap: balance;
+  }
+  .h4-display em { font-style: normal; color: var(--indigo-on-dark); }
+  .h4-promise {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: clamp(15px, 1.7vw, 23px);
+    line-height: 1.4;
+    letter-spacing: -0.02em;
+    color: #f5f7fb;
+    margin: clamp(16px, 2.4vw, 26px) auto 0;
+    max-width: 30ch;
+    text-wrap: balance;
+  }
+  .h4-promise em { font-style: normal; color: var(--indigo-on-dark); }
+  /* JetBrains Mono is only loaded at 500-800, so 500 is as light as this
+     can go — the wide tracking is what makes it read as a signature. */
+  .h4-name {
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: clamp(10.5px, 1.35vw, 18px);
+    letter-spacing: .32em;
+    text-transform: uppercase;
+    color: rgba(245, 247, 251, .58);
+    margin: clamp(12px, 1.8vw, 20px) 0 0;
+    text-align: right;
+  }
+  .h4-panel {
+    margin: clamp(46px, 8vw, 104px) auto 0;
+    max-width: 880px;
+    background: rgba(155, 143, 255, .06);
+    border: 1px solid rgba(155, 143, 255, .22);
+    border-radius: 14px;
+    padding: clamp(20px, 2.6vw, 34px);
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: clamp(16px, 3vw, 40px);
+    text-align: left;
+  }
+  .h4-services { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: clamp(4px, .9vw, 10px); }
+  .h4-services li {
+    font-family: var(--font-sans);
+    font-weight: 800;
+    font-size: clamp(16px, 2.3vw, 30px);
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    color: #f5f7fb;
+  }
+  .h4-services span { color: var(--indigo-on-dark); }
+  /* The portrait breaks out above the panel's top edge — that overlap is
+     the reference's one structural move, so the panel can't clip it. */
+  .h4-photo {
+    margin: 0;
+    flex: none;
+    display: flex;
+    align-items: stretch;
+    gap: 2px;
+    margin-top: calc(-1 * clamp(38px, 6.5vw, 92px));
+  }
+  .h4-photo img {
+    display: block;
+    width: clamp(132px, 20vw, 232px);
+    /* The markup keeps width/height attributes for CLS, and the height
+       attribute lands as a presentational hint that outranks `auto` — so
+       aspect-ratio is ignored and the portrait renders 1400px tall unless
+       height is reset here explicitly. */
+    height: auto;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    object-position: center 12%;
+    border-radius: 10px;
+  }
+  .h4-vert {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-family: var(--font-mono);
+    font-size: clamp(8.5px, .85vw, 10.5px);
+    font-weight: 600;
+    letter-spacing: .24em;
+    text-transform: uppercase;
+    color: rgba(245, 247, 251, .5);
+    padding: 2px 0;
+  }
+  .h4-sub {
+    font-family: var(--font-mono);
+    font-size: clamp(12.5px, 1.25vw, 15.5px);
+    font-weight: 500;
+    line-height: 1.75;
+    letter-spacing: .01em;
+    color: var(--muted-dark);
+    max-width: 46ch;
+    margin: clamp(34px, 5vw, 60px) auto 0;
+  }
+  .h4-cta { display: flex; justify-content: center; margin-top: clamp(22px, 3vw, 34px); }
+
+  @media (max-width: 759px) {
+    .h4-top { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .h4-label, .h4-name { text-align: left; }
+    .h4-panel { flex-direction: column-reverse; align-items: stretch; gap: 22px; }
+    .h4-photo { margin-top: calc(-1 * clamp(30px, 9vw, 56px)); align-self: center; }
+    .h4-photo img { width: min(58vw, 260px); }
+  }
 
   /* SOBRE */
   .sobre-grid { display: grid; gap: clamp(28px, 4vw, 56px); align-items: center; }
@@ -1150,39 +1169,45 @@
 </head>
 <body>
 
-<section class="hero on-dark" data-parallax="0.32" data-parallax-max="130">
+<section class="hero hero-alt on-dark" data-parallax="0.32" data-parallax-max="130">
+  <div class="hero-bg" aria-hidden="true"></div>
   <div class="connector-seg connector-seg-hero" aria-hidden="true"><span class="connector-track"></span><span class="connector-fill"></span></div>
   <div class="wrap">
-    <div class="hero-photo-mobile">
-      <img src="images/hero-ana.jpg" alt="Ana Luiza Di Giacomo, especialista em automação e IA" width="999" height="1400" loading="eager" fetchpriority="high" decoding="async">
-    </div>
-    <div class="hero-text">
-      <div class="hero-intro">
-        <div class="hero-logo">
-          <svg viewBox="20 6 308 118" role="img" aria-label="ana.nocode">
-            <g transform="translate(10,5)">
-              <g transform="translate(0,-1)" class="logo-a-paper" fill="none" stroke-width="5" stroke-linecap="round">
-                <path d="M50 12 L20 100"/><path d="M50 12 L80 100"/><path d="M32 64 L68 64"/>
-              </g>
-              <g transform="translate(16,9)" class="logo-a-indigo" fill="none" stroke-width="5" stroke-linecap="round">
-                <path d="M50 12 L20 100"/><path d="M50 12 L80 100"/><path d="M32 64 L68 64"/>
-              </g>
+    <div class="h4-top">
+      <div class="hero-logo">
+        <svg viewBox="20 6 308 118" role="img" aria-label="ana.nocode">
+          <g transform="translate(10,5)">
+            <g transform="translate(0,-1)" class="logo-a-paper" fill="none" stroke-width="5" stroke-linecap="round">
+              <path d="M50 12 L20 100"/><path d="M50 12 L80 100"/><path d="M32 64 L68 64"/>
             </g>
-            <text x="132" y="78" font-size="34"><tspan class="logo-word-a">ana.</tspan><tspan class="logo-word-nocode">nocode</tspan></text>
-          </svg>
-        </div>
-        <p class="name">Ana Luiza Di Giacomo</p>
-        <p class="eyebrow">n8n · IA · Claude Code — sistemas sob medida</p>
+            <g transform="translate(16,9)" class="logo-a-indigo" fill="none" stroke-width="5" stroke-linecap="round">
+              <path d="M50 12 L20 100"/><path d="M50 12 L80 100"/><path d="M32 64 L68 64"/>
+            </g>
+          </g>
+          <text x="132" y="78" font-size="34"><tspan class="logo-word-a">ana.</tspan><tspan class="logo-word-nocode">nocode</tspan></text>
+        </svg>
       </div>
-      <h1 class="headline">Eu construo os bastidores que fazem seu negócio <em>rodar sozinho</em>.</h1>
-      <p class="sub">As tarefas repetitivas do seu negócio passam a acontecer sozinhas — eu desenho e construo o sistema, você só acompanha.</p>
-      <a class="btn hero-cta" href="#contact-form">Fale comigo</a>
+      <p class="h4-label">n8n &middot; IA &middot; Claude Code</p>
     </div>
-    <div class="hero-terminal">
-      <div class="hero-photo reveal-item" data-tilt="6">
+
+    <h1 class="h4-display" style="--h4-size: clamp(32px, 6.4vw, 90px)">Eu construo os bastidores que fazem seu neg&oacute;cio <em>rodar sozinho</em>.</h1>
+
+    <p class="h4-name">Ana Luiza Di Giacomo</p>
+
+    <div class="h4-panel">
+      <ul class="h4-services">
+        <li><span>/</span> Automação</li>
+        <li><span>/</span> IA aplicada</li>
+        <li><span>/</span> Consultoria de Claude</li>
+      </ul>
+      <figure class="h4-photo">
         <img src="images/hero-ana.jpg" alt="Ana Luiza Di Giacomo, especialista em automação e IA" width="999" height="1400" loading="eager" fetchpriority="high" decoding="async">
-      </div>
+        <figcaption class="h4-vert">Sistemas sob medida</figcaption>
+      </figure>
     </div>
+
+    <p class="h4-sub">As tarefas repetitivas do seu negócio passam a acontecer sozinhas &mdash; eu desenho e construo o sistema, voc&ecirc; s&oacute; acompanha.</p>
+    <div class="h4-cta"><a class="btn hero-cta" href="#contact-form">Fale comigo</a></div>
   </div>
 </section>
 
