@@ -159,14 +159,18 @@
     0%, 100% { opacity: .4; transform: scale(.95); }
     50% { opacity: .65; transform: scale(1.02); }
   }
-  /* Fixed nav — the page is long on mobile with no way back to a section, so
-     this appears once the hero's own logo/CTA have scrolled out of view and
-     carries the "Fale comigo" CTA itself (replaces the old floating button —
-     one CTA on screen at a time). Ported by hand from a React/shadcn/Framer
-     Motion reference component, same approach as .hero-alt above: this page
-     has no build step, so the sliding hover pill is a single absolutely
-     positioned span moved with plain JS instead of framer-motion. */
+  /* Fixed nav — on screen from the first paint (not just after the hero),
+     so the page reserves --nav-h at the top (set from the nav's real
+     rendered height in JS below) and carries the "Fale comigo" CTA itself
+     (replaces the old floating button — one CTA on screen at a time). Solid
+     var(--navy) — same flat colour as the hero it sits on, on purpose, so
+     the seam is invisible rather than a translucent bar over it. Ported by
+     hand from a React/shadcn/Framer Motion reference component, same
+     approach as .hero-alt above: this page has no build step, so the
+     sliding hover pill is a single absolutely positioned span moved with
+     plain JS instead of framer-motion. */
   html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+  body { padding-top: var(--nav-h, 62px); }
 
   .site-nav {
     position: fixed;
@@ -179,16 +183,9 @@
     justify-content: space-between;
     gap: 20px;
     padding: 13px clamp(18px, 4vw, 40px);
-    background: rgba(10, 23, 48, .78);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background: var(--navy);
     border-bottom: 1px solid var(--line-dark);
-    opacity: 0;
-    transform: translateY(-100%);
-    pointer-events: none;
-    transition: opacity .3s ease, transform .3s cubic-bezier(.2,.8,.2,1);
   }
-  .site-nav.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
 
   .site-nav-logo { display: flex; align-items: center; flex-shrink: 0; }
   .site-nav-logo svg { height: 24px; width: auto; display: block; }
@@ -1915,13 +1912,23 @@
   })();
 
   (function () {
+    // The nav is fixed and on screen immediately, so the page needs
+    // --nav-h reserved at the top or its own height would sit over the
+    // hero's logo/kicker. Measured from the real element (not hardcoded)
+    // because the mobile breakpoint drops the link list, changing the
+    // nav's height, and the JetBrains Mono webfont can shift it slightly
+    // once it finishes loading.
     var nav = document.getElementById('site-nav');
-    var hero = document.querySelector('.hero');
-    if (!nav || !hero || !('IntersectionObserver' in window)) return;
+    if (!nav) return;
 
-    new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) { nav.classList.toggle('show', !e.isIntersecting); });
-    }).observe(hero);
+    function syncHeight() {
+      document.documentElement.style.setProperty('--nav-h', nav.offsetHeight + 'px');
+    }
+    syncHeight();
+    window.addEventListener('resize', syncHeight);
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(syncHeight);
+    }
   })();
 
   (function () {
