@@ -40,7 +40,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600;700;800&display=swap">
-<noscript><style>.reveal, .reveal-item { opacity: 1 !important; transform: none !important; }</style></noscript>
+<noscript><style>
+  .reveal, .reveal-item { opacity: 1 !important; transform: none !important; }
+  .step-viewport { overflow: visible; }
+  .steps { display: grid !important; gap: 14px; transform: none !important; }
+  .step-dots, .step-nav { display: none !important; }
+</style></noscript>
 <style>
   :root {
     --navy: #0a1730;
@@ -80,7 +85,7 @@
   .wrap { max-width: var(--wrap); margin: 0 auto; padding: clamp(56px, 11vw, 108px) var(--pad); }
   /* Above ~1600px a fixed 1160px column left the page reading as a small
      island in a large empty field. Widening the token (rather than any one
-     section) keeps every section and the connector thread in step. */
+     section) keeps every section in step. */
   @media (min-width: 1600px) { :root { --wrap: 1280px; } }
   .col { max-width: var(--measure); }
 
@@ -407,6 +412,44 @@
   }
   .h4-cta { display: flex; justify-content: center; margin-top: clamp(22px, 3vw, 34px); }
 
+  /* SCROLL CUE — the hero's content (panel + photo + subtext + CTA) runs
+     taller than the viewport on common desktop sizes (measured ~1250px at
+     1440x900 and 1920x1080), so the CTA sits below the fold with no hint
+     that the composition continues. Fixed to the viewport (not the hero's
+     own box) and faded out once the visitor starts scrolling — pinned to
+     the hero's own document position would just put it below the fold
+     too. Sits outside .hero in the markup on purpose: that section has
+     overflow:hidden, which clips fixed-position descendants against its
+     own box, not just the viewport. Desktop-only: on mobile the hero
+     already fits or nearly fits, and the next section's rule/seam is
+     enough of a cue once you're that close to it. */
+  .hero-scroll-cue {
+    display: none;
+  }
+  @media (min-width: 960px) {
+    .hero-scroll-cue {
+      display: flex;
+      justify-content: center;
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: clamp(18px, 3vh, 30px);
+      z-index: 5;
+      pointer-events: none;
+      opacity: 1;
+      transition: opacity .3s ease;
+    }
+    .hero-scroll-cue.is-hidden { opacity: 0; }
+    .hero-scroll-cue svg {
+      animation: hero-scroll-bob 1.8s ease-in-out infinite;
+      opacity: .55;
+    }
+  }
+  @keyframes hero-scroll-bob {
+    0%, 100% { transform: translateY(0); opacity: .4; }
+    50% { transform: translateY(6px); opacity: .75; }
+  }
+
   @media (max-width: 759px) {
     .h4-top { flex-direction: column; align-items: flex-start; gap: 10px; }
     .h4-label, .h4-name { text-align: left; }
@@ -491,8 +534,8 @@
   .service-giant-icon {
     width: clamp(28px, 4vw, 40px);
     height: clamp(28px, 4vw, 40px);
-    border-radius: 8px;
     flex: none;
+    color: var(--indigo-on-dark);
     transition: transform .3s cubic-bezier(.34, 1.56, .64, 1);
   }
   .service-giant-word {
@@ -627,7 +670,7 @@
     font-size: 11.5px;
     letter-spacing: .03em;
     line-height: 1.5;
-    color: rgba(147, 162, 194, .72);
+    color: rgba(147, 162, 194, .85);
     margin: 0 0 4px;
   }
 
@@ -646,6 +689,7 @@
     border-color: rgba(75, 63, 242, .3);
   }
   .on-light .service-giant-word { color: var(--ink); }
+  .on-light .service-giant-icon { color: var(--indigo); }
   .on-light .service h3 { color: var(--ink); }
   .on-light .service p { color: var(--muted-light); }
   .on-light .service:hover .service-giant-word,
@@ -658,13 +702,13 @@
   .on-dark .sobre-col p:not(.lede) { color: var(--muted-dark); }
   .on-dark .sobre-video video { filter: brightness(.9); }
 
-  /* Sobre and the FAQ are both navy now, so there is no colour change to
-     blend — a hairline stands in for the seam. */
-  .faq-section.abuts-dark { border-top: 1px solid var(--line-dark); }
-
   /* FAQ */
 
-  .faq-scroller { overflow: hidden; }
+  .faq-scroller {
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 clamp(28px, 6vw, 90px), #000 calc(100% - clamp(28px, 6vw, 90px)), transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0, #000 clamp(28px, 6vw, 90px), #000 calc(100% - clamp(28px, 6vw, 90px)), transparent 100%);
+  }
   .faq-scroller + .faq-scroller { margin-top: 20px; }
   .faq-track { display: flex; width: max-content; }
   .faq-track-group { display: flex; flex: none; gap: 14px; padding-right: 14px; }
@@ -680,13 +724,13 @@
   .faq-card {
     flex: none;
     width: clamp(196px, 60vw, 246px);
-    background: rgba(155, 143, 255, .05);
-    border: 1px solid rgba(155, 143, 255, .22);
+    background: rgba(75, 63, 242, .06);
+    border: 1px solid rgba(75, 63, 242, .22);
     border-radius: 12px;
     padding: 16px 18px;
   }
-  .faq-card h3 { font-size: 14.5px; font-weight: 700; margin: 0 0 6px; color: #f5f7fb; letter-spacing: -0.005em; }
-  .faq-card p { font-size: 12.5px; line-height: 1.55; color: var(--muted-dark); margin: 0; max-width: 100%; }
+  .faq-card h3 { font-size: 14.5px; font-weight: 700; margin: 0 0 6px; color: var(--ink); letter-spacing: -0.005em; }
+  .faq-card p { font-size: 12.5px; line-height: 1.55; color: var(--muted-light); margin: 0; max-width: 100%; }
 
   .faq-mobile-rows {
     width: 100vw;
@@ -717,52 +761,98 @@
 
   /* COMO EU TRABALHO */
   .tracks { display: grid; gap: clamp(36px, 6vw, 60px); }
+  /* Grid items default to min-width:auto, which respects a descendant's
+     intrinsic content size — and .steps' flex row (flex-shrink:0 cards,
+     so all 4 stay full-width side by side) has a large one. Without this,
+     that pushed the grid column, and the whole page, wider than the
+     viewport instead of letting .step-viewport's overflow:hidden clip it. */
+  .step-carousel { min-width: 0; }
   @media (min-width: 760px) { .tracks { grid-template-columns: 1fr 1fr; } }
   .track-title { font-size: clamp(17px, 2.4vw, 20px); font-weight: 800; letter-spacing: .04em; text-transform: uppercase; color: var(--muted-light); margin: 0 0 28px; }
   .track-title-accent { color: var(--indigo); }
-  .steps { list-style: none; margin: 0; padding: 0; }
-  /* Quiet, editorial step list — no numbered circle badge. A muted mono
-     numeral sits beside a single flowing paragraph whose lead-in phrase is
-     bold, matching a reference site's process copy ("Fale com a
-     EliteHousing. A gente escuta...") instead of a separate heading. */
-  .step {
-    position: relative;
-    display: grid;
-    grid-template-columns: 26px 1fr;
-    gap: 14px;
-    padding: 0 0 22px;
+  /* One step visible at a time, advanced by click — dots + Voltar/Próximo
+     below the card, matching the reference onboarding-carousel pattern.
+     .step-viewport clips the row of full-width cards; JS slides .steps
+     with a transform and keeps the dots/buttons in sync. No-JS fallback
+     is in the page's shared <noscript> block. */
+  .step-viewport { overflow: hidden; border-radius: 14px; }
+  .steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    /* Default stretch would equalize the 4 cards within one track, but
+       not between the two tracks — JS measures each card's natural
+       height and sets an explicit, shared height on all of them instead
+       (see the carousel script), so flex-start here just opts out of the
+       redundant per-track auto-stretch it would otherwise do first. */
+    align-items: flex-start;
+    transition: transform .45s cubic-bezier(.65, 0, .35, 1);
   }
-  .step:last-child { padding-bottom: 0; }
-  .step::after {
-    content: "";
-    position: absolute;
-    left: 12px;
-    top: 24px;
-    bottom: -2px;
-    width: 1px;
-    background: var(--line-light);
-    transform: scaleY(0);
-    transform-origin: top;
-    transition: transform .5s ease .15s;
+  /* One card per step — same subtle indigo-tint-on-paper language as
+     .faq-card and .guarantee-badge elsewhere in this section, so the new
+     cards read as the same family, not a one-off. */
+  .step-card {
+    flex: 0 0 100%;
+    width: 100%;
+    box-sizing: border-box;
+    background: rgba(75, 63, 242, .06);
+    border: 1px solid rgba(75, 63, 242, .22);
+    border-radius: 14px;
+    padding: 20px 22px;
+    min-height: 148px;
   }
-  .step.in::after { transform: scaleY(1); }
-  .step:last-child::after { display: none; }
-  .step-num {
-    position: relative;
-    z-index: 1;
-    padding-top: 2px;
+  .step-card-num {
+    display: block;
     font-family: var(--font-mono);
     font-size: 12px;
     font-weight: 700;
-    color: var(--muted-light);
-    flex: none;
-    transition: color .2s ease;
+    letter-spacing: .04em;
+    color: var(--indigo);
+    margin-bottom: 8px;
   }
-  .step p { font-size: 15.5px; line-height: 1.7; color: var(--muted-light); margin: 0; }
-  .step p strong { color: var(--ink); font-weight: 800; transition: color .2s ease; }
-  .step:hover { --hx: 6px; }
-  .step:hover .step-num { color: var(--indigo); }
-  .step:hover p strong { color: var(--indigo); }
+  .step-card-title { font-size: 17px; font-weight: 800; color: var(--ink); margin: 0 0 6px; }
+  .step-card p { font-size: 14.5px; line-height: 1.6; color: var(--muted-light); margin: 0; }
+
+  .step-dots { display: flex; gap: 8px; justify-content: center; margin: 16px 0 4px; }
+  .step-dot {
+    width: 8px;
+    height: 8px;
+    padding: 0;
+    border: none;
+    border-radius: 4px;
+    background: rgba(75, 63, 242, .25);
+    cursor: pointer;
+    transition: background .2s ease, width .2s ease;
+  }
+  .step-dot[aria-current="true"] { width: 22px; background: var(--indigo); }
+  .step-dot:hover { background: rgba(75, 63, 242, .5); }
+
+  .step-nav { display: flex; align-items: center; justify-content: space-between; }
+  .step-nav button {
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: opacity .2s ease, background .2s ease;
+  }
+  .step-nav-back {
+    background: none;
+    border: none;
+    padding: 8px 4px;
+    color: var(--muted-light);
+  }
+  .step-nav-back:hover { color: var(--ink); }
+  .step-nav-back[disabled] { opacity: .35; cursor: default; pointer-events: none; }
+  .step-nav-next {
+    background: var(--indigo);
+    border: none;
+    padding: 10px 20px;
+    color: #fff;
+  }
+  .step-nav-next:hover { background: #3d31d9; }
+  .step-nav-next[disabled] { opacity: .45; cursor: default; pointer-events: none; }
 
   .guarantee-badge {
     margin-top: clamp(36px, 6vw, 60px);
@@ -1099,8 +1189,8 @@
      scroller's overflow:hidden depending on where on the card you
      hovered, so this is glow-only — guaranteed not to overflow the box. */
   .faq-card:hover {
-    box-shadow: 0 30px 60px -18px rgba(10, 23, 48, .5);
-    border-color: rgba(155, 143, 255, .45);
+    box-shadow: 0 30px 60px -18px rgba(75, 63, 242, .3);
+    border-color: rgba(75, 63, 242, .4);
     transition: box-shadow .3s ease, border-color .3s ease;
   }
   .guarantee-badge[data-tilt]:hover {
@@ -1137,68 +1227,6 @@
     z-index: 0;
   }
 
-  /* CONNECTOR — a thread running down the left gutter through Sobre → O
-     que eu faço → Como eu trabalho → Depoimento → Ferramentas → Contato,
-     echoing the
-     n8n "connected nodes" motif already used in the workflow mockup. Each
-     section owns its own full-height segment (position:relative on
-     <section> already), so segments never need cross-section height math
-     and still read as one unbroken line since sections abut with no gap.
-     Skipped in the FAQ section: its full-bleed auto-scrolling cards would
-     make the line flicker in and out from behind them. */
-  .connector-seg {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    /* Anchored to the content grid's left gutter rather than the window
-       edge: at a flat 40px it sat 20px from the text at 1280 and 400px
-       adrift at 1920, reading as a stray rule instead of a thread. */
-    left: max(clamp(8px, 2.4vw, 40px), calc(50% - var(--wrap) / 2 + 20px));
-    width: 2px;
-    z-index: 0;
-    pointer-events: none;
-  }
-  .connector-track {
-    position: absolute;
-    inset: 0;
-    background: rgba(75, 63, 242, .18);
-  }
-  .on-dark .connector-track { background: rgba(155, 143, 255, .18); }
-  .connector-fill {
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: calc(var(--fill, 0) * 100%);
-    background: var(--indigo);
-  }
-  .on-dark .connector-fill {
-    background: var(--indigo-on-dark);
-    box-shadow: 0 0 12px rgba(155, 143, 255, .5);
-  }
-  .connector-dot {
-    position: absolute;
-    top: calc(clamp(56px, 11vw, 108px) + 8px);
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 9px;
-    height: 9px;
-    border-radius: 50%;
-    background: var(--indigo);
-    box-shadow: 0 0 0 4px rgba(75, 63, 242, .15);
-  }
-  .on-dark .connector-dot {
-    background: var(--indigo-on-dark);
-    box-shadow: 0 0 0 4px rgba(155, 143, 255, .18);
-  }
-  /* .strip's own background is solid indigo, so the default indigo track
-     and fill would render invisible against it — needs its own contrast. */
-  .strip .connector-track { background: rgba(255, 255, 255, .25); }
-  .strip .connector-fill { background: #fff; box-shadow: 0 0 12px rgba(255, 255, 255, .5); }
-  /* The thread now starts as a short stub at the foot of the hero. With the
-     hero filling the viewport there was otherwise nothing telling a visitor
-     the page continues below. */
-  .connector-seg-hero { top: auto; bottom: 0; height: clamp(64px, 11vh, 120px); }
-  @media (max-width: 959px) { .connector-seg-hero { display: none; } }
-
   .reveal {
     opacity: 0;
     transform: translateY(18px);
@@ -1223,8 +1251,8 @@
     .reveal, .reveal-item { opacity: 1; transform: none; transition: none; }
     .hero-cta::before { animation: none; opacity: .7; transform: none; }
     .faq-track { animation: none !important; }
-    .step::after { transition: none; transform: scaleY(1); }
     .hero::before, .contact-section::before, #sobre-video, [data-tilt] { transform: none !important; transition: none; }
+    .hero-scroll-cue svg { animation: none !important; opacity: .5; }
   }
 
 
@@ -1232,9 +1260,32 @@
 </head>
 <body>
 
+<nav class="site-nav" id="site-nav" aria-label="Navegação principal">
+  <a class="site-nav-logo" href="#top" aria-label="ana.nocode — voltar ao topo">
+    <svg viewBox="20 6 308 118" role="img" aria-hidden="true">
+      <g transform="translate(10,5)">
+        <g transform="translate(0,-1)" class="logo-a-paper" fill="none" stroke-width="5" stroke-linecap="round">
+          <path d="M50 12 L20 100"/><path d="M50 12 L80 100"/><path d="M32 64 L68 64"/>
+        </g>
+        <g transform="translate(16,9)" class="logo-a-indigo" fill="none" stroke-width="5" stroke-linecap="round">
+          <path d="M50 12 L20 100"/><path d="M50 12 L80 100"/><path d="M32 64 L68 64"/>
+        </g>
+      </g>
+    </svg>
+  </a>
+  <ul class="site-nav-list" id="site-nav-list">
+    <span class="site-nav-highlight" id="site-nav-highlight" aria-hidden="true"></span>
+    <li><a class="site-nav-link" href="#servicos">O que eu faço</a></li>
+    <li><a class="site-nav-link" href="#casos">Casos</a></li>
+    <li><a class="site-nav-link" href="#como-trabalho">Como eu trabalho</a></li>
+    <li><a class="site-nav-link" href="#sobre">Sobre</a></li>
+    <li><a class="site-nav-link" href="#faq">FAQ</a></li>
+  </ul>
+  <a href="#contact-form" class="btn site-nav-cta">Fale comigo</a>
+</nav>
+
 <section id="top" class="hero hero-alt on-dark" data-parallax="0.32" data-parallax-max="130">
   <div class="hero-bg" aria-hidden="true"></div>
-  <div class="connector-seg connector-seg-hero" aria-hidden="true"><span class="connector-track"></span><span class="connector-fill"></span></div>
   <div class="wrap">
     <div class="h4-top">
       <div class="hero-logo">
@@ -1274,14 +1325,22 @@
   </div>
 </section>
 
+<div class="hero-scroll-cue" id="hero-scroll-cue" aria-hidden="true">
+  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color: var(--indigo-on-dark);">
+    <path d="M6 9 L12 15 L18 9"/>
+  </svg>
+</div>
+
 <section id="servicos" class="on-light reveal section-services seam-top" style="--seam-from:var(--navy)">
-  <div class="connector-seg" aria-hidden="true"><span class="connector-track"></span><span class="connector-fill"></span><span class="connector-dot"></span></div>
   <div class="wrap">
     <h2 class="ref"><span class="rule"></span> O que eu faço <span class="rule"></span></h2>
     <div class="services">
       <div class="service reveal-item">
         <a class="service-giant" href="#contact-form" data-tilt="8">
-          <img class="service-giant-icon" src="images/img2.png" alt="" width="40" height="40" loading="lazy" decoding="async">
+          <svg class="service-giant-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="5" cy="12" r="2.6"/><circle cx="19" cy="6" r="2.6"/><circle cx="19" cy="18" r="2.6"/>
+            <path d="M7.3 10.7 L16.7 7.1"/><path d="M7.3 13.3 L16.7 16.9"/>
+          </svg>
           <span class="service-giant-word">Automação</span>
         </a>
         <div>
@@ -1291,7 +1350,9 @@
       </div>
       <div class="service reveal-item">
         <a class="service-giant" href="#contact-form" data-tilt="8">
-          <img class="service-giant-icon" src="images/img3.png" alt="" width="40" height="40" loading="lazy" decoding="async">
+          <svg class="service-giant-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 3 C12.6 7.2 13.8 9.6 18 12 C13.8 12.6 12.6 15.6 12 21 C11.4 15.6 10.2 12.6 6 12 C10.2 9.6 11.4 7.2 12 3 Z"/>
+          </svg>
           <span class="service-giant-word">IA</span>
         </a>
         <div>
@@ -1301,7 +1362,9 @@
       </div>
       <div class="service reveal-item">
         <a class="service-giant" href="#contact-form" data-tilt="8">
-          <img class="service-giant-icon" src="images/img4.png" alt="" width="40" height="40" loading="lazy" decoding="async">
+          <svg class="service-giant-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M4 6 C4 4.9 4.9 4 6 4 H18 C19.1 4 20 4.9 20 6 V14 C20 15.1 19.1 16 18 16 H9 L5 19.5 V16 H6 C4.9 16 4 15.1 4 14 Z"/>
+          </svg>
           <span class="service-giant-word">Consultoria</span>
         </a>
         <div>
@@ -1314,7 +1377,6 @@
 </section>
 
 <section id="casos" class="on-dark reveal cases-section seam-top" style="--seam-from:var(--paper)">
-  <div class="connector-seg" aria-hidden="true"><span class="connector-track"></span><span class="connector-fill"></span><span class="connector-dot"></span></div>
   <div class="wrap">
     <h2 class="ref"><span class="rule"></span> O que eu já entreguei <span class="rule"></span></h2>
     <p class="cases-lede">Sistemas que já estão rodando — não exemplos de vitrine.</p>
@@ -1353,7 +1415,6 @@
 </section>
 
 <section class="on-light reveal testimonial-section seam-top" style="--seam-from:var(--navy)">
-  <div class="connector-seg" aria-hidden="true"><span class="connector-track"></span><span class="connector-fill"></span><span class="connector-dot"></span></div>
   <div class="wrap">
     <h2 class="ref"><span class="rule"></span> Depoimento <span class="rule"></span></h2>
     <figure class="testimonial">
@@ -1372,27 +1433,72 @@
 </section>
 
 <section id="como-trabalho" class="on-light reveal section-process">
-  <div class="connector-seg" aria-hidden="true"><span class="connector-track"></span><span class="connector-fill"></span><span class="connector-dot"></span></div>
   <div class="wrap">
     <h2 class="ref"><span class="rule"></span> Como eu trabalho <span class="rule"></span></h2>
     <div class="tracks">
-      <div>
+      <div class="step-carousel">
         <p class="track-title">Processo — <span class="track-title-accent">Consultoria</span></p>
-        <ol class="steps">
-          <li class="step reveal-item"><span class="step-num">01</span><p><strong>Nivelamento.</strong> Conversa inicial pra entender onde você está com IA hoje.</p></li>
-          <li class="step reveal-item"><span class="step-num">02</span><p><strong>Trilha sob medida.</strong> Monto aula por aula, sempre perguntando o que você quer e precisa aprender.</p></li>
-          <li class="step reveal-item"><span class="step-num">03</span><p><strong>Acompanhamento.</strong> Ajusto o conteúdo conforme seu interesse e seu ritmo.</p></li>
-          <li class="step reveal-item"><span class="step-num">04</span><p><strong>Cobrança por sessão.</strong> Você paga por sessão, não um pacote fechado — sem surpresa no meio do caminho.</p></li>
-        </ol>
+        <div class="step-viewport">
+          <ol class="steps">
+            <li class="step-card">
+              <span class="step-card-num">01</span>
+              <h3 class="step-card-title">Nivelamento.</h3>
+              <p>Conversa inicial pra entender onde você está com IA hoje.</p>
+            </li>
+            <li class="step-card">
+              <span class="step-card-num">02</span>
+              <h3 class="step-card-title">Trilha sob medida.</h3>
+              <p>Monto aula por aula, sempre perguntando o que você quer e precisa aprender.</p>
+            </li>
+            <li class="step-card">
+              <span class="step-card-num">03</span>
+              <h3 class="step-card-title">Acompanhamento.</h3>
+              <p>Ajusto o conteúdo conforme seu interesse e seu ritmo.</p>
+            </li>
+            <li class="step-card">
+              <span class="step-card-num">04</span>
+              <h3 class="step-card-title">Cobrança por sessão.</h3>
+              <p>Você paga por sessão, não um pacote fechado — sem surpresa no meio do caminho.</p>
+            </li>
+          </ol>
+        </div>
+        <div class="step-dots" role="tablist" aria-label="Passos — Consultoria"></div>
+        <div class="step-nav">
+          <button type="button" class="step-nav-back">Voltar</button>
+          <button type="button" class="step-nav-next">Próximo</button>
+        </div>
       </div>
-      <div>
+      <div class="step-carousel">
         <p class="track-title">Processo — <span class="track-title-accent">Automação</span></p>
-        <ol class="steps">
-          <li class="step reveal-item"><span class="step-num">01</span><p><strong>Diagnóstico (sem custo).</strong> Conversa pra entender o problema de verdade, sem compromisso de fechar nada.</p></li>
-          <li class="step reveal-item"><span class="step-num">02</span><p><strong>Desenho da automação.</strong> Mostro exatamente como o sistema vai funcionar, com valor e prazo fechados. Nada é construído antes de você aprovar esse desenho.</p></li>
-          <li class="step reveal-item"><span class="step-num">03</span><p><strong>Implementação.</strong> Eu construo o sistema.</p></li>
-          <li class="step reveal-item"><span class="step-num">04</span><p><strong>Entrega + garantia.</strong> Repasso credenciais e dados — o sistema é seu. E você tem 15 dias de ajuste incluído, sem custo extra.</p></li>
-        </ol>
+        <div class="step-viewport">
+          <ol class="steps">
+            <li class="step-card">
+              <span class="step-card-num">01</span>
+              <h3 class="step-card-title">Diagnóstico (sem custo).</h3>
+              <p>Conversa pra entender o problema de verdade, sem compromisso de fechar nada.</p>
+            </li>
+            <li class="step-card">
+              <span class="step-card-num">02</span>
+              <h3 class="step-card-title">Desenho da automação.</h3>
+              <p>Mostro exatamente como o sistema vai funcionar, com valor e prazo fechados. Nada é construído antes de você aprovar esse desenho.</p>
+            </li>
+            <li class="step-card">
+              <span class="step-card-num">03</span>
+              <h3 class="step-card-title">Implementação.</h3>
+              <p>Eu construo o sistema.</p>
+            </li>
+            <li class="step-card">
+              <span class="step-card-num">04</span>
+              <h3 class="step-card-title">Entrega + garantia.</h3>
+              <p>Repasso credenciais e dados — o sistema é seu. E você tem 15 dias de ajuste incluído, sem custo extra.</p>
+            </li>
+          </ol>
+        </div>
+        <div class="step-dots" role="tablist" aria-label="Passos — Automação"></div>
+        <div class="step-nav">
+          <button type="button" class="step-nav-back">Voltar</button>
+          <button type="button" class="step-nav-next">Próximo</button>
+        </div>
       </div>
     </div>
 
@@ -1409,7 +1515,6 @@
 </section>
 
 <section id="sobre" class="on-dark reveal sobre-section seam-top" style="--seam-from:var(--paper)">
-  <div class="connector-seg" aria-hidden="true"><span class="connector-track"></span><span class="connector-fill"></span><span class="connector-dot"></span></div>
   <div class="wrap">
     <h2 class="ref"><span class="rule"></span> Sobre <span class="rule"></span></h2>
     <div class="sobre-grid">
@@ -1425,7 +1530,7 @@
   </div>
 </section>
 
-<section id="faq" class="on-dark reveal faq-section abuts-dark">
+<section id="faq" class="on-light reveal faq-section seam-top" style="--seam-from:var(--navy)">
   <div class="wrap">
     <h2 class="ref"><span class="rule"></span> Perguntas frequentes <span class="rule"></span></h2>
 
@@ -1542,8 +1647,7 @@
   </div>
 </section>
 
-<section class="strip seam-top" style="--seam-from:var(--navy)">
-  <div class="connector-seg connector-seg-nodot" aria-hidden="true"><span class="connector-track"></span><span class="connector-fill"></span></div>
+<section class="strip seam-top" style="--seam-from:var(--paper)">
   <div class="wrap">
     <span class="strip-label">Ferramentas</span>
     <div class="tools-row">
@@ -1555,7 +1659,6 @@
 </section>
 
 <section class="on-dark reveal contact-section" data-parallax="0.32" data-parallax-max="130">
-  <div class="connector-seg" aria-hidden="true"><span class="connector-track"></span><span class="connector-fill"></span><span class="connector-dot"></span></div>
   <div class="wrap">
     <h2 class="ref"><span class="rule"></span> Contato <span class="rule"></span></h2>
     <div class="col">
@@ -1640,50 +1743,14 @@
   </footer>
 </section>
 
-<nav class="site-nav" id="site-nav" aria-label="Navegação principal">
-  <a class="site-nav-logo" href="#top" aria-label="ana.nocode — voltar ao topo">
-    <svg viewBox="20 6 308 118" role="img" aria-hidden="true">
-      <g transform="translate(10,5)">
-        <g transform="translate(0,-1)" class="logo-a-paper" fill="none" stroke-width="5" stroke-linecap="round">
-          <path d="M50 12 L20 100"/><path d="M50 12 L80 100"/><path d="M32 64 L68 64"/>
-        </g>
-        <g transform="translate(16,9)" class="logo-a-indigo" fill="none" stroke-width="5" stroke-linecap="round">
-          <path d="M50 12 L20 100"/><path d="M50 12 L80 100"/><path d="M32 64 L68 64"/>
-        </g>
-      </g>
-    </svg>
-  </a>
-  <ul class="site-nav-list" id="site-nav-list">
-    <span class="site-nav-highlight" id="site-nav-highlight" aria-hidden="true"></span>
-    <li><a class="site-nav-link" href="#servicos">O que eu faço</a></li>
-    <li><a class="site-nav-link" href="#casos">Casos</a></li>
-    <li><a class="site-nav-link" href="#como-trabalho">Como eu trabalho</a></li>
-    <li><a class="site-nav-link" href="#sobre">Sobre</a></li>
-    <li><a class="site-nav-link" href="#faq">FAQ</a></li>
-  </ul>
-  <a href="#contact-form" class="btn site-nav-cta">Fale comigo</a>
-</nav>
-
 <script>
   (function () {
-    document.querySelectorAll('.services, .cases, .steps, .contact-list, .tools-row, .terminal-body, .sobre-col').forEach(function (container) {
+    document.querySelectorAll('.services, .cases, .steps, .contact-list, .tools-row, .sobre-col').forEach(function (container) {
       var items = container.querySelectorAll('.reveal-item');
       items.forEach(function (item, i) { item.style.transitionDelay = (i * 90) + 'ms'; });
     });
 
-    // The hero terminal is a page-load "boot up" moment, not a scroll
-    // reveal — it must play immediately regardless of whether its lines
-    // happen to sit below the fold on a given viewport (e.g. stacked
-    // mobile layout), so it's excluded from the IntersectionObserver
-    // below and revealed here directly.
-    document.querySelectorAll('.hero-terminal .reveal, .hero-terminal .reveal-item').forEach(function (el) {
-      requestAnimationFrame(function () { el.classList.add('in'); });
-    });
-
-    var els = Array.prototype.filter.call(
-      document.querySelectorAll('.reveal, .reveal-item'),
-      function (el) { return !el.closest('.hero-terminal'); }
-    );
+    var els = document.querySelectorAll('.reveal, .reveal-item');
     if (!('IntersectionObserver' in window)) {
       els.forEach(function (el) { el.classList.add('in'); });
       return;
@@ -1851,33 +1918,6 @@
     window.addEventListener('scroll', function () {
       if (!ticking) { requestAnimationFrame(update); ticking = true; }
     }, { passive: true });
-    update();
-  })();
-
-  (function () {
-    // Lights up each connector segment in step with how far the user has
-    // scrolled through its own section — the thread "fills in" as you move
-    // through the page instead of just sitting there static.
-    if (!window.matchMedia || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-    var segs = document.querySelectorAll('.connector-seg');
-    if (!segs.length) return;
-    var ticking = false;
-    function update() {
-      var vh = window.innerHeight;
-      segs.forEach(function (seg) {
-        var r = seg.getBoundingClientRect();
-        var progress = r.height > 0 ? (vh * 0.55 - r.top) / r.height : 0;
-        progress = Math.max(0, Math.min(1, progress));
-        seg.style.setProperty('--fill', progress.toFixed(3));
-      });
-      ticking = false;
-    }
-    function requestUpdate() {
-      if (!ticking) { requestAnimationFrame(update); ticking = true; }
-    }
-    window.addEventListener('scroll', requestUpdate, { passive: true });
-    window.addEventListener('resize', requestUpdate, { passive: true });
     update();
   })();
 
@@ -2050,34 +2090,77 @@
   })();
 
   (function () {
-    try {
-      var hero = document.querySelector('.hero');
-      var heroText = document.querySelector('.hero-text');
-      var heroTerm = document.querySelector('.hero-terminal');
-      if (!hero || !heroText || !heroTerm) return;
-      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var cue = document.getElementById('hero-scroll-cue');
+    if (!cue) return;
+    function sync() {
+      cue.classList.toggle('is-hidden', (window.scrollY || window.pageYOffset) > 80);
+    }
+    window.addEventListener('scroll', sync, { passive: true });
+    sync();
+  })();
 
-      // No mouse parallax and no 3D depth here anymore — a plain, very
-      // visible scroll transition instead: the text and the portrait slide
-      // toward each other's side of the screen and cross paths as you
-      // scroll past the hero.
-      var ticking = false;
-      function update() {
-        var y = window.scrollY || window.pageYOffset;
-        var progress = Math.min(Math.max(y / hero.offsetHeight, 0), 1);
-        var travel = Math.min(window.innerWidth * 0.7, 820);
-        heroText.style.transform = 'translate3d(' + (progress * travel).toFixed(1) + 'px,0,0)';
-        heroText.style.opacity = String(1 - progress);
-        heroTerm.style.transform = 'translate3d(' + (progress * -travel).toFixed(1) + 'px,0,0)';
-        heroTerm.style.opacity = String(1 - progress);
-        ticking = false;
+  (function () {
+    // "Como eu trabalho" step carousel: one card visible at a time,
+    // advanced by clicking a dot or Próximo/Voltar. Each .step-carousel
+    // (one per track — Consultoria, Automação) gets its own independent
+    // state, built from however many .step-card items it actually has
+    // rather than an assumed count.
+    document.querySelectorAll('.step-carousel').forEach(function (carousel) {
+      var track = carousel.querySelector('.steps');
+      var cards = Array.prototype.slice.call(carousel.querySelectorAll('.step-card'));
+      var dotsWrap = carousel.querySelector('.step-dots');
+      var backBtn = carousel.querySelector('.step-nav-back');
+      var nextBtn = carousel.querySelector('.step-nav-next');
+      if (!track || !cards.length || !dotsWrap || !backBtn || !nextBtn) return;
+
+      var dots = cards.map(function (_, i) {
+        var dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'step-dot';
+        dot.setAttribute('aria-label', 'Passo ' + (i + 1) + ' de ' + cards.length);
+        dot.addEventListener('click', function () { goTo(i); });
+        dotsWrap.appendChild(dot);
+        return dot;
+      });
+
+      var index = 0;
+      function render() {
+        track.style.transform = 'translateX(-' + (index * 100) + '%)';
+        dots.forEach(function (dot, i) {
+          if (i === index) dot.setAttribute('aria-current', 'true');
+          else dot.removeAttribute('aria-current');
+        });
+        backBtn.disabled = index === 0;
+        nextBtn.disabled = index === cards.length - 1;
       }
-      function requestUpdate() {
-        if (!ticking) { requestAnimationFrame(update); ticking = true; }
+      function goTo(i) {
+        index = Math.max(0, Math.min(cards.length - 1, i));
+        render();
       }
-      window.addEventListener('scroll', requestUpdate, { passive: true });
-      update();
-    } catch (e) {}
+
+      backBtn.addEventListener('click', function () { goTo(index - 1); });
+      nextBtn.addEventListener('click', function () { goTo(index + 1); });
+
+      render();
+    });
+
+    // Equalize every card to the tallest one's natural height — across
+    // BOTH tracks, not just within each — so the two carousels read as a
+    // matched pair no matter which step each is currently showing. Text
+    // reflows at different widths, so this reruns on resize.
+    var allCards = Array.prototype.slice.call(document.querySelectorAll('.step-carousel .step-card'));
+    function equalizeHeights() {
+      if (!allCards.length) return;
+      allCards.forEach(function (c) { c.style.height = 'auto'; });
+      var max = allCards.reduce(function (m, c) { return Math.max(m, c.offsetHeight); }, 0);
+      allCards.forEach(function (c) { c.style.height = max + 'px'; });
+    }
+    var resizeTimer;
+    window.addEventListener('resize', function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(equalizeHeights, 150);
+    }, { passive: true });
+    equalizeHeights();
   })();
 </script>
 </body>
