@@ -159,22 +159,88 @@
     0%, 100% { opacity: .4; transform: scale(.95); }
     50% { opacity: .65; transform: scale(1.02); }
   }
-  /* Persistent CTA — the page is long on mobile with no fixed nav, so this
-     stays reachable once the hero's own CTA has scrolled out of view. It
-     hides again once the real contact form is on screen to avoid redundancy. */
-  .floating-cta {
+  /* Fixed nav — the page is long on mobile with no way back to a section, so
+     this appears once the hero's own logo/CTA have scrolled out of view and
+     carries the "Fale comigo" CTA itself (replaces the old floating button —
+     one CTA on screen at a time). Ported by hand from a React/shadcn/Framer
+     Motion reference component, same approach as .hero-alt above: this page
+     has no build step, so the sliding hover pill is a single absolutely
+     positioned span moved with plain JS instead of framer-motion. */
+  html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+
+  .site-nav {
     position: fixed;
-    right: 18px;
-    bottom: 18px;
+    top: 0;
+    left: 0;
+    right: 0;
     z-index: 40;
-    padding: 13px 22px;
-    font-size: 14.5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 13px clamp(18px, 4vw, 40px);
+    background: rgba(10, 23, 48, .78);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line-dark);
     opacity: 0;
+    transform: translateY(-100%);
     pointer-events: none;
-    transition: opacity .25s ease, box-shadow .18s ease, transform .2s cubic-bezier(.2,.8,.2,1);
+    transition: opacity .3s ease, transform .3s cubic-bezier(.2,.8,.2,1);
   }
-  .floating-cta.show { opacity: 1; pointer-events: auto; }
-  @media (max-width: 480px) { .floating-cta { right: 14px; bottom: 14px; padding: 14px 18px; font-size: 14px; } }
+  .site-nav.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+
+  .site-nav-logo { display: flex; align-items: center; flex-shrink: 0; }
+  .site-nav-logo svg { height: 24px; width: auto; display: block; }
+  .site-nav-logo .logo-a-paper { stroke: #F5F4F0; }
+  .site-nav-logo .logo-a-indigo { stroke: #4B3FF2; stroke-opacity: .88; }
+
+  .site-nav-list {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .site-nav-highlight {
+    position: absolute;
+    top: 4px;
+    left: 0;
+    height: calc(100% - 8px);
+    width: 0;
+    border-radius: 7px;
+    background: rgba(155, 143, 255, .16);
+    opacity: 0;
+    transition: transform .28s cubic-bezier(.2,.8,.2,1), width .28s cubic-bezier(.2,.8,.2,1), opacity .18s ease;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .site-nav-highlight.show { opacity: 1; }
+  .site-nav-link {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    padding: 9px 14px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    color: #f5f7fb;
+    opacity: .8;
+    transition: opacity .18s ease, color .18s ease;
+    white-space: nowrap;
+  }
+  .site-nav-link:hover, .site-nav-link:focus-visible { opacity: 1; color: var(--indigo-on-dark); }
+
+  .site-nav-cta { padding: 9px 20px; font-size: 13.5px; flex-shrink: 0; }
+
+  @media (max-width: 760px) {
+    .site-nav-list { display: none; }
+    .site-nav { padding: 12px clamp(16px, 5vw, 28px); }
+  }
 
 
   /* HERO ALT — composition ported from a designer-portfolio reference:
@@ -1169,7 +1235,7 @@
 </head>
 <body>
 
-<section class="hero hero-alt on-dark" data-parallax="0.32" data-parallax-max="130">
+<section id="top" class="hero hero-alt on-dark" data-parallax="0.32" data-parallax-max="130">
   <div class="hero-bg" aria-hidden="true"></div>
   <div class="connector-seg connector-seg-hero" aria-hidden="true"><span class="connector-track"></span><span class="connector-fill"></span></div>
   <div class="wrap">
@@ -1211,7 +1277,7 @@
   </div>
 </section>
 
-<section class="on-light reveal section-services seam-top" style="--seam-from:var(--navy)">
+<section id="servicos" class="on-light reveal section-services seam-top" style="--seam-from:var(--navy)">
   <div class="connector-seg" aria-hidden="true"><span class="connector-track"></span><span class="connector-fill"></span><span class="connector-dot"></span></div>
   <div class="wrap">
     <h2 class="ref"><span class="rule"></span> O que eu faço <span class="rule"></span></h2>
@@ -1250,7 +1316,7 @@
   </div>
 </section>
 
-<section class="on-dark reveal cases-section seam-top" style="--seam-from:var(--paper)">
+<section id="casos" class="on-dark reveal cases-section seam-top" style="--seam-from:var(--paper)">
   <div class="connector-seg" aria-hidden="true"><span class="connector-track"></span><span class="connector-fill"></span><span class="connector-dot"></span></div>
   <div class="wrap">
     <h2 class="ref"><span class="rule"></span> O que eu já entreguei <span class="rule"></span></h2>
@@ -1308,7 +1374,7 @@
   </div>
 </section>
 
-<section class="on-light reveal section-process">
+<section id="como-trabalho" class="on-light reveal section-process">
   <div class="connector-seg" aria-hidden="true"><span class="connector-track"></span><span class="connector-fill"></span><span class="connector-dot"></span></div>
   <div class="wrap">
     <h2 class="ref"><span class="rule"></span> Como eu trabalho <span class="rule"></span></h2>
@@ -1345,7 +1411,7 @@
   </div>
 </section>
 
-<section class="on-dark reveal sobre-section seam-top" style="--seam-from:var(--paper)">
+<section id="sobre" class="on-dark reveal sobre-section seam-top" style="--seam-from:var(--paper)">
   <div class="connector-seg" aria-hidden="true"><span class="connector-track"></span><span class="connector-fill"></span><span class="connector-dot"></span></div>
   <div class="wrap">
     <h2 class="ref"><span class="rule"></span> Sobre <span class="rule"></span></h2>
@@ -1362,7 +1428,7 @@
   </div>
 </section>
 
-<section class="on-dark reveal faq-section abuts-dark">
+<section id="faq" class="on-dark reveal faq-section abuts-dark">
   <div class="wrap">
     <h2 class="ref"><span class="rule"></span> Perguntas frequentes <span class="rule"></span></h2>
 
@@ -1577,7 +1643,29 @@
   </footer>
 </section>
 
-<a href="#contact-form" class="btn floating-cta" id="floating-cta">Fale comigo</a>
+<nav class="site-nav" id="site-nav" aria-label="Navegação principal">
+  <a class="site-nav-logo" href="#top" aria-label="ana.nocode — voltar ao topo">
+    <svg viewBox="20 6 308 118" role="img" aria-hidden="true">
+      <g transform="translate(10,5)">
+        <g transform="translate(0,-1)" class="logo-a-paper" fill="none" stroke-width="5" stroke-linecap="round">
+          <path d="M50 12 L20 100"/><path d="M50 12 L80 100"/><path d="M32 64 L68 64"/>
+        </g>
+        <g transform="translate(16,9)" class="logo-a-indigo" fill="none" stroke-width="5" stroke-linecap="round">
+          <path d="M50 12 L20 100"/><path d="M50 12 L80 100"/><path d="M32 64 L68 64"/>
+        </g>
+      </g>
+    </svg>
+  </a>
+  <ul class="site-nav-list" id="site-nav-list">
+    <span class="site-nav-highlight" id="site-nav-highlight" aria-hidden="true"></span>
+    <li><a class="site-nav-link" href="#servicos">O que eu faço</a></li>
+    <li><a class="site-nav-link" href="#casos">Casos</a></li>
+    <li><a class="site-nav-link" href="#como-trabalho">Como eu trabalho</a></li>
+    <li><a class="site-nav-link" href="#sobre">Sobre</a></li>
+    <li><a class="site-nav-link" href="#faq">FAQ</a></li>
+  </ul>
+  <a href="#contact-form" class="btn site-nav-cta">Fale comigo</a>
+</nav>
 
 <script>
   (function () {
@@ -1827,31 +1915,35 @@
   })();
 
   (function () {
-    var cta = document.getElementById('floating-cta');
+    var nav = document.getElementById('site-nav');
     var hero = document.querySelector('.hero');
-    var form = document.getElementById('contact-form');
-    var faq = document.querySelector('.faq-section');
-    if (!cta || !hero || !form || !('IntersectionObserver' in window)) return;
-
-    var heroVisible = true, formVisible = false, faqVisible = false;
-    function sync() { cta.classList.toggle('show', !heroVisible && !formVisible && !faqVisible); }
+    if (!nav || !hero || !('IntersectionObserver' in window)) return;
 
     new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) { heroVisible = e.isIntersecting; });
-      sync();
+      entries.forEach(function (e) { nav.classList.toggle('show', !e.isIntersecting); });
     }).observe(hero);
+  })();
 
-    if (faq) {
-      new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) { faqVisible = e.isIntersecting; });
-        sync();
-      }).observe(faq);
-    }
+  (function () {
+    // Sliding hover pill behind the nav links — the framer-motion
+    // "Highlight" primitive from the reference component, redone as one
+    // absolutely positioned span moved with plain JS since this page has
+    // no build step (see .site-nav comment above).
+    var list = document.getElementById('site-nav-list');
+    var highlight = document.getElementById('site-nav-highlight');
+    if (!list || !highlight) return;
 
-    new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) { formVisible = e.isIntersecting; });
-      sync();
-    }).observe(form);
+    var links = list.querySelectorAll('.site-nav-link');
+    links.forEach(function (link) {
+      link.addEventListener('mouseenter', function () {
+        highlight.style.width = link.offsetWidth + 'px';
+        highlight.style.transform = 'translateX(' + link.offsetLeft + 'px)';
+        highlight.classList.add('show');
+      });
+    });
+    list.addEventListener('mouseleave', function () {
+      highlight.classList.remove('show');
+    });
   })();
 
   (function () {
